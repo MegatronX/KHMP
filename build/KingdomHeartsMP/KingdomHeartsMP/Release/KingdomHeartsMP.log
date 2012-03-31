@@ -1,0 +1,312 @@
+﻿Build started 02/02/2012 02:12:41 AM.
+     1>Project "C:\Kingdom Hearts MP\build\KingdomHeartsMP\KingdomHeartsMP\KingdomHeartsMP.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release\KingdomHeartsMP.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /MP /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\Engine\Engine.cpp ..\..\..\src\Engine\Graphics\Rocket\ElementTransformer.cpp ..\..\..\src\Engine\Graphics\Screens\Screen.cpp ..\..\..\src\Engine\Graphics\Screens\ScreenManager.cpp ..\..\..\src\Engine\Graphics\Screens\ScreenStack.cpp ..\..\..\src\Engine\Graphics\Sprites\AnimatedSpriteInterface.cpp ..\..\..\src\Engine\Scripting\Python\ElementTransformWrap.cpp ..\..\..\src\Engine\Scripting\Python\PythonScripter.cpp ..\..\..\src\Engine\Scripting\Python\RocketModule.cpp ..\..\..\src\Engine\System\Input\InputModule.cpp ..\..\..\src\Game\actions\Action.cpp ..\..\..\src\Game\character\BaseCharacter.cpp ..\..\..\src\Game\components\CharacterEquipmentComponent.cpp ..\..\..\src\Game\components\Component.cpp ..\..\..\src\Game\components\ElementEffectivenessComponent.cpp ..\..\..\src\Game\components\ItemComponent.cpp ..\..\..\src\Game\components\StatsComponent.cpp ..\..\..\src\Game\components\StatusEffectivenessComponent.cpp ..\..\..\src\Game\Entity.cpp ..\..\..\src\Game\GameInstance.cpp ..\..\..\src\Game\graphics\screens\BasicRMLScreen.cpp ..\..\..\src\Game\graphics\screens\TitleScreen.cpp ..\..\..\src\Game\items\Item.cpp ..\..\..\src\Game\items\ItemDatabase.cpp ..\..\..\src\Game\scripting\UseComponentWrap.cpp ..\..\..\src\main.cpp
+         Engine.cpp
+         ElementTransformer.cpp
+         Screen.cpp
+         ScreenManager.cpp
+         ScreenStack.cpp
+         AnimatedSpriteInterface.cpp
+         ElementTransformWrap.cpp
+         PythonScripter.cpp
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+         RocketModule.cpp
+         InputModule.cpp
+         Action.cpp
+         BaseCharacter.cpp
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+         CharacterEquipmentComponent.cpp
+     1>..\..\..\src\Engine\Engine.cpp(6): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(11): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(28): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Style' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(28): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Weight' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(29): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Style' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(29): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Weight' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(30): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Style' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(30): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Weight' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(31): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Style' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(31): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Weight' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(33): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Style' used in qualified name
+     1>..\..\..\src\Engine\Engine.cpp(33): warning C4482: nonstandard extension used: enum 'Rocket::Core::Font::Weight' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+         Component.cpp
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(37): warning C4482: nonstandard extension used: enum 'Cache::ResourceClass' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(62): warning C4482: nonstandard extension used: enum 'Cache::World' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(62): warning C4482: nonstandard extension used: enum 'Cache::World' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(62): warning C4482: nonstandard extension used: enum 'Cache::World' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(62): warning C4482: nonstandard extension used: enum 'Cache::World' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(62): warning C4482: nonstandard extension used: enum 'Cache::World' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(62): warning C4482: nonstandard extension used: enum 'Cache::World' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(70): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>c:\kingdom hearts mp\src\engine\scripting\python\EngineModule.h(73): warning C4482: nonstandard extension used: enum 'Input::InputDevice' used in qualified name
+         ElementEffectivenessComponent.cpp
+         ItemComponent.cpp
+     1>c:\kingdom hearts mp\src\game\actions\Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>c:\kingdom hearts mp\src\game\actions\Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/EntityModule.h(46): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/EntityModule.h(46): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/EntityModule.h(46): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/EntityModule.h(46): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/EntityModule.h(46): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+         StatsComponent.cpp
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+         StatusEffectivenessComponent.cpp
+         Entity.cpp
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/CharacterModule.h(13): warning C4482: nonstandard extension used: enum 'Game::CharacterStatus' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\Scripting/CharacterModule.h(13): warning C4482: nonstandard extension used: enum 'Game::CharacterStatus' used in qualified name
+     1>..\..\..\src\Engine\Scripting\Python\PythonScripter.cpp(157): warning C4172: returning address of local variable or temporary
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+         GameInstance.cpp
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(10): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(11): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(12): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(13): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(14): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(15): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(16): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(17): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(18): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(19): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(20): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(21): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(22): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(23): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(24): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(26): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(27): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(28): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(29): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(30): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(31): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(32): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(33): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(34): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(35): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(36): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(37): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(38): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(39): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(40): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(302): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(310): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(483): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(486): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(529): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(533): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(549): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(551): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(558): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(560): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(579): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(583): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(600): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(602): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(610): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
+     1>..\..\..\src\Engine\System\Input\InputModule.cpp(612): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
+         BasicRMLScreen.cpp
+         TitleScreen.cpp
+         Item.cpp
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+         ItemDatabase.cpp
+         UseComponentWrap.cpp
+         main.cpp
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(27): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(28): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(29): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(30): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(31): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(32): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(34): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(35): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(36): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Engine\caching/Cache.h(37): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>..\..\..\src\Game\items\Item.cpp(11): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>..\..\..\src\Game\items\ItemDatabase.cpp(86): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>C:\Kingdom Hearts MP\src\Game\actions/Action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Kingdom Hearts MP\build\KingdomHeartsMP\Release\KingdomHeartsMP.exe" /NOLOGO "sfml-audio.lib" "sfml-graphics.lib" "sfml-main.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" freetype248MT.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib fmodex_vc.lib ftgl_static.lib RocketCore.lib /MANIFEST /ManifestFile:"Release\KingdomHeartsMP.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Kingdom Hearts MP\build\KingdomHeartsMP\Release\KingdomHeartsMP.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Kingdom Hearts MP\build\KingdomHeartsMP\Release\KingdomHeartsMP.lib" /MACHINE:X86 Release\SectionLoopMusic.obj
+         Release\SoundSystem.obj
+         Release\FontCache.obj
+         Release\TextureCache.obj
+         Release\CompressionUtils.obj
+         Release\AppConfiguration.obj
+         Release\ContentManager.obj
+         Release\ResourceLoadImport.obj
+         Release\Engine.obj
+         Release\OpenGLHelpers.obj
+         Release\BaseFileInterface.obj
+         Release\ElementTransformer.obj
+         Release\LibRocketRenderInterface.obj
+         Release\RocketSystemInterface.obj
+         Release\Screen.obj
+         Release\ScreenManager.obj
+         Release\ScreenStack.obj
+         Release\AnimatedSpriteInterface.obj
+         Release\pugixml.obj
+         Release\ElementTransformWrap.obj
+         Release\PythonScripter.obj
+         Release\RocketModule.obj
+         Release\InputModule.obj
+         Release\GameTimeModule.obj
+         Release\ScalableClock.obj
+         Release\StopWatch.obj
+         Release\Timer.obj
+         Release\Action.obj
+         Release\BaseCharacter.obj
+         Release\Stats.obj
+         Release\CharacterEquipmentComponent.obj
+         Release\Component.obj
+         Release\ElementEffectivenessComponent.obj
+         Release\ItemComponent.obj
+         Release\StatsComponent.obj
+         Release\StatusEffectivenessComponent.obj
+         Release\Elements.obj
+         Release\Entity.obj
+         Release\GameInstance.obj
+         Release\BasicRMLScreen.obj
+         Release\TitleScreen.obj
+         Release\Inventory.obj
+         Release\Item.obj
+         Release\ItemDatabase.obj
+         Release\UseComponentWrap.obj
+         Release\main.obj
+            Creating library C:\Kingdom Hearts MP\build\KingdomHeartsMP\Release\KingdomHeartsMP.lib and object C:\Kingdom Hearts MP\build\KingdomHeartsMP\Release\KingdomHeartsMP.exp
+     1>PythonScripter.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) bool __cdecl Rocket::Core::Assert(char const *,char const *,int)" (__imp_?Assert@Core@Rocket@@YA_NPBD0H@Z)
+     1>C:\Kingdom Hearts MP\build\KingdomHeartsMP\Release\KingdomHeartsMP.exe : fatal error LNK1120: 1 unresolved externals
+     1>Done Building Project "C:\Kingdom Hearts MP\build\KingdomHeartsMP\KingdomHeartsMP\KingdomHeartsMP.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:46.72

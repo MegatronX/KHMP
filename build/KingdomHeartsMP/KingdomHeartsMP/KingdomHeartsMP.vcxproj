@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A4288AC5-A21C-4AF4-9A2E-46930AF0373F}</ProjectGuid>
+    <RootNamespace>KingdomHeartsMP</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\include;C:\Kingdom Hearts MP\src\Libraries;C:\Python27\include;C:\Kingdom Hearts MP\src\Game;C:\Kingdom Hearts MP\src\Engine;C:\Kingdom Hearts MP\extlib\include;C:\Programming_Libraries\Cpp_Libraries\boost_1_48_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Python27\libs;C:\Kingdom Hearts MP\extlib\lib;C:\Programming_Libraries\Cpp_Libraries\boost_1_48_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\include;C:\Kingdom Hearts MP\src\Libraries;C:\Python27\include;C:\Kingdom Hearts MP\src\Game;C:\Kingdom Hearts MP\src\Engine;C:\Kingdom Hearts MP\extlib\include;C:\Programming_Libraries\Cpp_Libraries\boost_1_48_0;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\Python27\libs;C:\Kingdom Hearts MP\extlib\lib;C:\Programming_Libraries\Cpp_Libraries\boost_1_48_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;freetype248MT_D.lib;%(AdditionalDependencies);opengl32.lib;glu32.lib;fmodex_vc.lib;ftgl_static.lib;RocketCore_d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;freetype248MT.lib;%(AdditionalDependencies);opengl32.lib;glu32.lib;fmodex_vc.lib;ftgl_static.lib;RocketCore.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\Config.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\Engine\Audio\SectionLoopMusic.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Audio\SoundSystem.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Caching\FontCache.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Caching\TextureCache.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Compression\CompressionUtils.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Configuration\AppConfiguration.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\ContentManagement\ContentManager.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\ContentManagement\ResourceLoadImport.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Engine.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\OpenGLHelpers.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\BaseFileInterface.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\ElementTransformer.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\LibRocketRenderInterface.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\RocketSystemInterface.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Screens\Screen.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Screens\ScreenManager.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Screens\ScreenStack.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\IO\xml\pugixml.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Scripting\Python\ElementTransformWrap.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Scripting\Python\PythonScripter.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Scripting\Python\RocketModule.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\System\Input\InputModule.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Time\GameTimeModule.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Time\ScalableClock.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Time\StopWatch.cpp" />
+    <ClCompile Include="..\..\..\src\Engine\Time\Timer.cpp" />
+    <ClCompile Include="..\..\..\src\Game\abilities\Ability.cpp" />
+    <ClCompile Include="..\..\..\src\Game\abilities\AbilityManager.cpp" />
+    <ClCompile Include="..\..\..\src\Game\actions\Action.cpp" />
+    <ClCompile Include="..\..\..\src\Game\battle\mechanics\BaseMechanics.cpp" />
+    <ClCompile Include="..\..\..\src\Game\battle\mechanics\Mechanics.cpp" />
+    <ClCompile Include="..\..\..\src\Game\character\BaseCharacter.cpp" />
+    <ClCompile Include="..\..\..\src\Game\character\Stats.cpp" />
+    <ClCompile Include="..\..\..\src\Game\components\CharacterEquipmentComponent.cpp" />
+    <ClCompile Include="..\..\..\src\Game\components\Component.cpp" />
+    <ClCompile Include="..\..\..\src\Game\components\ElementEffectivenessComponent.cpp" />
+    <ClCompile Include="..\..\..\src\Game\components\ItemComponent.cpp" />
+    <ClCompile Include="..\..\..\src\Game\components\StatsComponent.cpp" />
+    <ClCompile Include="..\..\..\src\Game\components\StatusEffectivenessComponent.cpp" />
+    <ClCompile Include="..\..\..\src\Game\elements\Elements.cpp" />
+    <ClCompile Include="..\..\..\src\Game\Entity.cpp" />
+    <ClCompile Include="..\..\..\src\Game\GameInstance.cpp" />
+    <ClCompile Include="..\..\..\src\Game\graphics\screens\BasicRMLScreen.cpp" />
+    <ClCompile Include="..\..\..\src\Game\graphics\screens\TitleScreen.cpp" />
+    <ClCompile Include="..\..\..\src\Game\items\Inventory.cpp" />
+    <ClCompile Include="..\..\..\src\Game\items\Item.cpp" />
+    <ClCompile Include="..\..\..\src\Game\items\ItemDatabase.cpp" />
+    <ClCompile Include="..\..\..\src\Game\minigames\triad\card.cpp" />
+    <ClCompile Include="..\..\..\src\Game\minigames\triad\Deck.cpp" />
+    <ClCompile Include="..\..\..\src\Game\minigames\triad\Hand.cpp" />
+    <ClCompile Include="..\..\..\src\Game\minigames\triad\PlayField.cpp" />
+    <ClCompile Include="..\..\..\src\Game\minigames\triad\TriadPlayer.cpp" />
+    <ClCompile Include="..\..\..\src\Game\scripting\UseComponentWrap.cpp" />
+    <ClCompile Include="..\..\..\src\Game\statuseffects\StatusEffect.cpp" />
+    <ClCompile Include="..\..\..\src\Game\statuseffects\StatusEffectsManager.cpp" />
+    <ClCompile Include="..\..\..\src\Game\statuseffects\StatusEffectWeightComponent.cpp" />
+    <ClCompile Include="..\..\..\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\Engine\Audio\SectionLoopableMusic.h" />
+    <ClInclude Include="..\..\..\src\Engine\Audio\SoundSystem.h" />
+    <ClInclude Include="..\..\..\src\Engine\Caching\Cache.h" />
+    <ClInclude Include="..\..\..\src\Engine\Caching\FontCache.h" />
+    <ClInclude Include="..\..\..\src\Engine\Caching\PathCollection.h" />
+    <ClInclude Include="..\..\..\src\Engine\Caching\TextureCache.h" />
+    <ClInclude Include="..\..\..\src\Engine\Compression\Base64Util.h" />
+    <ClInclude Include="..\..\..\src\Engine\Compression\CompressionUtils.h" />
+    <ClInclude Include="..\..\..\src\Engine\Configuration\AppConfiguration.h" />
+    <ClInclude Include="..\..\..\src\Engine\ContentManagement\ContentManager.h" />
+    <ClInclude Include="..\..\..\src\Engine\ContentManagement\ResourceLoadImport.h" />
+    <ClInclude Include="..\..\..\src\Engine\Engine.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\AnimatedDraw.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\DrawInterface.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\GL\glew.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\GL\glxew.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\GL\wglew.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\OpenGLHelpers.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\AlphaOscillateTransformer.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\BaseFileInterface.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\BlankTransformer.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\ElementTransformer.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\ElementTransformInterface.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\FaderTransform.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\LibRocketRenderInterace.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\PositionTransformer.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\RocketSystemInterface.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Screens\Screen.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Screens\ScreenManager.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Screens\ScreenStack.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Sprites\Sprite.h" />
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Sprites\SpriteInterface.h" />
+    <ClInclude Include="..\..\..\src\Engine\IO\xml\BasicKeyValueReader.h" />
+    <ClInclude Include="..\..\..\src\Engine\IO\xml\pugiconfig.hpp" />
+    <ClInclude Include="..\..\..\src\Engine\IO\xml\pugixml.hpp" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\ElementTransformWrap.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\EngineModule.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\EngineScripter.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\GraphicsModule.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\PythonScripter.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\RocketModule.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\ScreenModule.h" />
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\ScriptHelpers.h" />
+    <ClInclude Include="..\..\..\src\Engine\System\Input\InputInterface.h" />
+    <ClInclude Include="..\..\..\src\Engine\System\Input\InputModule.h" />
+    <ClInclude Include="..\..\..\src\Engine\System\Input\PlayerInputs.h" />
+    <ClInclude Include="..\..\..\src\Engine\Time\GameTimeModule.h" />
+    <ClInclude Include="..\..\..\src\Engine\Time\ScalableClock.h" />
+    <ClInclude Include="..\..\..\src\Engine\Time\StopWatch.hpp" />
+    <ClInclude Include="..\..\..\src\Engine\Time\Timer.hpp" />
+    <ClInclude Include="..\..\..\src\Engine\Utilities\boost_function_python.h" />
+    <ClInclude Include="..\..\..\src\Engine\Utilities\Cloneable.h" />
+    <ClInclude Include="..\..\..\src\Game\abilities\Ability.h" />
+    <ClInclude Include="..\..\..\src\Game\abilities\AbilityManager.h" />
+    <ClInclude Include="..\..\..\src\Game\abilities\CharacterAbilityOverrides.h" />
+    <ClInclude Include="..\..\..\src\Game\actions\Action.h" />
+    <ClInclude Include="..\..\..\src\Game\actions\ActionCharacter.h" />
+    <ClInclude Include="..\..\..\src\Game\actions\ActionInterface.h" />
+    <ClInclude Include="..\..\..\src\Game\actions\ActionModifierComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\actions\ActionResult.h" />
+    <ClInclude Include="..\..\..\src\Game\actions\ActiveAction.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\BattleCharacter.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\BattleCharacterComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\BattleField.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\BattleParty.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\BaseMechanics.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\BattleQueue.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\DamageFormulas.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\Mechanics.h" />
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\TurnGenerator.h" />
+    <ClInclude Include="..\..\..\src\Game\character\BaseCharacter.h" />
+    <ClInclude Include="..\..\..\src\Game\character\Party.h" />
+    <ClInclude Include="..\..\..\src\Game\character\Stats.h" />
+    <ClInclude Include="..\..\..\src\Game\components\AccuracyComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\ActionUseComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\ApplyEffectComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\BattleUseComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\CharacterEquipmentComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\Component.h" />
+    <ClInclude Include="..\..\..\src\Game\components\DamageCalculationComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\DamageSplitComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\EffectTriggerComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\ElementEffectivenessComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\FieldUseComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\HealingComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\InputComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\ItemComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\PowerComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\StatAffectorComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\StatsComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\StatusEffectivenessComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\SynthesisRecipeComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\TargetChangeComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\ThrowComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\TransformActionComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\UseComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\UseItemComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\elements\Elements.h" />
+    <ClInclude Include="..\..\..\src\Game\Entity.h" />
+    <ClInclude Include="..\..\..\src\Game\GameInstance.h" />
+    <ClInclude Include="..\..\..\src\Game\graphics\screens\BasicRMLScreen.h" />
+    <ClInclude Include="..\..\..\src\Game\graphics\screens\GameScreen.h" />
+    <ClInclude Include="..\..\..\src\Game\graphics\screens\TitleScreen.h" />
+    <ClInclude Include="..\..\..\src\Game\graphics\visualizers\minigames\CardVisualizer.h" />
+    <ClInclude Include="..\..\..\src\Game\items\Inventory.h" />
+    <ClInclude Include="..\..\..\src\Game\items\Item.h" />
+    <ClInclude Include="..\..\..\src\Game\items\ItemComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\items\ItemDatabase.h" />
+    <ClInclude Include="..\..\..\src\Game\minigames\triad\Card.h" />
+    <ClInclude Include="..\..\..\src\Game\minigames\triad\Deck.h" />
+    <ClInclude Include="..\..\..\src\Game\minigames\triad\Hand.h" />
+    <ClInclude Include="..\..\..\src\Game\minigames\triad\PlayField.h" />
+    <ClInclude Include="..\..\..\src\Game\minigames\triad\TriadPlayer.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\ActionModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\BattleModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\CharacterModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\ComponentModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\EntityModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\GameInstanceModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\GameScreensModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\GameScripting.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\ItemModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\UseComponentWrap.h" />
+    <ClInclude Include="..\..\..\src\Game\statuseffects\StatusEffect.h" />
+    <ClInclude Include="..\..\..\src\Game\statuseffects\StatusEffectsLibrary.h" />
+    <ClInclude Include="..\..\..\src\Game\statuseffects\StatusEffectsManager.h" />
+    <ClInclude Include="..\..\..\src\Game\statuseffects\StatusEffectWeightComponent.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
