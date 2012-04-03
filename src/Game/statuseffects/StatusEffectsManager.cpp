@@ -20,13 +20,26 @@ namespace Game
 		{
 			if (se.get() != nullptr)
 			{
-				NameToSE[se->GetName()] = se;
-				PriorityToSE[se->GetPriority()].push_back(se.get());
-				for (auto cc = se->CallConditions.begin(); cc != se->CallConditions.end(); ++cc)
+				auto it = NameToSE.find(se->GetName());
+				if (it != NameToSE.end())
 				{
-					CallConditionToSE[*cc].push_back(se.get());
+					if (se->IsRefreshable())
+					{
+
+					}
 				}
-				se->SetRemainingTicks(turns);
+				else
+				{
+					NameToSE[se->GetName()] = se;
+					PriorityToSE[se->GetPriority()].push_back(se.get());
+					for (auto cc = se->CallConditions.begin(); cc != se->CallConditions.end(); ++cc)
+					{
+						CallConditionToSE[*cc].push_back(se.get());
+					}
+					se->SetRemainingTicks(turns);
+				}
+				
+				//auto appComp = 
 			}
 		}
 		void StatusEffectsManager::AddStatusEffect(const std::string& effectName, int turns)
@@ -157,6 +170,10 @@ namespace Game
 		{
 			if (effect.get() != nullptr)
 				IncrementStatusResistance(effect->GetName(), inc);
+		}
+		StatusEffectsManager::RawClonePtr StatusEffectsManager::RawClone() const
+		{
+			return new StatusEffectsManager(*this);
 		}
 	}
 }

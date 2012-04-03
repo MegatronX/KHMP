@@ -26,6 +26,10 @@ namespace Game
 			{
 				return BaseParty;
 			}
+			virtual RawClonePtr RawClone() const override
+			{
+				return new BattleCharacterComponent(*this);
+			}
 		protected:
 				BattleParty* BParty;
 				Character::Party* BaseParty;

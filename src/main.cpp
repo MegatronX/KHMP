@@ -10,6 +10,7 @@
 #include <Graphics/Rocket/FaderTransform.h>
 #include <graphics/Screens/TitleScreen.h>
 #include <minigames//triad/Deck.h>
+#include <character/StatsManager.h>
 static const std::string CommandHead = "from EngineModule import *\n";
 void CommandLineIssuer(Engine* engine)
 {
@@ -22,6 +23,7 @@ void CommandLineIssuer(Engine* engine)
 }
 
 using namespace std;
+using namespace Game;
 int main()
 {
 	try
@@ -63,6 +65,14 @@ int main()
 		col->Initialize(trans);*/
 		//trans->AddTransformation()
 		//screen.Add
+
+		int arStats[Character::StatCount] = {324, 34, 37, 32, 29, 28, 24, 34, 40, 20, 20, 200, 49};
+
+		Character::BaseCharacter Arian("Arian", arStats);
+
+		auto SManager = Arian.GetComponentAs<Character::StatsManager*>("StatsManager");
+
+		auto SEManager = Arian.GetComponentAs<StatusEffects::StatusEffectsManager*>("StatusEffectsManager");
 		Game::MiniGames::Triad::Test(&GameEngine);
 		sf::Thread CommandThread(&CommandLineIssuer, &GameEngine);
 		CommandThread.Launch();
@@ -95,4 +105,5 @@ int main()
 	{
 
 	}
+	return EXIT_SUCCESS;
 }

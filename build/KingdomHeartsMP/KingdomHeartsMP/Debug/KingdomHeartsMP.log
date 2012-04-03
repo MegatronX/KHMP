@@ -1,10 +1,10 @@
-﻿Build started 31/03/2012 12:41:46 AM.
+﻿Build started 01/04/2012 11:10:37 PM.
      1>Project "C:\Kingdom Hearts MP\build\KingdomHeartsMP\KingdomHeartsMP\KingdomHeartsMP.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\KingdomHeartsMP.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\Game\minigames\triad\Deck.cpp
-         Deck.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\main.cpp
+         main.cpp
      1>c:\kingdom hearts mp\src\engine\caching\cache.h(24): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
      1>c:\kingdom hearts mp\src\engine\caching\cache.h(25): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
      1>c:\kingdom hearts mp\src\engine\caching\cache.h(26): warning C4482: nonstandard extension used: enum 'Cache::GameStyle' used in qualified name
@@ -22,12 +22,61 @@
      1>c:\kingdom hearts mp\src\engine\system\input\inputmodule.h(49): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
      1>c:\kingdom hearts mp\src\engine\system\input\inputmodule.h(49): warning C4482: nonstandard extension used: enum 'Input::PlayerInput' used in qualified name
      1>c:\kingdom hearts mp\src\engine\system\input\inputmodule.h(49): warning C4482: nonstandard extension used: enum 'Input::InputAction' used in qualified name
-     1>c:\kingdom hearts mp\src\game\minigames\triad\deck.cpp(45): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\kingdom hearts mp\src\game\minigames\triad\deck.cpp(58): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\kingdom hearts mp\src\game\minigames\triad\deck.cpp(72): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\kingdom hearts mp\src\game\minigames\triad\deck.cpp(92): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\kingdom hearts mp\src\game\minigames\triad\deck.cpp(145): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\kingdom hearts mp\src\game\minigames\triad\deck.cpp(164): warning C4700: uninitialized local variable 'stats' used
+     1>c:\kingdom hearts mp\src\game\actions\action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>c:\kingdom hearts mp\src\game\actions\action.h(16): warning C4482: nonstandard extension used: enum 'Game::EntityTypes' used in qualified name
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory(348): warning C4996: 'std::_Uninitialized_copy0': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory(333) : see declaration of 'std::_Uninitialized_copy0'
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\auto_buffer.hpp(192) : see reference to function template instantiation '_FwdIt std::uninitialized_copy<I,boost::variant<T0_,T1>*>(_InIt,_InIt,_FwdIt)' being compiled
+                 with
+                 [
+                     _FwdIt=boost::variant<boost::shared_ptr<void>,boost::signals2::detail::foreign_void_shared_ptr> *,
+                     I=boost::variant<boost::shared_ptr<void>,boost::signals2::detail::foreign_void_shared_ptr> *,
+                     T0_=boost::shared_ptr<void>,
+                     T1=boost::signals2::detail::foreign_void_shared_ptr,
+                     _InIt=boost::variant<boost::shared_ptr<void>,boost::signals2::detail::foreign_void_shared_ptr> *
+                 ]
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\auto_buffer.hpp(179) : see reference to function template instantiation 'void boost::signals2::detail::auto_buffer<T,StackBufferPolicy>::copy_rai<I,false>(I,I,boost::variant<T0_,T1> *,const boost::integral_constant<bool,false> &)' being compiled
+                 with
+                 [
+                     T=boost::signals2::detail::void_shared_ptr_variant,
+                     StackBufferPolicy=boost::signals2::detail::store_n_objects<10>,
+                     I=boost::variant<boost::shared_ptr<void>,boost::signals2::detail::foreign_void_shared_ptr> *,
+                     T0_=boost::shared_ptr<void>,
+                     T1=boost::signals2::detail::foreign_void_shared_ptr
+                 ]
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\auto_buffer.hpp(205) : see reference to function template instantiation 'void boost::signals2::detail::auto_buffer<T,StackBufferPolicy>::copy_impl<I>(I,I,boost::variant<T0_,T1> *,std::random_access_iterator_tag)' being compiled
+                 with
+                 [
+                     T=boost::signals2::detail::void_shared_ptr_variant,
+                     StackBufferPolicy=boost::signals2::detail::store_n_objects<10>,
+                     I=boost::variant<boost::shared_ptr<void>,boost::signals2::detail::foreign_void_shared_ptr> *,
+                     T0_=boost::shared_ptr<void>,
+                     T1=boost::signals2::detail::foreign_void_shared_ptr
+                 ]
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\auto_buffer.hpp(289) : see reference to function template instantiation 'void boost::signals2::detail::auto_buffer<T,StackBufferPolicy>::copy_impl<boost::variant<T0_,T1>*>(I,I,boost::variant<T0_,T1> *)' being compiled
+                 with
+                 [
+                     T=boost::signals2::detail::void_shared_ptr_variant,
+                     StackBufferPolicy=boost::signals2::detail::store_n_objects<10>,
+                     T0_=boost::shared_ptr<void>,
+                     T1=boost::signals2::detail::foreign_void_shared_ptr,
+                     I=boost::variant<boost::shared_ptr<void>,boost::signals2::detail::foreign_void_shared_ptr> *
+                 ]
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\auto_buffer.hpp(282) : while compiling class template member function 'boost::variant<T0_,T1> *boost::signals2::detail::auto_buffer<T,StackBufferPolicy>::move_to_new_buffer(unsigned int,const boost::false_type &)'
+                 with
+                 [
+                     T0_=boost::shared_ptr<void>,
+                     T1=boost::signals2::detail::foreign_void_shared_ptr,
+                     T=boost::signals2::detail::void_shared_ptr_variant,
+                     StackBufferPolicy=boost::signals2::detail::store_n_objects<10>
+                 ]
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\slot_call_iterator.hpp(40) : see reference to class template instantiation 'boost::signals2::detail::auto_buffer<T,StackBufferPolicy>' being compiled
+                 with
+                 [
+                     T=boost::signals2::detail::void_shared_ptr_variant,
+                     StackBufferPolicy=boost::signals2::detail::store_n_objects<10>
+                 ]
+                 c:\programming_libraries\cpp_libraries\boost_1_48_0\boost\signals2\detail\slot_call_iterator.hpp(44) : see reference to class template instantiation 'boost::signals2::detail::slot_call_iterator_cache<ResultType,Function>' being compiled
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Kingdom Hearts MP\build\KingdomHeartsMP\Debug\KingdomHeartsMP.exe" /NOLOGO "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-main-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" freetype248MT_D.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib fmodex_vc.lib ftgl_static.lib RocketCore_d.lib /MANIFEST /ManifestFile:"Debug\KingdomHeartsMP.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Kingdom Hearts MP\build\KingdomHeartsMP\Debug\KingdomHeartsMP.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Kingdom Hearts MP\build\KingdomHeartsMP\Debug\KingdomHeartsMP.lib" /MACHINE:X86 Debug\SectionLoopMusic.obj
          Debug\SoundSystem.obj
@@ -62,6 +111,7 @@
          Debug\Mechanics.obj
          Debug\BaseCharacter.obj
          Debug\Stats.obj
+         Debug\StatsManager.obj
          Debug\CharacterEquipmentComponent.obj
          Debug\Component.obj
          Debug\ElementEffectivenessComponent.obj
@@ -98,4 +148,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:10.67
+Time Elapsed 00:00:13.37

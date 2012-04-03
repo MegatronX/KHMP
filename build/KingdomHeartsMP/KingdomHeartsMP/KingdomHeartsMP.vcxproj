@@ -112,6 +112,7 @@
     <ClCompile Include="..\..\..\src\Game\battle\mechanics\Mechanics.cpp" />
     <ClCompile Include="..\..\..\src\Game\character\BaseCharacter.cpp" />
     <ClCompile Include="..\..\..\src\Game\character\Stats.cpp" />
+    <ClCompile Include="..\..\..\src\Game\character\StatsManager.cpp" />
     <ClCompile Include="..\..\..\src\Game\components\CharacterEquipmentComponent.cpp" />
     <ClCompile Include="..\..\..\src\Game\components\Component.cpp" />
     <ClCompile Include="..\..\..\src\Game\components\ElementEffectivenessComponent.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="..\..\..\src\Game\character\BaseCharacter.h" />
     <ClInclude Include="..\..\..\src\Game\character\Party.h" />
     <ClInclude Include="..\..\..\src\Game\character\Stats.h" />
+    <ClInclude Include="..\..\..\src\Game\character\StatsManager.h" />
     <ClInclude Include="..\..\..\src\Game\components\AccuracyComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\ActionUseComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\ApplyEffectComponent.h" />

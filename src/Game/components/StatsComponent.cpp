@@ -9,6 +9,13 @@ namespace Game
 		{
 
 		}
+		StatComponent::StatComponent(Entity* owner, int initialValue) : Component(owner, "EmptyStatComponent" + owner->GetName(), "StatsComponent")
+		{
+			for (int i = 0; i < StatCount; ++i)
+			{
+				Stats[i] = initialValue;
+			}
+		}
 		StatComponent::StatComponent(Entity* owner, const std::string& name) : Component(owner, name, "StatsComponent")
 		{
 
@@ -19,6 +26,11 @@ namespace Game
 			{
 				Stats[i] = initialValue;
 			}
+		}
+		StatComponent::StatComponent(Entity* owner, int initialValues[Character::StatCount])
+		{
+			for (int i = 0; i < StatCount; ++i)
+				Stats[i] = initialValues[i];
 		}
 		StatComponent::StatComponent(Entity* owner, const int InitialStats[StatCount], const std::string& name) : Component(owner, name, "StatsComponent")//: Stats(InitialStats)
 		{

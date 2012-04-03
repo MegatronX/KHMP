@@ -21,6 +21,11 @@ namespace Game
 			{
 				return false;
 			}
+
+			virtual RawClonePtr RawClone() const override
+			{
+				return new ActionModifierComponent(*this);
+			}
 		};
 	}
 }

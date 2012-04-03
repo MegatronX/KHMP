@@ -326,6 +326,9 @@
     <ClCompile Include="..\..\..\src\Game\abilities\AbilityManager.cpp">
       <Filter>Source Files\Game\Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\character\StatsManager.cpp">
+      <Filter>Source Files\Game\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Engine\Audio\SectionLoopableMusic.h">
@@ -708,6 +711,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\Game\battle\BattleParty.h">
       <Filter>Source Files\Game\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\StatsManager.h">
+      <Filter>Source Files\Game\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

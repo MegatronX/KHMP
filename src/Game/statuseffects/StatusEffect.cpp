@@ -9,7 +9,11 @@ namespace Game
 		{
 
 		}
+		StatusEffect::StatusEffect(const StatusEffect& eff) : NetPositive(eff.NetPositive), Refreshable(eff.Refreshable), RemainingTicks(eff.RemainingTicks), RecommendedTicks(eff.RecommendedTicks), Priority(eff.Priority), CallConditions(eff.CallConditions), 
+			Holder(eff.Holder)
+		{
 
+		}
 		int StatusEffect::GetRemainingTicks() const
 		{
 			return RemainingTicks;
@@ -44,9 +48,57 @@ namespace Game
 		{
 			Holder = holder;
 		}
+
+		bool StatusEffect::IsRefreshable() const
+		{
+			return Refreshable;
+		}
+		void StatusEffect::SetRefreshable(const bool val)
+		{
+			Refreshable = val;
+		}
+
 		void StatusEffect::SetPriority(const int prior)
 		{
 			Priority = prior;
+		}
+
+		boost::signals2::connection StatusEffect::AddEffectActivatedSignal(const EffectActivatedSignal::slot_type& event)
+		{
+			return EffectSignal.connect(event);
+		}
+		boost::signals2::connection StatusEffect::AddEffectDeactivatedSignal(const EffectActivatedSignal::slot_type& event)
+		{
+			return EffectDeactivatedSignal.connect(event);
+		}
+		void StatusEffect::DispatchActivatedSignal(const std::string& activationCondition)
+		{
+			EffectSignal(this, activationCondition);
+		}
+		void StatusEffect::DispatchDeactivatedSignal(const std::string& deactivatedCondition)
+		{
+			EffectDeactivatedSignal(this, deactivatedCondition);
+		}
+		StatusEffect& StatusEffect::operator=(const StatusEffect& eff)
+		{
+			if ((*this) == eff)
+				return *this;
+			Entity::operator=(eff);
+			NetPositive = eff.NetPositive;
+			Refreshable = eff.Refreshable;
+			RemainingTicks = eff.RemainingTicks;
+			RecommendedTicks = eff.RecommendedTicks;
+			Priority = eff.Priority;
+			CallConditions = eff.CallConditions;
+			Holder = eff.Holder;
+		}
+		bool StatusEffect::operator==(const StatusEffect& eff)
+		{
+			return this->GetName() == eff.GetName();
+		}
+		bool StatusEffect::operator!=(const StatusEffect& eff)
+		{
+			return !(*this == eff);
 		}
 	}
 }

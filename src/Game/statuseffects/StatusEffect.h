@@ -3,6 +3,7 @@
 #include <Entity.h>
 #include <Utilities/Cloneable.h>
 #include <boost/unordered_set.hpp>
+#include <boost/signals2.hpp>
 #include <vector>
 namespace Game
 {
@@ -28,24 +29,44 @@ namespace Game
 		MPInspection,				//Used for MP One/MP Half
 		SPInspection,			
 	};
+	
+	
+
 	namespace StatusEffects
 	{
+		class StatusEffect;
+		typedef boost::signals2::signal<void (StatusEffects::StatusEffect*, const std::string&)> EffectActivatedSignal;
 		class StatusEffect : public Entity
 		{
 		public:
 			StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int TickCount = 7);
+			StatusEffect(const StatusEffect& eff);
 			int GetRemainingTicks() const;
 			int GetPriority() const;
 			virtual RawClonePtr RawClone() const override;
 			bool IsPositive() const;
 			const Character::BaseCharacter* GetHolder() const;
+			bool IsRefreshable() const;
+			
+			boost::signals2::connection AddEffectActivatedSignal(const EffectActivatedSignal::slot_type& event);
+			boost::signals2::connection AddEffectDeactivatedSignal(const EffectActivatedSignal::slot_type& event);
+			void DispatchActivatedSignal(const std::string& activationCondition);
+			void DispatchDeactivatedSignal(const std::string& deactivatedCondition);
+			StatusEffect& operator=(const StatusEffect& eff);
+			bool operator==(const StatusEffect& eff);
+			bool operator!=(const StatusEffect& eff);
 		protected:
 			void SetRemainingTicks(const int ticks);
 			void SetIsPositive(const bool pos);
 			void SetHolder(Character::BaseCharacter* holder);
 			void SetPriority(const int prior);
+			void SetRefreshable(const bool val);
+
 		private:
+			EffectActivatedSignal EffectSignal;
+			EffectActivatedSignal EffectDeactivatedSignal;
 			bool NetPositive;
+			bool Refreshable;
 			int RemainingTicks;
 			int RecommendedTicks;
 			int Priority;

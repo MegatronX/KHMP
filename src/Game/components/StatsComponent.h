@@ -13,18 +13,21 @@ namespace Game
 	namespace Character
 	{
 		class BaseCharacter;
+		class StatsManager;
 	}
 	namespace Components
 	{
 		
 		class StatComponent; 
 
-		typedef boost::signal<void (const std::string& compName, StatComponent*, Character::Stat stat, int oldVal, int newVal)> StatChangedSignal;
+		typedef boost::signals2::signal<void (const std::string& compName, StatComponent*, Character::Stat stat, int oldVal, int newVal)> StatChangedSignal;
 		
 		class StatComponent : public Components::Component, public boost::signals::trackable
 		{
 		public:
 			StatComponent(Entity* owner);
+			StatComponent(Entity* owner, int initialValue);
+			StatComponent(Entity* owner, int initialValues[Character::StatCount]);
 			StatComponent(Entity* owner, const std::string& name);
 			StatComponent(Entity* owner, int initialValue, const std::string& name);
 			StatComponent(Entity* owner, const int InitialStats[Character::StatCount], const std::string& name) ;
@@ -33,7 +36,7 @@ namespace Game
 			StatComponent(const StatComponent& base);
 			int GetStat(const Character::Stat stat) const;
 			bool SetStat(const Character::Stat stat, const int value);
-			boost::signals::connection AddStatChangedEvent(const StatChangedSignal::slot_type& event);
+			boost::signals2::connection AddStatChangedEvent(const StatChangedSignal::slot_type& event);
 			void DispatchStatChangedEvents(Character::Stat stat, int prevVal, int newVal);
 			virtual ~StatComponent();
 			StatComponent& operator=(const StatComponent& reference);
@@ -46,6 +49,7 @@ namespace Game
 		private:
 			int Stats[Character::StatCount] ;
 			friend class Character::BaseCharacter;
+			friend class Character::StatsManager;
 		};
 	}
 }

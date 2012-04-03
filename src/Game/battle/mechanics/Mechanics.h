@@ -31,6 +31,7 @@ namespace Game
 			virtual bool IsHit(Character::BaseCharacter& target, Actions::Action& action);
 			virtual bool IsCritical(Character::BaseCharacter& target, Actions::Action& action);
 			BattleField* GetField() const;
+			virtual RawClonePtr RawClone() const override;
 		private:
 			BattleField* Field;
 		};

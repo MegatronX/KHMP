@@ -46,7 +46,7 @@ namespace Game
 			void IncrementStatusResistance(const StatusEffect* effect, const float inc);
 			void IncrementStatusResistance(se_ptr effect, const float inc);
 
-
+			virtual RawClonePtr RawClone() const override;
 		private:
 			boost::unordered_map<std::string, se_ptr> NameToSE;
 			boost::unordered_map<CallCondition, std::vector<StatusEffect*> > CallConditionToSE;

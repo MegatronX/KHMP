@@ -26,5 +26,9 @@ namespace Game
 		{
 			return Field;
 		}
+		Mechanics::RawClonePtr Mechanics::RawClone() const
+		{
+			return new Mechanics(*this);
+		}
 	}
 }
