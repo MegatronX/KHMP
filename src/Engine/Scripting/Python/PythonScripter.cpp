@@ -12,6 +12,7 @@
 #include <Scripting/ActionModule.h>
 #include <Scripting/BattleModule.h>
 #include <scripting/GameScreensModule.h>
+#include <scripting/StatusEffectsModule.h>
 using namespace boost::python;
 using namespace Game;
 using namespace Game::Scripting;
@@ -31,6 +32,7 @@ namespace Scripting
 		PyImport_AppendInittab("GraphicsModule", initGraphicsModule);
 		PyImport_AppendInittab("ScreenModule", initScreenModule);
 		PyImport_AppendInittab("GameScreensModule", initGameScreensModule);
+		PyImport_AppendInittab("StatusEffectsModule", initStatusEffectsModule);
 		Py_Initialize();
 		MainModule = object((handle<>(borrowed(PyImport_AddModule("__main__")))));
 		MainNamespace = MainModule.attr("__dict__");
@@ -85,6 +87,10 @@ namespace Scripting
 		auto GameScreensModule = object((handle<>(PyImport_ImportModule("GameScreensModule"))));
 		MainNamespace["GameScreensModule"] = GameScreensModule;
 		AdditionalModules["GameScreensModule"] = GameScreensModule;
+
+		auto SEModule = object((handle<>(PyImport_ImportModule("StatusEffectsModule"))));
+		MainNamespace["StatusEffectsModule"] = SEModule;
+		AdditionalModules["StatusEffectsModule"] = SEModule;
 	}
 	void PythonScripter::RunString(const std::string &scriptString)
 	{
@@ -163,6 +169,11 @@ namespace Scripting
 	{
 		return GraphicsModule;
 	}
+	boost::python::object& PythonScripter::GetStatusEffectsModule()
+	{
+		return StatusEffectsModule;
+	}
+	//boost::python::object emptyObject();
 	boost::python::object& PythonScripter::GetModule(const std::string& name)
 	{
 		auto it = AdditionalModules.find(name);

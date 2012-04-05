@@ -60,6 +60,7 @@ namespace Game
 				.def("IsType", &Entity::IsType)
 				.def("GetComponent", &Entity::GetComponent, boost::python::return_value_policy<boost::python::reference_existing_object>())
 				.def("RegisterComponent", &Entity::RegisterComponent)
+				.def("HasComponent", &Entity::HasComponent)
 				.def("Clone", &Entity::Clone)//, &EntityWrap::CloneDefault)
 				.def("__eq__", &Entity::operator ==)
 				.def("__neq__", &Entity::operator !=)

@@ -33,7 +33,7 @@ int main()
 		GameWindow.SetFramerateLimit(120);
 		Engine GameEngine("Config.xml", &GameWindow, Res);
 		Game::GameInstance GameInst(GameEngine, false);
-		GameEngine.GetPythonScripter().RunFile("TitleScreen.py");
+		//GameEngine.GetPythonScripter().RunFile("TitleScreen.py");
 		int x = 10;
 		//Game::Graphics::GameRocket::BasicRMLScreen screen("Inv", "TitleScreen.rml", &GameEngine, GameEngine.GetUID());
 		//Game::Graphics::Screens::TitleScreen TitleScr(&GameEngine);
@@ -71,8 +71,11 @@ int main()
 		Character::BaseCharacter Arian("Arian", arStats);
 
 		auto SManager = Arian.GetComponentAs<Character::StatsManager*>("StatsManager");
-
+		SManager->SyncAllBattleStats();
 		auto SEManager = Arian.GetComponentAs<StatusEffects::StatusEffectsManager*>("StatusEffectsManager");
+		auto haste = GameInst.GetSELibrary().GetStatusEffect("Haste");
+		SEManager->AddStatusEffect("Haste", DEFAULT_TURNS);
+		SEManager->RemoveStatusEffect("Haste");
 		Game::MiniGames::Triad::Test(&GameEngine);
 		sf::Thread CommandThread(&CommandLineIssuer, &GameEngine);
 		CommandThread.Launch();

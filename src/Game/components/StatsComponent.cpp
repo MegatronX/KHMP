@@ -59,7 +59,7 @@ namespace Game
 			}
 			return false;
 		}
-		boost::signals::connection StatComponent::AddStatChangedEvent(const StatChangedSignal::slot_type& event)
+		boost::signals2::connection StatComponent::AddStatChangedEvent(const StatChangedSignal::slot_type& event)
 		{
 			return StatChangedEvent.connect(event);
 		}

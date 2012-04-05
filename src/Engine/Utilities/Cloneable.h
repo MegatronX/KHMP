@@ -25,7 +25,7 @@ public:
 	typedef T* RawClonePtr;
 	virtual ClonePtr Clone() const
 	{
-		return ClonePtr(RawClonePtr());
+		return ClonePtr(RawClone());
 	}
 	virtual RawClonePtr RawClone() const
 	{

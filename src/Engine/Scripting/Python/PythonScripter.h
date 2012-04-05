@@ -38,6 +38,7 @@ namespace Scripting
 		boost::python::object& GetLibRocketModule();
 		boost::python::object& GetRocketModule();
 		boost::python::object& GetGraphicsModule();
+		boost::python::object& GetStatusEffectsModule();
 		boost::python::object& GetModule(const std::string& name);
 		void AddModule(const std::string& name, boost::python::object& module);
 
@@ -55,6 +56,7 @@ namespace Scripting
 		boost::python::object RocketModule;
 		boost::python::object GraphicsModule;
 		boost::python::object ScreensModule;
+		boost::python::object StatusEffectsModule;
 		boost::unordered_map<std::string, boost::python::object> AdditionalModules;
 	};
 }

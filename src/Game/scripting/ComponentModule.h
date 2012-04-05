@@ -1,6 +1,8 @@
 #pragma once
 #include <components/Component.h>
 #include <components/UseComponent.h>
+#include <components/ApplyEffectComponent.h>
+#include <statuseffects/StatusEffectsManager.h>
 #include <battle/BattleField.h>
 #include <battle/BattleCharacter.h>
 #include <character/BaseCharacter.h>
@@ -112,6 +114,9 @@ namespace Game
 				.def("__copy__", &generic__copy__<UseComponentWrap>)
 				.def("__deepcopy__", &generic__deepcopy__<UseComponentWrap>)
 				;
+
+//			class_<Components::StatComponent, boost::shared_ptr<Components::StatComponent>, bases<Components::Component> >("StatsComponent")
+	//			;
 /*
 Component(bool valid = false);
 Component(bool valid = false, const int id = ++ComponentIDCounter);

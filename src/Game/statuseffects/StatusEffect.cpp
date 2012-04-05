@@ -5,12 +5,12 @@ namespace Game
 	namespace StatusEffects
 	{
 
-		StatusEffect::StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos, const int priority, const int TickCount) : Holder(holder), RemainingTicks(TickCount), NetPositive(IsPos), Priority(priority), Entity(name, Entity::StringHasher("StatusEffect"))
+		StatusEffect::StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos, const int priority, const int TickCount) : Holder(holder), RecommendedTicks(TickCount), NetPositive(IsPos), Priority(priority), Entity(name, Entity::StringHasher("StatusEffect"))
 		{
 
 		}
 		StatusEffect::StatusEffect(const StatusEffect& eff) : NetPositive(eff.NetPositive), Refreshable(eff.Refreshable), RemainingTicks(eff.RemainingTicks), RecommendedTicks(eff.RecommendedTicks), Priority(eff.Priority), CallConditions(eff.CallConditions), 
-			Holder(eff.Holder)
+			Holder(eff.Holder), Entity(eff)
 		{
 
 		}
@@ -22,7 +22,10 @@ namespace Game
 		{
 			return Priority;
 		}
-
+		int StatusEffect::GetRecommendedTicks() const
+		{
+			return RecommendedTicks;
+		}
 		StatusEffect::RawClonePtr StatusEffect::RawClone() const
 		{
 			return new StatusEffect(*this);
@@ -91,6 +94,7 @@ namespace Game
 			Priority = eff.Priority;
 			CallConditions = eff.CallConditions;
 			Holder = eff.Holder;
+			return *this;
 		}
 		bool StatusEffect::operator==(const StatusEffect& eff)
 		{

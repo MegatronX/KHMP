@@ -39,13 +39,15 @@ namespace Game
 		class StatusEffect : public Entity
 		{
 		public:
-			StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int TickCount = 7);
+			StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int RecommendedTickCount = 7);
 			StatusEffect(const StatusEffect& eff);
 			int GetRemainingTicks() const;
 			int GetPriority() const;
+			int GetRecommendedTicks() const;
 			virtual RawClonePtr RawClone() const override;
 			bool IsPositive() const;
 			const Character::BaseCharacter* GetHolder() const;
+			void SetHolder(Character::BaseCharacter* holder);
 			bool IsRefreshable() const;
 			
 			boost::signals2::connection AddEffectActivatedSignal(const EffectActivatedSignal::slot_type& event);
@@ -58,7 +60,7 @@ namespace Game
 		protected:
 			void SetRemainingTicks(const int ticks);
 			void SetIsPositive(const bool pos);
-			void SetHolder(Character::BaseCharacter* holder);
+			
 			void SetPriority(const int prior);
 			void SetRefreshable(const bool val);
 

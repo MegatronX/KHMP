@@ -6,10 +6,15 @@
 #include "StatusEffect.h"
 #include <components/Component.h>
 #include "StatusEffectsLibrary.h"
+
+#define DEFAULT_TURNS 100000
+
 class Entity;
 
 namespace Game
 {
+	class GameInstance;
+	
 	namespace StatusEffects
 	{
 		class StatusEffectsManager : public Components::Component
@@ -18,7 +23,7 @@ namespace Game
 			StatusEffectsManager(Entity* owner);
 			
 			void AddStatusEffect(StatusEffect* se, const int turns);
-			void AddStatusEffect(se_ptr se, const int turns);
+			void AddStatusEffect(se_ptr se, int turns);
 			void AddStatusEffect(const std::string& effectName, int turns);
 			
 			bool RemoveStatusEffect(const std::string& name);
@@ -54,6 +59,7 @@ namespace Game
 			boost::unordered_set<std::string> LockedInStatusEffects;
 			boost::unordered_map<std::string, float> SEResistances;
 			static StatusEffectsLibrary* SELibrary;
+			friend class GameInstance;
 		};
 	}
 }

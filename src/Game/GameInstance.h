@@ -2,6 +2,7 @@
 #ifndef _GAMEINSTANCE_H_
 #define _GAMEINSTANCE_H_
 #include <items/ItemDatabase.h>
+#include <statuseffects/StatusEffectsLibrary.h>
 #include <boost/signals2.hpp>
 #include <boost/noncopyable.hpp>
 #include <sfml/System.hpp>
@@ -15,13 +16,18 @@ namespace Game
 
 		GameInstance(Engine& engine, bool ThreadStart = true);
 		Items::ItemDatabase& GetItemLibrary();
+		StatusEffects::StatusEffectsLibrary& GetSELibrary();
 		boost::signals2::connection AddGameReadySignal(const GameReadySignal::slot_type& event);
 	protected:
 		void MakeGameInstance();
 		void GenerateItems();
 		void ReloadItemLibrary();
+
+		void GenerateStatusEffects();
+		void ReloadStatusEffectsLibrary();
 	private:
 		Items::ItemDatabase itemDB;
+		StatusEffects::StatusEffectsLibrary SELib;
 		Engine* PrimaryEngine;
 		GameReadySignal readySig;
 		sf::Thread MakeThread;

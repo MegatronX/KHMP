@@ -6,7 +6,7 @@ namespace Game
 {
 	namespace Character
 	{
-		const int StatCount = 13;
+		const int StatCount = 14;
 		enum Stat
 		{
 			HP = 0,
@@ -24,8 +24,9 @@ namespace Game
 			Evasion = 9,
 			MgEvasion = 10,
 			Accuracy = 11,
-			Luck = 12,
-			//None = 13 //Using this as an indexer will cause a segfault
+			MgAccuracy = 12,
+			Luck = 13,
+			//None = 14 //Using this as an indexer will cause a segfault
 		};
 
 		extern const boost::unordered_map<Stat, std::string> StatNameLookup;

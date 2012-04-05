@@ -1,7 +1,8 @@
 #include "StatusEffectsManager.h"
 #include <Entity.h>
 #include <algorithm>
-
+#include <components/ApplyEffectComponent.h>
+#include <character/BaseCharacter.h>
 namespace Game
 {
 	namespace StatusEffects
@@ -16,16 +17,20 @@ namespace Game
 		{
 			AddStatusEffect(se_ptr(se), turns);
 		}
-		void StatusEffectsManager::AddStatusEffect(se_ptr se, const int turns)
+		void StatusEffectsManager::AddStatusEffect(se_ptr se, int turns)
 		{
 			if (se.get() != nullptr)
 			{
+				if (turns == DEFAULT_TURNS)
+				{
+					turns = se->GetRecommendedTicks();
+				}
 				auto it = NameToSE.find(se->GetName());
 				if (it != NameToSE.end())
 				{
 					if (se->IsRefreshable())
 					{
-
+						it->second->SetRemainingTicks(se->GetRemainingTicks());
 					}
 				}
 				else
@@ -37,6 +42,18 @@ namespace Game
 						CallConditionToSE[*cc].push_back(se.get());
 					}
 					se->SetRemainingTicks(turns);
+					auto character = dynamic_cast<Character::BaseCharacter*>(this->GetOwner());
+					if (character != nullptr)
+					{
+						se->SetHolder(character);
+						auto applyEff = se->GetComponentAs<Components::ApplyEffectComponent*>("ApplyEffectComponent");
+						if (applyEff != nullptr)
+						{
+							applyEff->Apply(character);
+						}
+						
+					}
+					
 				}
 				
 				//auto appComp = 
@@ -50,6 +67,19 @@ namespace Game
 		bool StatusEffectsManager::RemoveStatusEffect(const std::string& name)
 		{
 			bool removed = false;
+			auto it = NameToSE.find(name);
+			if (it != NameToSE.end())
+			{
+				auto character = dynamic_cast<Character::BaseCharacter*>(this->GetOwner());
+				if (character != nullptr)
+				{
+					auto applyEff = it->second->GetComponentAs<Components::ApplyEffectComponent*>("ApplyEffectComponent");
+					if (applyEff != nullptr)
+					{
+						applyEff->UnApply(character);
+					}
+				}
+			}
 			return removed;
 		}
 		void StatusEffectsManager::RemoveStatusEffects(const int count, bool AtRandom)

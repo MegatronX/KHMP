@@ -231,6 +231,7 @@
     <ClInclude Include="..\..\..\src\Game\components\StatAffectorComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\StatsComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\StatusEffectivenessComponent.h" />
+    <ClInclude Include="..\..\..\src\Game\components\StatusEffectReplaceAndCancelComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\SynthesisRecipeComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\TargetChangeComponent.h" />
     <ClInclude Include="..\..\..\src\Game\components\ThrowComponent.h" />
@@ -262,6 +263,7 @@
     <ClInclude Include="..\..\..\src\Game\scripting\GameScreensModule.h" />
     <ClInclude Include="..\..\..\src\Game\scripting\GameScripting.h" />
     <ClInclude Include="..\..\..\src\Game\scripting\ItemModule.h" />
+    <ClInclude Include="..\..\..\src\Game\scripting\StatusEffectsModule.h" />
     <ClInclude Include="..\..\..\src\Game\scripting\UseComponentWrap.h" />
     <ClInclude Include="..\..\..\src\Game\statuseffects\StatusEffect.h" />
     <ClInclude Include="..\..\..\src\Game\statuseffects\StatusEffectsLibrary.h" />

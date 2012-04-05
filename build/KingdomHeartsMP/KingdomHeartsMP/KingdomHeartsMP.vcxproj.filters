@@ -148,6 +148,9 @@
     <Filter Include="Source Files\Game\Battle\Mechanics">
       <UniqueIdentifier>{e16121bf-c100-4428-8771-07977b760840}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\StatusEffects\NewFilter1">
+      <UniqueIdentifier>{d5a277a2-0fb4-4f71-88f3-decced5ead1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\Config.xml">
@@ -714,6 +717,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\Game\character\StatsManager.h">
       <Filter>Source Files\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\scripting\StatusEffectsModule.h">
+      <Filter>Source Files\Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\components\StatusEffectReplaceAndCancelComponent.h">
+      <Filter>Source Files\Game\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

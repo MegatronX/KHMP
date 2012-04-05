@@ -33,9 +33,18 @@ namespace Game
 				auto se = NameToStatusEffect.find(name);
 				if (se != NameToStatusEffect.end())
 				{
-					return boost::dynamic_pointer_cast<StatusEffect>(se->second->Clone());
+					auto res = se->second->Clone();
+					return boost::dynamic_pointer_cast<StatusEffect>(res);
 				}
 				return se_ptr();
+			}
+
+			void AddStatusEffect(se_ptr se)
+			{
+				if (se.get() != nullptr)
+				{
+					NameToStatusEffect[se->GetName()] = se;
+				}
 			}
 		private:
 			boost::unordered_map<std::string, se_ptr> NameToStatusEffect;
