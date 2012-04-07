@@ -92,6 +92,28 @@ class StatusResistanceBoostApply(ApplyEffectComponent):
 
 	def Clone(self):
 		return copy.deepcopy(self)
+		
+class StatRestorePostMove(PostMoveEffect):
+	def __init__(self, Owner, StatRest, StatRate):
+		self.StatRest = StatRest;
+		self.StatRate = StatRate;
+		ApplyEffectComponent.__init__(self,Owner)
+	
+	def PostUse(self, Action, RootAction):
+		Damage = Action.GetFinalDamage()
+		if (self.StatRest != None and self.StatRate != None):
+			Character = self.GetOwner().GetHoldingCharacter()
+			if (Character != None):
+				SM = Character.GetStatManager()
+				if (SM != None):
+					if (self.StatRate == Stats.HP):
+						SM.SetHP(SM.GetHP() + int(self.StatRate * self.StatRest))
+					if (self.StatRate == Stats.MP):
+						SM.SetMP(SM.GetMP() + int(self.StatRate * self.StatRest))
+					if (self.StatRate == Stats.SP):
+						SM.SetSP(SM.GetSP() + int(self.StatRate * self.StatRest))
+						
+						
 
 CurrentSE = StatusEffect(None, "Haste", True)
 Mult = SingleStatBoostApply(CurrentSE, Stat.Speed, 1.5)
