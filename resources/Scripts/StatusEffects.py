@@ -112,8 +112,38 @@ class StatRestorePostMove(PostMoveEffect):
 						SM.SetMP(SM.GetMP() + int(self.StatRate * self.StatRest))
 					if (self.StatRate == Stats.SP):
 						SM.SetSP(SM.GetSP() + int(self.StatRate * self.StatRest))
+	def Clone(self):
+		return copy.deepcopy(self)
 						
-						
+class StatTurbo(ActionModifierComponent):
+	def __init__(self, Owner, Stat, TurboRate, CostRate, ActiveOnMagic, ActiveOnPhysical):
+		self.TargetStat = Stat
+		self.TurboRate = TurboRate
+		ActionModifierComponent(self, Owner)
+		
+	def ModifyAction(self, Action, Mechanics):
+		if (Action.Users.HasUser(self.Owner.GetHolder())):
+			mgW = Action.GetMagicWeight()
+			phyW = Action.GetPhysicalWeight()
+			Booster = int(CalcBoost(self, Action, mgW, phyW, ActiveOnMagic, ActiveOnPhysical)) 
+			StatCost = CalcStatCost(Action, Booster)
+			
+	def CalcBoost(self, Action, mgW, phyW, ActOnMg, ActOnPhy):
+		Adder = 0
+		if (mgW > 0 and ActOnMg):
+			Adder += Action.Power * self.TurboRate * mgW
+		if (phyW > 0 and ActOnPhy):
+			Adder += Action.Power * self.TurboRate * phyW
+	def CalcStatCost(self, Action, Adder):
+		if (Adder <= Action.Power):
+			return 0
+		if (Action.MPCost > 0 && self.TargetStat = Stats.MP)
+			return int((Adder / Action.BasePower) * (1 + self.TurboRate) * Action.MPCost)
+		
+		
+	def Clone(self):
+		return copy.deepcopy(self)
+		
 
 CurrentSE = StatusEffect(None, "Haste", True)
 Mult = SingleStatBoostApply(CurrentSE, Stat.Speed, 1.5)
