@@ -29,14 +29,28 @@ namespace Game
 			std::vector<Ability*>& GetAbilitiesWithCallCondition(const CallCondition cc, bool sortByPriority = false) const;
 			std::vector<Ability*>& GetAbilitiesWithPriority(const int priority) const;
 
-			std::vector<Ability*> GetAbilitiesWithComponent(const std::string* compName, bool SortByPriority = false) const;
+			std::vector<Ability*> GetAbilitiesWithComponent(const std::string& compName, bool SortByPriority = false) const;
 			std::vector<Ability*> GetPositiveStatusEffects(bool SortByPriority = false) const;
 			std::vector<Ability*> GetNegativeStatusEffects(bool SortByPriority = false) const;
+			
+			bool AddAbility(const std::string& AbilityName, int instances = 1);
+			bool AddAbility(const Ability* ability, int instances = 1);
+			bool AddAbility(abil_ptr ability, int instances = 1);
+			
+			bool RemoveAbility(const std::string, int instances = 1);
+			
 			void DistributeXP(const int XP);
+			
+			static void SetAbilityLibrary(AbilityLibrary* lib);
 		private:
 			boost::unordered_map<std::string, AbilityHolder> PermanentAbilities;
 			boost::unordered_map<std::string, AbilityHolder> UnlearnedAbilities;
 			bool AllowXP;
+			
+			static AbilityLibrary* abilLib;
+			
+			static boost::unordered_map<std::string, boost::unordered_map<std::string, int> > APCostOverrides;
+			static boost::unordered_map<std::string, boost::unordered_map<std::string, int> > RequiredXPOverrides;
 		};
 	}
 }
