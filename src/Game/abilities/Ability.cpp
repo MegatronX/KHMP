@@ -4,8 +4,7 @@ namespace Game
 {
 	namespace Abilities
 	{
-		boost::unordered_map<std::string, boost::unordered_map<std::string, int> > Ability::APCostOverrides; // = boost::unordered_map<std::string, boost::unordered_map<std::string, int> >();
-		boost::unordered_map<std::string, boost::unordered_map<std::string, int> > Ability::RequiredXPOverrides; // = boost::unordered_map<std::string, boost::unordered_map<std::string, int> >();
+		 // = boost::unordered_map<std::string, boost::unordered_map<std::string, int> >();
 		Ability::Ability(Character::BaseCharacter* owner, const std::string& name, int priority) : StatusEffect(owner, name, true, 0, 0)
 		{
 
