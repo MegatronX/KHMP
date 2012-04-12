@@ -6,6 +6,8 @@ namespace Game
 {
 	namespace Abilities
 	{
+		class AbilityManager;
+		
 		class Ability : public StatusEffects::StatusEffect
 		{
 		public:
@@ -16,8 +18,10 @@ namespace Game
 			int APCost;
 			int Instances;
 			int RequiredXP;
-			static boost::unordered_map<std::string, boost::unordered_map<std::string, int> > APCostOverrides;
-			static boost::unordered_map<std::string, boost::unordered_map<std::string, int> > RequiredXPOverrides;
+			
+			friend class AbilityManager;
+			//static boost::unordered_map<std::string, boost::unordered_map<std::string, int> > APCostOverrides;
+			//static boost::unordered_map<std::string, boost::unordered_map<std::string, int> > RequiredXPOverrides;
 		};
 
 		typedef boost::shared_ptr<Ability> abil_ptr;
