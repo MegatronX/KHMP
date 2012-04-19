@@ -151,6 +151,9 @@
     <Filter Include="Source Files\Game\StatusEffects\NewFilter1">
       <UniqueIdentifier>{d5a277a2-0fb4-4f71-88f3-decced5ead1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Battle\Components">
+      <UniqueIdentifier>{26b2e58f-139f-4ff7-8241-fb5694a00b80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\Config.xml">
@@ -331,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\Game\character\StatsManager.cpp">
       <Filter>Source Files\Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\Attack.cpp">
+      <Filter>Source Files\Game\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -723,6 +729,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\Game\components\StatusEffectReplaceAndCancelComponent.h">
       <Filter>Source Files\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\HitComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\DamageCalculationComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\Attack.h">
+      <Filter>Source Files\Game\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\PostUseComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\UseComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\PreUseComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,16 @@
 #include "Mechanics.h"
 #include <Entity.h>
+#include <actions/Attack.h>
+#include <character/StatsManager.h>
 #include <components/Component.h>
 #include <battle/BattleField.h>
+#include <battle/DamageCalculationComponent.h>
+#include <battle/HitComponent.h>
+
+#include <battle/PostUseComponent.h>
+#include <battle/PreUseComponent.h>
+#include <battle/UseComponent.h>
+
 namespace Game
 {
 	namespace Battle
@@ -15,15 +24,46 @@ namespace Game
 			return false;
 		}
 		
-		void Mechanics::ProcessActionDefault(Actions::Action& action)
+		void Mechanics::ProcessActionDefault(Actions::Action& action, bool InBattle)
 		{
-			PreUsePhase(action);
+			PreUsePhase(action, InBattle);
 			
+			UsePhase(action, InBattle);
 			
-			PostUsePhase(action);
+			PostUsePhase(action, InBattle);
 		}
 		
+		void Mechanics::PreUsePhase(Actions::Action& action, bool InBattle /* = true */)
+		{
+			auto puse = action.GetComponentAs<PreUseComponent*>("PreUseComponent");
+			if (puse != nullptr)
+			{
+				puse->PreUse(action, *this, InBattle);
+			}
+		}
 		
+		void Mechanics::PostUsePhase(Actions::Action& action, bool InBattle /* = true */)
+		{
+			auto puse = action.GetComponentAs<PostUseComponent*>("PreUseComponent");
+			if (puse != nullptr)
+			{
+				puse->PostUse(action, *this, InBattle);
+			}
+		}
+
+		void Mechanics::UsePhase(Actions::Action& action, bool InBattle)
+		{
+			auto use = action.GetComponentAs<UseComponent*>("UseComponent");
+			if (use != nullptr)
+			{
+				use->Use(action, *this, InBattle);
+			}
+			else
+			{
+
+			}
+		}
+
 		bool Mechanics::IsHit(Character::BaseCharacter& target, Actions::Action& action)
 		{
 			auto hitoverride = action.GetComponentAs<HitComponent>("HitComponent");
@@ -33,7 +73,7 @@ namespace Game
 			}
 			else
 			{
-				return ApplyHitFormulat(target, action);
+				return ApplyHitFormula(target, action);
 			}
 			return false;
 		}
@@ -45,10 +85,10 @@ namespace Game
 			auto usercount = 0;
 			for (auto it = action.Users.GetPartyMembers().begin(); it != action.Users.GetPartyMembers().end(); ++it)
 			{
-				auto sm = (*it).GetComponentAs<Character::StatsManagerComponent>("StatsManagerComponent");
+				auto sm = (*it).GetComponentAs<Character::StatsManager>("StatsManagerComponent");
 				if (sm != nullptr)
 				{
-					runningaccuracy += sm.GetInBattleStat(Stat::Accuracy);
+					runningaccuracy += sm.GetInBattleStat(Character::Stat::Accuracy);
 					usercount++;
 				}
 			}
@@ -59,13 +99,13 @@ namespace Game
 			
 			float evasion = 0.f;
 			
-			auto atk = dynamic_cast<Attack*>(&action);
+			auto atk = dynamic_cast<Actions::Attack*>(&action);
 			if (atk != nullptr)
 			{
-				auto sm = target.GetComponentAs<CharacteR:StatsManagerComponent>("StatsManagerComponent");
+				auto sm = target.GetComponentAs<Character::StatsManager*>("StatsManagerComponent");
 				if (sm != nullptr)
 				{
-					evasion = sm.GetInBattleStat(Stat::MgEvasion) * atk->GetMagicWeight() + sm.GetInBattleStat(Stat::Evasion) * atk->GetPhysicalWeight();
+					evasion = sm->GetBattleStat(Character::Stat::MgEvasion) * atk->GetMagicWeight() + sm->GetBattleStat(Character::Stat::Evasion) * atk->GetPhysicalWeight();
 				}	
 			}
 			
@@ -93,19 +133,19 @@ namespace Game
 			}
 			return critical;
 		}
-		int Mechanics::CalculateDamage(Character::BaseCharacter& target, const Action& action)
+		int Mechanics::CalculateDamage(Character::BaseCharacter& target, const Actions::Action& action)
 		{
-			auto dmgoverride = action.GetComponentAs<DamageCalculationComponent>("DamageCalculationComponent");
+			auto dmgoverride = action.GetComponentAs<DamageCalculationComponent*>("DamageCalculationComponent");
 			if (dmgoverride != nullptr)
 			{
-				return dmgoverride.CalculateDamage(target, action, *this);
+				return dmgoverride->CalculateDamage(target, action, *this);
 			}
 			else
 			{
-				return ApplyDamageFormula(target, action, *this);
+				return ApplyDamageFormula(target, action);
 			}
 		}
-		int Mechanics::ApplyDamageFormula(Character::BaseCharacter& target, const Action& action)
+		int Mechanics::ApplyDamageFormula(Character::BaseCharacter& target, const Actions::Action& action)
 		{
 			return 0;
 		}

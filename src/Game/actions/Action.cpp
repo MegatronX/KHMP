@@ -14,11 +14,7 @@ namespace Game
 		{
 
 		}
-		Action::ClonePtr Action::Clone() const
-		{
-			return Action::ClonePtr(new Action(*this));
-		}
-		bool Action::PreUse(Action* action)//, ActionInterface(true, true, true, true, true, true)
+		/*bool Action::PreUse(Action* action)//, ActionInterface(true, true, true, true, true, true)
 		{
 			std::vector<Actions::ActionInterface*> comps;
 			comps.reserve(10);
@@ -32,10 +28,6 @@ namespace Game
 			}
 			if (comps.size() < 0)
 			{
-				/*std::sort(comps.begin(), comps.end(), [](ActionInterface* const& comp1, ActionInterface* const& comp2)
-				{
-					return comp1->GetPriority() < comp2->GetPriority();
-				});*/
 				for (auto comp = comps.begin(); comp != comps.end(); ++comp)
 				{
 					(*comp)->PreUse(this);
@@ -58,10 +50,6 @@ namespace Game
 			}
 			if (comps.size() < 0)
 			{
-				/*std::sort(comps.begin(), comps.end(), [](ActionUseComponent* const& comp1, ActionUseComponent* const& comp2)
-				{
-					return comp1->GetPriority() < comp2->GetPriority();
-				});*/
 				for (auto comp = comps.begin(); comp != comps.end(); ++comp)
 				{
 					(*comp)->Use(this);
@@ -84,10 +72,6 @@ namespace Game
 			}
 			if (comps.size() < 0)
 			{
-				/*std::sort(comps.begin(), comps.end(), [](ActionUseComponent* const& comp1, ActionUseComponent* const& comp2)
-				{
-					return comp1->GetPriority() < comp2->GetPriority();
-				});*/
 				for (auto comp = comps.begin(); comp != comps.end(); ++comp)
 				{
 					(*comp)->PostUse(this);
@@ -108,6 +92,16 @@ namespace Game
 		bool Action::BattlePostUse(Action* action, Battle::BattleField* field)
 		{
 			return false;
+		}*/
+
+		Action::RawClonePtr Action::RawClone() const
+		{
+			return new Action(*this);
+		}
+
+		float Action::GetAccuracy() const
+		{
+			return this->Accuracy;
 		}
 	}
 }

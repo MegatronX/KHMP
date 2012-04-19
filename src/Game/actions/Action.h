@@ -9,7 +9,7 @@ namespace Game
 {
 	namespace Actions
 	{
-		class Action : public Entity, public ActionInterface
+		class Action : public Entity//, public ActionInterface
 		{
 		public:
 			Action();
@@ -23,15 +23,17 @@ namespace Game
 			bool IgnoreTargetSE;
 			bool IgnoreTargetAbil;
 
-			virtual bool PreUse(Action* action) override;
+			/*virtual bool PreUse(Action* action) override;
 			virtual bool Use(Action* action) override;
 			virtual bool PostUse(Action* action) override;
 			virtual bool BattlePreUse(Action* action, Battle::BattleField* field) override;
 			virtual bool BattleUse(Action* action, Battle::BattleField* field) override;
-			virtual bool BattlePostUse(Action* action, Battle::BattleField* field) override;
-			ClonePtr Clone() const override;
-		protected:
+			virtual bool BattlePostUse(Action* action, Battle::BattleField* field) override;*/
+			RawClonePtr RawClone() const override;
 
+			float GetAccuracy() const;
+		protected:
+			float Accuracy;
 		};
 	}
 }

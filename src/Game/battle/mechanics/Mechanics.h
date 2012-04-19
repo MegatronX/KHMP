@@ -28,9 +28,29 @@ namespace Game
 		public:
 			Mechanics(BattleField* owner);
 			virtual bool ApplyStatusEffect(Character::BaseCharacter& target, const std::string& se, int turns, float seApplyRate = 1.0f);
+
+			virtual void ProcessActionDefault(Actions::Action& action, bool InBattle = true);
+
+			virtual void PreUsePhase(Actions::Action& action, bool InBattle = true);
+
+			virtual void PostUsePhase(Actions::Action& action, bool InBattle = true);
+
+			virtual void UsePhase(Actions::Action& action, bool InBattle = true);
+
 			virtual bool IsHit(Character::BaseCharacter& target, Actions::Action& action);
+
+			virtual bool ApplyHitFormula(Character::BaseCharacter& target, Actions::Action& action);
+
 			virtual bool IsCritical(Character::BaseCharacter& target, Actions::Action& action);
+
+			virtual bool ApplyCriticalFormula(Character::BaseCharacter& target, Actions::Action& action);
+
+			virtual int CalculateDamage(Character::BaseCharacter& target, const Actions::Action& action);
+
+			virtual void ApplyDamageFormula(Character::BaseCharacter& target, const Actions::Action& action);
+
 			BattleField* GetField() const;
+
 			virtual RawClonePtr RawClone() const override;
 		private:
 			BattleField* Field;
