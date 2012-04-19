@@ -49,6 +49,10 @@ namespace Game
 
 			virtual void ApplyDamageFormula(Character::BaseCharacter& target, const Actions::Action& action);
 
+			virtual void EnforceActionCosts(Character::BaseCharacter& user, const Actions::Action& action);
+			
+			virtual int EnforceCalculatedDamage(Character::Character& target, const Actions:Action& action, int calculatedDamage);
+
 			BattleField* GetField() const;
 
 			virtual RawClonePtr RawClone() const override;
