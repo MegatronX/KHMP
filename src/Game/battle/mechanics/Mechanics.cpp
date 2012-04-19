@@ -15,7 +15,7 @@ namespace Game
 {
 	namespace Battle
 	{
-		Mechanics::Mechanics(BattleField* owner) : Component(owner, owner->GetName(), "Mechanics"), Field(owner)
+		Mechanics::Mechanics(BattleField* owner) : Component(owner, owner != nullptr ? owner->GetName() + "Mechanics" : "NoOwnerMechanics", "Mechanics"), Field(owner)
 		{
 
 		}
@@ -145,10 +145,69 @@ namespace Game
 				return ApplyDamageFormula(target, action);
 			}
 		}
-		int Mechanics::ApplyDamageFormula(Character::BaseCharacter& target, const Actions::Action& action)
+		int Mechanics::ApplyDamageFormula(Character::BaseCharacter& target, Actions::Action& action)
 		{
-			return 0;
+			int damage = 0;
+			
+			action.SetCalculatedDamage(damage);
+			
+			return damage;
 		}
+		
+		void EnforceActionCosts(Character::BaseCharacter& user, Actions::Action& action)
+		{
+			//the action gets first priority to determine the cost of performing the action. If the action does not provide an override,
+			//the user can attempt a cost override
+			auto actoverride = action.GetComponentAs<ActionCostOverrideComponent*>("ActionCostOverrideComponent");
+			if (actoverride != nullptr)
+			{
+				actovverride->EnforceActionCost(user, action);
+			}
+			else
+			{
+				auto costoverrides = user.GetComponentAs<ActionCostOverrideComponent*>("ActionCostOverrideComponent");
+				if (costoverrides != nullptr)
+				{
+					costoverrides->EnforceActionCost(user, action);
+				}
+				else
+				{
+					auto sm = user.GetComponentAs<StatManager*>("StatManager");
+					if (sm != nullptr)
+					{
+						if (action.GetMPCost() > 0)
+							sm->SetCurrentStat(Stats.MP)(sm->GetCurrentStat(Stats.MP) - action.GetMPCost())
+						if (action.GetSPCost() > 0)
+							sm->SetCurrentStat(Stats.SP)
+			
+					}
+				}
+			}
+		}
+			
+		int EnforceCalculatedDamage(Character::Character& target, Actions:Action& action, int calculatedDamage)
+		{
+			int inflictedDamage = 0;
+			if (action.IsDamageCalculated() && calculatedDamage > 0)
+			{
+				auto sm = target.GetComponentAs<StatManager*>("StatManager");
+				if (sm != nullptr)
+				{
+					int remHP = sm->GetCurrentStat(Stats.HP);
+					if (calcualtedDamage > remHP)
+						inflictedDamage = remHP;
+					sm->SetCurrentStat(Stat.HP)(remHP - calculatedDamage);
+				}
+#ifdef DEBUG
+				else
+					std:cerr << "Could not find StatManager for " << target->GetName() << "\n";				
+#endif
+			}
+			
+			return inflictedDamage;
+		}
+
+		
 		BattleField* Mechanics::GetField() const
 		{
 			return Field;
