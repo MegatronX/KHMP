@@ -127,6 +127,8 @@ class StatTurbo(ActionModifierComponent):
 			phyW = Action.GetPhysicalWeight()
 			Booster = int(CalcBoost(self, Action, mgW, phyW, ActiveOnMagic, ActiveOnPhysical)) 
 			StatCost = CalcStatCost(Action, Booster)
+			Action.SetPower(Action.GetPower() + Booster)
+			
 			
 	def CalcBoost(self, Action, mgW, phyW, ActOnMg, ActOnPhy):
 		Adder = 0
@@ -143,7 +145,39 @@ class StatTurbo(ActionModifierComponent):
 		
 	def Clone(self):
 		return copy.deepcopy(self)
+
+class ActionReversalComponent(ActionModifierComponent):
+	def __init__(self, Owner, ReflectMagic = True, ReflectSkills = False, DontReverseOnFlags = None, RandomUser = True):
+		self.ReflectMg = ReflectMagic
+		self.ReflectSkills = ReflectSkills
+		self.DontReverseOnFlags = DontReverseOnFlags
+		self.RandomUser = RandomUser
+		ActionModifierComponent.__init__(self, Owner)
+	
+	def ModifyAction(self, Action, Mechanics):
+		if (Action.Users.GetCount() > 0 and Action.Targets.GetCount() > 0 and ReversalCheck(Action, Mechanics)):
+			for target in Action.Targets:
+				if (target == Owner.GetHolder()):
+					if (self.RandomUser):
+						target.Character = Action.Users.GetCharacter(Mechanics.GetRandomInt(0, Action.Users.GetCount() - 1)
+					else:
+						target.Character = Action.Users.GetFirst()
+					Action.SetReflected(True)
+	def ReversalCheck(self, Action, Mechanics):
+		Reverse = False
+		if (Action != None):
+			if ((self.ReflectMg && Action.IsMagic()) or (self.ReflectSkills && Action.IsSkill())):
+				Reverse = True
+				for flag in self.DontReverseOnFlags:
+					if (Action.HasFlag(flag)):
+						Reverse = False
+						break
+		return Reverse
+	def Clone(self):
+		return copy.deepcopy(self)
 		
+		
+
 
 CurrentSE = StatusEffect(None, "Haste", True)
 Mult = SingleStatBoostApply(CurrentSE, Stat.Speed, 1.5)
