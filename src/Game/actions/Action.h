@@ -14,8 +14,8 @@ namespace Game
 		public:
 			Action();
 			Action(const std::string& name, const int type = EntityTypes::ActionEntity);
-			std::vector<ActiveAction> Users;
-			std::vector<ActiveAction> Targets;
+			ActionUsers Users;
+			ActionTargets Targets;
 
 			bool IgnoreUserSE;
 			bool IgnoreUserAbil;
