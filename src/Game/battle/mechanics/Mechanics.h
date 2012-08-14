@@ -84,6 +84,10 @@ namespace Game
 
 			void SetRandomEnabled(const bool Enabled = true);
 
+			virtual void EnforceActionCosts(Character::BaseCharacter& user, const Actions::Action& action);
+			
+			virtual int EnforceCalculatedDamage(Character::Character& target, const Actions:Action& action, int calculatedDamage);
+
 			BattleField* GetField() const;
 
 			virtual RawClonePtr RawClone() const override;
