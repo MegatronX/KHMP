@@ -43,8 +43,6 @@ namespace WPFTools
 
         private XmlElement MakeXmlEnemyInstanceTemplate(XmlDocument doc)
         {
-            XmlElement enemyInst = doc.CreateElement("EnemyInstance");
-            enemyInst.SetAttribute("level", "0");
            
             XElement template = new XElement("EnemyInstance", new XAttribute("level", "0"),
                                                 new XElement("Description", new XAttribute("value", "0")),
@@ -108,7 +106,7 @@ namespace WPFTools
                 }
                 else
                 {
-                    MessageBox.Show("The enterted level was not a valid number. Please use an integer value between 0 and 100");
+                    MessageBox.Show("The entered level was not a valid number. Please use an integer value between 0 and 100");
                 }
             }
             else

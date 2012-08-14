@@ -1,11 +1,16 @@
 #pragma once
 #ifndef _BATTLEPARTY_H_
 #define _BATTLEPARTY_H_
-#include <battle/BattleCharacterComponent.h>
-#include <character/Party.h>
+//#include <battle/BattleCharacterComponent.h>
+//#include <character/Party.h>
 namespace Game
 {
-	namespace Character
+	/*namespace Battle
+	{
+		typedef Character::PartyInterface<BattleCharacterComponent> BattleParty;
+		typedef boost::shared_ptr<BattleParty> battleparty_ptr;
+	}*/
+	/*namespace Character
 	{
 		Party;
 	}
@@ -20,7 +25,7 @@ namespace Game
 			Character::Party* BaseParty;
 		};
 		
-	}
+	}*/
 }
 
 #endif

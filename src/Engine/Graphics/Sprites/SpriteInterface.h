@@ -11,7 +11,7 @@ namespace Graphics
 	class SpriteInterface;
 	
 
-	class SpriteInterface : public DrawInterface
+	class SpriteInterface : public virtual DrawInterface
 	{
 	public:
 		SpriteInterface() : Rotation(0.f), Position(0.f, 0.f), Scale(1.f, 1.f)

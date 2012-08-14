@@ -154,16 +154,52 @@
     <Filter Include="Source Files\Game\Battle\Components">
       <UniqueIdentifier>{26b2e58f-139f-4ff7-8241-fb5694a00b80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Utility">
+      <UniqueIdentifier>{31ae9635-bb63-4bc3-b488-73327838f812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{5fd091fd-f49e-4902-9dc2-cc7379bbd5d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Battle\ai">
+      <UniqueIdentifier>{c1e6f268-4a15-45ac-8854-57d6a6f6daa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Graphics\Animation">
+      <UniqueIdentifier>{9319da0e-6d6d-44ed-9707-e7acb87d27b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Character\PlayerParty">
+      <UniqueIdentifier>{6c7a1cb8-82bd-403b-b9b3-8eec2e9c6c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Character\EnemyParty">
+      <UniqueIdentifier>{64120e09-6137-450e-b31f-47c1e22b4943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Save">
+      <UniqueIdentifier>{93deb652-b092-4f9b-ac97-35b186510a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Game State">
+      <UniqueIdentifier>{b2e435c8-5b52-46bd-b5fe-5b312c0687d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Graphics\Camera">
+      <UniqueIdentifier>{233b589b-0a06-4a46-8ee6-f4615f899a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Mapping">
+      <UniqueIdentifier>{ec562567-8e24-49af-9827-a0ae9d965d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Graphics\Screens\Mapping">
+      <UniqueIdentifier>{e400da69-c7cb-4f76-94f8-a18d9f76d551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\CutScenes">
+      <UniqueIdentifier>{af77699a-dc71-422a-97c0-05f39b6e715d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\Config.xml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\..\..\resources\XML Databases\SpriteDescriptions.xml">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\Engine\Audio\SectionLoopMusic.cpp">
       <Filter>Source Files\Engine\Audio</Filter>
     </ClCompile>
@@ -263,9 +299,6 @@
     <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\BaseFileInterface.cpp">
       <Filter>Source Files\Engine\Graphics\Rocket</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\LibRocketRenderInterface.cpp">
-      <Filter>Source Files\Engine\Graphics\Rocket</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\RocketSystemInterface.cpp">
       <Filter>Source Files\Engine\Graphics\Rocket</Filter>
     </ClCompile>
@@ -335,8 +368,86 @@
     <ClCompile Include="..\..\..\src\Game\character\StatsManager.cpp">
       <Filter>Source Files\Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Game\battle\Attack.cpp">
+    <ClCompile Include="..\..\..\src\Game\actions\ActionLibrary.cpp">
       <Filter>Source Files\Game\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\actions\Attack.cpp">
+      <Filter>Source Files\Game\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\BattleField.cpp">
+      <Filter>Source Files\Game\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\mechanics\ATBTurnGenerator.cpp">
+      <Filter>Source Files\Game\Battle\Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\mechanics\QueueTurnGenerator.cpp">
+      <Filter>Source Files\Game\Battle\Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\mechanics\TurnGenerator.cpp">
+      <Filter>Source Files\Game\Battle\Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\ai\BattlerAI.cpp">
+      <Filter>Source Files\Game\Battle\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Sprites\Sprite.cpp">
+      <Filter>Source Files\Engine\Graphics\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\battle\ActionHistory.cpp">
+      <Filter>Source Files\Game\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Sprites\AnimatedSprite.cpp">
+      <Filter>Source Files\Engine\Graphics\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Animation\FrameAnimation.cpp">
+      <Filter>Source Files\Engine\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\graphics\AnimatorCollection.cpp">
+      <Filter>Source Files\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Rocket\LibRocketRenderInterface.cpp">
+      <Filter>Source Files\Engine\Graphics\Rocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\character\LevelingTable.cpp">
+      <Filter>Source Files\Game\Character\PlayerParty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\character\PlayerParty.cpp">
+      <Filter>Source Files\Game\Character\PlayerParty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Camera\Camera.cpp">
+      <Filter>Source Files\Engine\Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Mapping\TileSet.cpp">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Mapping\TileMap.cpp">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Mapping\Layer.cpp">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Mapping\Exit.cpp">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Utilities\base64.cpp">
+      <Filter>Source Files\Engine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Mapping\AnimatedLayer.cpp">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Graphics\Screens\MapViewLayer.cpp">
+      <Filter>Source Files\Engine\Graphics\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\mapping\GameMap.cpp">
+      <Filter>Source Files\Game\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Engine\Mapping\AnimatedTileSet.cpp">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Game\graphics\screens\GameMapViewScreen.cpp">
+      <Filter>Source Files\Game\Graphics\Screens\Mapping</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -589,9 +700,6 @@
     <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\BaseFileInterface.h">
       <Filter>Source Files\Engine\Graphics\Rocket</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\LibRocketRenderInterace.h">
-      <Filter>Source Files\Engine\Graphics\Rocket</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\RocketSystemInterface.h">
       <Filter>Source Files\Engine\Graphics\Rocket</Filter>
     </ClInclude>
@@ -646,9 +754,6 @@
     <ClInclude Include="..\..\..\src\Game\components\CharacterEquipmentComponent.h">
       <Filter>Source Files\Game\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\Engine\Graphics\AnimatedDraw.h">
-      <Filter>Source Files\Engine\Graphics\Sprites</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\AlphaOscillateTransformer.h">
       <Filter>Source Files\Engine\Graphics\Rocket\ElementTransformations</Filter>
     </ClInclude>
@@ -690,9 +795,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\Game\abilities\CharacterAbilityOverrides.h">
       <Filter>Source Files\Game\Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Game\battle\mechanics\TurnGenerator.h">
-      <Filter>Source Files\Game\Battle\Mechanics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\Game\battle\mechanics\BaseMechanics.h">
       <Filter>Source Files\Game\Battle\Mechanics</Filter>
@@ -736,9 +838,6 @@
     <ClInclude Include="..\..\..\src\Game\battle\DamageCalculationComponent.h">
       <Filter>Source Files\Game\Battle\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\Game\battle\Attack.h">
-      <Filter>Source Files\Game\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\Game\battle\PostUseComponent.h">
       <Filter>Source Files\Game\Battle\Components</Filter>
     </ClInclude>
@@ -747,6 +846,150 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\Game\battle\PreUseComponent.h">
       <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\actions\ActionLibrary.h">
+      <Filter>Source Files\Game\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\utility\EntityLibrary.h">
+      <Filter>Source Files\Game\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\abilities\AbilityLibrary.h">
+      <Filter>Source Files\Game\Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\actions\ActionUserTarget.h">
+      <Filter>Source Files\Game\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\CriticalHitComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\actions\Attack.h">
+      <Filter>Source Files\Game\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\Battle.h">
+      <Filter>Source Files\Game\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\components\ElementWeightComponent.h">
+      <Filter>Source Files\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\scripting\ElementModule.h">
+      <Filter>Source Files\Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\DamageSplitComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\AtkDefStatComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="mainx.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\ATBTurnGenerator.h">
+      <Filter>Source Files\Game\Battle\Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\QueueTurnGenerator.h">
+      <Filter>Source Files\Game\Battle\Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\TurnGenerator.h">
+      <Filter>Source Files\Game\Battle\Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\ai\BattlerAI.h">
+      <Filter>Source Files\Game\Battle\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\graphics\visualizers\EntityVisualizer.h">
+      <Filter>Source Files\Game\Graphics\Visualizers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\CharacterLibrary.h">
+      <Filter>Source Files\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\graphics\DrawManager.h">
+      <Filter>Source Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\mechanics\PostTurnComponent.h">
+      <Filter>Source Files\Game\Battle\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\AnimatedDraw.h">
+      <Filter>Source Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\battle\ActionHistory.h">
+      <Filter>Source Files\Game\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Sprites\AnimatedSprite.h">
+      <Filter>Source Files\Engine\Graphics\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Animation\Animator.hpp">
+      <Filter>Source Files\Engine\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Animation\FrameAnimation.hpp">
+      <Filter>Source Files\Engine\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\graphics\AnimatorCollection.h">
+      <Filter>Source Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\LibRocketRenderInterface.h">
+      <Filter>Source Files\Engine\Graphics\Rocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Rocket\Assert.h">
+      <Filter>Source Files\Engine\Graphics\Rocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\components\LevelingComponent.h">
+      <Filter>Source Files\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardBack.h">
+      <Filter>Source Files\Game\Graphics\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\PlayerPartyComponent.h">
+      <Filter>Source Files\Game\Character\PlayerParty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\PlayerCharacterComponent.h">
+      <Filter>Source Files\Game\Character\PlayerParty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\LevelingTable.h">
+      <Filter>Source Files\Game\Character\PlayerParty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\EnemyComponent.h">
+      <Filter>Source Files\Game\Character\EnemyParty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\character\PlayerParty.h">
+      <Filter>Source Files\Game\Character\PlayerParty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Camera\Camera.h">
+      <Filter>Source Files\Engine\Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Mapping\TileSet.h">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Mapping\TileMap.h">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Mapping\Layer.h">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Mapping\Exit.h">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Utilities\base64.h">
+      <Filter>Source Files\Engine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Mapping\AnimatedLayer.h">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Graphics\Screens\MapViewLayer.h">
+      <Filter>Source Files\Engine\Graphics\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\mapping\GameMap.h">
+      <Filter>Source Files\Game\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Mapping\AnimatedTileSet.h">
+      <Filter>Source Files\Engine\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Engine\Scripting\Python\MappingModule.h">
+      <Filter>Source Files\Engine\Scripting\Python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\graphics\screens\GameMapViewScreen.h">
+      <Filter>Source Files\Game\Graphics\Screens\Mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Game\cutscenes\CutScene.h">
+      <Filter>Source Files\Game\CutScenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -127,21 +127,21 @@ namespace Graphics
 		{
 
 			int Modifiers = 0;
-			if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Key::LShift) ||
-				(sf::Keyboard::IsKeyPressed(sf::Keyboard::Key::RShift)))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) ||
+				(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RShift)))
 				Modifiers |= Rocket::Core::Input::KM_SHIFT;
-			if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Key::LControl) ||
-				(sf::Keyboard::IsKeyPressed(sf::Keyboard::Key::RControl)))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl) ||
+				(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RControl)))
 				Modifiers |= Rocket::Core::Input::KM_CTRL;
-			if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Key::LAlt) ||
-				(sf::Keyboard::IsKeyPressed(sf::Keyboard::Key::RAlt)))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LAlt) ||
+				(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RAlt)))
 				Modifiers |= Rocket::Core::Input::KM_ALT;
 			return Modifiers;
 			
 		}
 		float RocketSystemInterface::GetElapsedTime()
 		{
-			return timer.GetElapsedTime() * 0.001f;
+			return timer.getElapsedTime().asSeconds();// * 0.001f;
 		}
 		bool RocketSystemInterface::LogMessage(Rocket::Core::Log::Type type, const Rocket::Core::String& message)
 		{

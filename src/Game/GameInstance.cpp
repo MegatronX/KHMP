@@ -1,6 +1,7 @@
 #include "GameInstance.h"
 #include <Engine.h>
 #include <statuseffects/StatusEffectsManager.h>
+#include <items/Inventory.h>
 //#include <Scripting/ItemModule.h>
 //#include <Scripting/GameScripting.h>
 //#include <Scripting/ItemModule.h>
@@ -10,9 +11,10 @@ namespace Game
 	{
 		try
 		{
-			PrimaryEngine->GetPythonScripter().AddScriptObject<GameInstance>("GameInstance", *this, PrimaryEngine->GetPythonScripter().GetModule("GameInstanceModule"));
+			PrimaryEngine->GetPythonScripter().AddScriptObject<GameInstance>("ActiveGame", *this, PrimaryEngine->GetPythonScripter().GetModule("GameInstanceModule"));
 			GenerateItems();
 			GenerateStatusEffects();
+			GenerateActions();
 			//Initalize others
 
 			readySig();
@@ -22,11 +24,11 @@ namespace Game
 			PyErr_Print();
 		}
 	}
-	GameInstance::GameInstance(Engine& engine, bool ThreadStart) : PrimaryEngine(&engine), MakeThread(&GameInstance::MakeGameInstance, this)
+	GameInstance::GameInstance(Engine& engine, bool ThreadStart) : PrimaryEngine(&engine), MakeThread(&GameInstance::MakeGameInstance, this), SelectedDifficulty("Standard")
 	{
 		if (ThreadStart)
 		{
-			MakeThread.Launch();
+			MakeThread.launch();
 		}
 		else
 		{
@@ -53,6 +55,38 @@ namespace Game
 	{
 		
 	}
+
+	void GameInstance::GenerateActions()
+	{
+		PrimaryEngine->GetPythonScripter().AddScriptObject<Actions::ActionsLibrary>("ActionLibrary", ActLib, PrimaryEngine->GetPythonScripter().GetModule("ActionModule"));
+		PrimaryEngine->GetPythonScripter().RunFile(std::string("Actions.py"));
+	}
+
+	void GameInstance::ReloadActions()
+	{
+
+	}
+
+	void GameInstance::MakeNewGame(const std::string& difficulty)
+	{
+		SelectedDifficulty = difficulty;
+		PrimaryEngine->GetScreenManager().ClearStacks();
+		PParty.RegisterComponent("Inventory Component", boost::shared_ptr<Items::InventoryComponent>(new Items::InventoryComponent()), true);
+		PrimaryEngine->GetPythonScripter().RunFile("MakeNewGame.py");
+
+	}
+	void GameInstance::LoadSave(const std::string& savefile, const std::string& savename)
+	{
+
+	}
+	Character::PlayerParty& GameInstance::GetPlayerParty()
+	{
+		return PParty;
+	}
+	/*GameState& GameInstance::GetPlayerGameState()
+	{
+		return PlayerState;
+	}*/
 	Items::ItemDatabase& GameInstance::GetItemLibrary()
 	{
 		return itemDB;
@@ -60,6 +94,10 @@ namespace Game
 	StatusEffects::StatusEffectsLibrary& GameInstance::GetSELibrary()
 	{
 		return SELib;
+	}
+	Actions::ActionsLibrary& GameInstance::GetActionLibrary()
+	{
+		return ActLib;
 	}
 	boost::signals2::connection GameInstance::AddGameReadySignal(const GameReadySignal::slot_type& event)
 	{

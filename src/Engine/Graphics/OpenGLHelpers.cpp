@@ -5,8 +5,8 @@ namespace Graphics
 {
 	inline void SetupOpenGL2DView(const sf::View& view)
 	{
-		sf::Vector2f size(view.GetSize());
-		sf::Vector2f center(view.GetCenter());
+		sf::Vector2f size(view.getSize());
+		sf::Vector2f center(view.getCenter());
 		sf::Vector2f position = center - size * 0.5f;
 
 		// Edit the OpenGL projection matrix
@@ -19,14 +19,14 @@ namespace Graphics
 
 		// Setup rotation 
 		glTranslatef(center.x, center.y, 0.f);
-		glRotatef(view.GetRotation(), 0.f, 0.f, -1.f);
+		glRotatef(view.getRotation(), 0.f, 0.f, -1.f);
 		glTranslatef(-center.x, -center.y, 0.f);
 	}
 	void PushOpenGLStates(sf::RenderWindow& target)
 	{
 		// Switch to manual OpenGL handling, save SFML's state
 		//target.SaveGLStates();
-		target.SetActive();
+		target.setActive();
 
 		// Switch blend mode, depending on glow effect	
 		//if (mGlow)
@@ -45,7 +45,7 @@ namespace Graphics
 		// Initialize projection matrix (2D view)
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
-		SetupOpenGL2DView(target.GetView());
+		SetupOpenGL2DView(target.getView());
 
 		// Initialize modelview matrix
 		glMatrixMode(GL_MODELVIEW);

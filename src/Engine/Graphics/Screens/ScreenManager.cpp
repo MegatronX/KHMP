@@ -4,15 +4,30 @@ namespace Graphics
 {
 	namespace Screens
 	{
-		void ScreenManager::AddScreen(screen_ptr screen)
+		ScreenManager::ScreenManager() : Iterating(false), ScreensAdded(false)
+		{
+
+		}
+		void ScreenManager::AddScreen(screen_ptr screen, const int index)
 		{
 			if (screen.get() != nullptr)
 			{
 				ScreenStack newStack(screen->GetScreenName(), screen->engine->GetUID(), true, true);
-				newStack.AddScreen(screen);
-				StackByName[newStack.GetScreenName()] = newStack;
-				StackByID[newStack.GetUID()] = &StackByName[newStack.GetScreenName()];
-				StacksInDrawOrder.push_back(&StackByName[newStack.GetScreenName()]);
+				if (!Iterating)
+				{
+					newStack.AddScreen(screen, screen->GetDrawPriority());
+					StackByName[newStack.GetScreenName()] = newStack;
+					(&StackByName[newStack.GetScreenName()])->SetDrawPriority(index);
+					StackByID[newStack.GetUID()] = &StackByName[newStack.GetScreenName()];
+					StacksInDrawOrder[index].push_back(&StackByName[newStack.GetScreenName()]);
+				}
+				else
+				{
+					AddedStacks[newStack.GetScreenName()] = newStack;
+					(&AddedStacks[newStack.GetScreenName()])->SetDrawPriority(index);
+				}
+				//StacksInDrawOrder[index]
+				//StacksInDrawOrder.push_back(&StackByName[newStack.GetScreenName()]);
 			}
 			
 		}
@@ -20,21 +35,83 @@ namespace Graphics
 		{
 			if (screen.get() != nullptr)
 			{
-				ScreenStack newStack(screen->GetScreenName(), screen->engine->GetUID(), true, true);
-				newStack.AddScreen(screen);
-				StackByName[newStack.GetScreenName()] = newStack;
-				StackByID[newStack.GetUID()] = &StackByName[newStack.GetScreenName()];
-				StacksInDrawOrder.push_back(&StackByName[newStack.GetScreenName()]);
+				auto it = StackByName.find(stackName);
+				if (it != StackByName.end())
+				{
+					it->second.AddScreen(screen, screen->GetDrawPriority());
+				}
+				else
+				{
+					ScreenStack newStack(screen->GetScreenName(), screen->engine->GetUID(), true, true);
+					newStack.AddScreen(screen, screen->GetDrawPriority());
+					StackByName[newStack.GetScreenName()] = newStack;
+					StackByID[newStack.GetUID()] = &StackByName[newStack.GetScreenName()];
+				}
 			}
 
 		}
-		void ScreenManager::AddScreenStack(const std::string& name, const ScreenStack& stack, bool registerIndividualScreens)
+		void ScreenManager::AddScreenStack(const std::string& name, const ScreenStack& stack, const int DrawIndex, bool registerIndividualScreens)
 		{
-
+			//ScreenStack st(stack);
+			if (!Iterating)
+			{
+				StackByName[name] = stack;
+				StackByID[stack.GetUID()] = &StackByName[name];
+				(&StackByName[name])->SetDrawPriority(DrawIndex);
+				StacksInDrawOrder[DrawIndex].push_back(&StackByName[name]);
+				
+			}
+			else
+			{
+				AddedStacks[name] = stack;
+				(&AddedStacks[name])->SetDrawPriority(DrawIndex);
+			}
 		}
-		ScreenStack& ScreenManager::GetScreenStack(const std::string& name)
+		ScreenStack* ScreenManager::GetScreenStack(const std::string& name)
 		{
-			return *(*StacksInDrawOrder.begin());
+			auto it = StackByName.find(name);
+			if (it != StackByName.end())
+			{
+				return &(it->second);
+			}
+			return nullptr;
+			//return *(*StacksInDrawOrder.begin());
+		}
+
+		bool ScreenManager::RemoveStack(const std::string& name)
+		{
+			bool Removed = false;
+			auto it = StackByName.find(name);
+			if (it != StackByName.end())
+			{
+				if (!Iterating)
+				{
+					auto id = StackByID.find(it->second.GetUID());
+					if (id != StackByID.end())
+					{
+						StackByID.erase(id);
+					}
+					int priority = it->second.GetDrawPriority();
+					if (StacksInDrawOrder[priority].size() > 0)
+					{
+						for (auto st = StacksInDrawOrder[priority].begin(); st != StacksInDrawOrder[priority].end(); ++st)
+						{
+							if (*(*st) == it->second)
+							{
+								StacksInDrawOrder[priority].erase(st);
+								break;
+							}
+						}
+					}
+					StackByName.erase(it);
+				}
+				else
+				{
+					RemovedStacks.push_back(name);
+				}
+				Removed = true;
+			}
+			return Removed;
 		}
 
 		bool ScreenManager::RegisterStackCreationFunction(const std::string& name)
@@ -49,53 +126,130 @@ namespace Graphics
 
 		bool ScreenManager::HandleKeyPressed(const sf::Uint32 time, const Input::InputModule* inputModule, ::Input::InputActionResult& action)
 		{
+			
 			bool handled = false;
-			for (auto stack = StacksInDrawOrder.begin(); stack != StacksInDrawOrder.end(); ++stack)
+			Iterating = true;
+			for (auto index = StacksInDrawOrder.rbegin(); index != StacksInDrawOrder.rend(); ++index)
 			{
-				handled |= (*stack)->HandleKeyPressed(time, inputModule, action);
+				for (auto stack = index->second.begin(); stack != index->second.end(); ++stack)
+				{
+					handled |= (*stack)->HandleKeyPressed(time, inputModule, action);
+				}
 			}
+			Iterating = false;
 			return handled;
 		}
 		bool ScreenManager::HandleKeyReleased(const sf::Uint32 time, const Input::InputModule* inputModule, ::Input::InputActionResult& action)
 		{
 			bool handled = false;
-			for (auto stack = StacksInDrawOrder.begin(); stack != StacksInDrawOrder.end(); ++stack)
+			Iterating = true;
+			for (auto index = StacksInDrawOrder.begin(); index != StacksInDrawOrder.end(); ++index)
 			{
-				handled |= (*stack)->HandleKeyReleased(time, inputModule, action);
+				for (auto stack = index->second.begin(); stack != index->second.end(); ++stack)
+				{
+					handled |= (*stack)->HandleKeyReleased(time, inputModule, action);
+				}
 			}
+			Iterating = false;
 			return handled;
 		}
 
 		//Animate Draw
 		void ScreenManager::Update(const sf::Uint32 time, const float TimeScale)
 		{
-			for (auto stack = StacksInDrawOrder.begin(); stack != StacksInDrawOrder.end(); ++stack)
+			Iterating = true;
+			for (auto index = StacksInDrawOrder.rbegin(); index != StacksInDrawOrder.rend(); ++index)
 			{
-				(*stack)->Update(time, TimeScale);
+				for (auto stack = index->second.begin(); stack != index->second.end();)
+				{
+					if ((*stack)->GetDeletable())
+					{
+						stack = index->second.erase(stack);
+					}
+					else
+					{
+						(*stack)->Update(time, TimeScale);
+						++stack;
+					}
+				}
 			}
+			Iterating = false;
+			SyncUpScreens();
 		}
 		void ScreenManager::Update(const float time, const float TimeScale)
 		{
-			for (auto stack = StacksInDrawOrder.begin(); stack != StacksInDrawOrder.end(); ++stack)
+			Iterating = true;
+			for (auto index = StacksInDrawOrder.rbegin(); index != StacksInDrawOrder.rend(); ++index)
 			{
-				(*stack)->Update(time, TimeScale);
+				for (auto stack = index->second.begin(); stack != index->second.end();)
+				{
+					if ((*stack)->GetDeletable())
+					{
+						stack = index->second.erase(stack);
+					}
+					else
+					{
+						(*stack)->Update(time, TimeScale);
+						++stack;
+					}
+				}
 			}
+			Iterating = false;
+			SyncUpScreens();
 		}
 
 		void ScreenManager::Draw(sf::RenderWindow &window)
 		{
-			for (auto stack = StacksInDrawOrder.begin(); stack != StacksInDrawOrder.end(); ++stack)
+			Iterating = true;
+			for (auto index = StacksInDrawOrder.begin(); index != StacksInDrawOrder.end(); ++index)
 			{
-				(*stack)->Draw(window);
+				for (auto stack = index->second.begin(); stack != index->second.end(); ++stack)
+				{
+					(*stack)->Draw(window);
+				}
 			}
+			Iterating = false;
 		}
 		void ScreenManager::Draw(sf::RenderWindow &window, sf::Shader &shader)
 		{
-			for (auto stack = StacksInDrawOrder.begin(); stack != StacksInDrawOrder.end(); ++stack)
+			Iterating = true;
+			for (auto index = StacksInDrawOrder.begin(); index != StacksInDrawOrder.end(); ++index)
 			{
-				(*stack)->Draw(window, shader);
+				for (auto stack = index->second.begin(); stack != index->second.end(); ++stack)
+				{
+					(*stack)->Draw(window, shader);
+				}
+			}
+			Iterating = false;
+		}
+		void ScreenManager::SyncUpScreens()
+		{
+			if (AddedStacks.size() > 0)
+			{
+				auto orig = AddedStacks;
+				AddedStacks.clear();
+				for (auto stack = orig.begin(); stack != orig.end(); ++stack)
+				{
+					AddScreenStack(stack->first, stack->second, stack->second.GetDrawPriority(), true);
+				}
+			}
+			if (RemovedStacks.size() > 0)
+			{
+				auto orig = RemovedStacks;
+				RemovedStacks.clear();
+				for (auto stack = orig.begin(); stack != orig.end(); ++stack)
+				{
+					RemoveStack(*stack);
+				}
 			}
 		}
 
+		void ScreenManager::ClearStacks()
+		{
+			for (auto stack = StackByName.begin(); stack != StackByName.end(); ++stack)
+			{
+				RemoveStack(stack->first);
+			}
+		}
 	}
 }

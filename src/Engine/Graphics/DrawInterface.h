@@ -3,9 +3,10 @@
 #define _DRAWINTERFACE_H_
 #include <sfml/Graphics.hpp>
 #include <sfml/Window.hpp>
+#include <Utilities/Cloneable.h>
 namespace Graphics
 {
-	class DrawInterface
+	class DrawInterface : public Cloneable<DrawInterface>
 	{
 	public:
 		DrawInterface(int drawPriority = 0, bool drawing = true) : DrawPriority(drawPriority), Drawing(drawing)
@@ -26,9 +27,19 @@ namespace Graphics
 		{
 			return DrawPriority;
 		}
-	private:
+		void SetDrawPriority(const int priority)
+		{
+			DrawPriority = priority;
+		}
+		RawClonePtr RawClone() const override
+		{
+			return new DrawInterface(*this);
+		}
+	protected:
 		bool Drawing;
 		int DrawPriority;
+	private:
+		
 	};
 }
 

@@ -2,16 +2,19 @@
 #include <components/Component.h>
 #include <components/UseComponent.h>
 #include <components/ApplyEffectComponent.h>
+#include <components/ElementWeightComponent.h>
 #include <statuseffects/StatusEffectsManager.h>
 #include <battle/BattleField.h>
 #include <battle/BattleCharacter.h>
 #include <character/BaseCharacter.h>
 #include <boost/python.hpp>
+#include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <Entity.h>
 #include <vector>
 #include <memory>
 #include <scripting/Python/ScriptHelpers.h>
 #include <Scripting/UseComponentWrap.h>
+
 using namespace boost;
 using namespace boost::python;
 
@@ -48,6 +51,10 @@ namespace Game
 			{
 
 			}
+			ComponentWrap(PyObject* self_, const ComponentWrap& comp) : self(self_), Component(comp)
+			{
+
+			}
 			Components::Component::ClonePtr Clone() const override
 			{
 				return call_method<Components::Component::ClonePtr>(self, "Clone");
@@ -57,7 +64,7 @@ namespace Game
 				return this->Components::Component::Clone();
 			}
 			PyObject* self;
-		};
+		}; 
 		/*
 		Component();
 		Component(bool valid, const int id = ++ComponentIDCounter);
@@ -83,26 +90,34 @@ namespace Game
 			class_<Components::Component, boost::shared_ptr<ComponentWrap> >("Component")
 				.def(init<>())
 				.def(init<const Components::Component&>())
+				.def(init<const ComponentWrap&>())
 				.def(init<Entity*, bool>())
 				.def(init<Entity*, const std::string&, int, boost::python::optional<bool>  >())
 				.def(init<Entity*, const std::string&, const std::string&, boost::python::optional<bool> >())
 				.def("GetComponentType", &Components::Component::GetComponentType)
 				.def("GetName", &Components::Component::GetNameByVal)
 				.def("GetNameHash", &Components::Component::GetNameHash)
+				.def("GetOwner", &Components::Component::GetOwner, return_value_policy<reference_existing_object>())
 				.def("GetUID", &Components::Component::GetUID)
 				.def("IsType", IsType1)
 				.def("IsType", IsType2)
 				.def("IsValid", &Components::Component::IsValid)
 				.def("SetValid", &Components::Component::SetValid)
 				//.def("SmartClone", &Components::Component::SmartClone)
-				.def("Clone", &Components::Component::Clone, &ComponentWrap::Clone)
+				.def("Clone", &ComponentWrap::CloneDefault)
 				.def("__eq__", &Components::Component::operator==)
 				.def("__neq__", &Components::Component::operator!=)
-				.def("__copy__", &generic__copy__<ComponentWrap>)
-				.def("__deepcopy__", &generic__deepcopy__<ComponentWrap>)
+				.def("__copy__", &generic__copy__<Components::Component>)
+				.def("__deepcopy__", &generic__deepcopy__<Components::Component>)
 				;
-
-			class_<Components::UseComponent, boost::shared_ptr<UseComponentWrap>, bases<Components::Component> >("UseComponent")
+			class_<Components::ElementWeightComponent, bases<Components::Component> >("ElementWeightComponent", init<Entity*>())
+				.def(init<Entity*, boost::unordered_map<Elements::Element, float>&>())
+				.def("AddWeight", &Components::ElementWeightComponent::AddWeight)
+				.def("GetElementWeight", &Components::ElementWeightComponent::GetElementWeights, return_value_policy<reference_existing_object>())
+				.def("GetWeight", &Components::ElementWeightComponent::GetWeight)
+				.def("Moderate", &Components::ElementWeightComponent::Moderate)
+				;
+			/*class_<Components::UseComponent, boost::shared_ptr<UseComponentWrap>, bases<Components::Component> >("UseComponent")
 				.def(init<>())
 				.def(init<const std::string&,bool, bool>())
 				.def(init<const Components::UseComponent&>())
@@ -113,7 +128,7 @@ namespace Game
 				.def("Clone", &Components::UseComponent::Clone, &UseComponentWrap::Clone)
 				.def("__copy__", &generic__copy__<UseComponentWrap>)
 				.def("__deepcopy__", &generic__deepcopy__<UseComponentWrap>)
-				;
+				;*/
 
 //			class_<Components::StatComponent, boost::shared_ptr<Components::StatComponent>, bases<Components::Component> >("StatsComponent")
 	//			;

@@ -5,6 +5,7 @@
 #include <string>
 #include <boost/python.hpp>
 #include <boost/unordered_map.hpp>
+
 namespace Scripting
 {
 	class PythonScripter
@@ -39,6 +40,7 @@ namespace Scripting
 		boost::python::object& GetRocketModule();
 		boost::python::object& GetGraphicsModule();
 		boost::python::object& GetStatusEffectsModule();
+		boost::python::object& GetMappingModule();
 		boost::python::object& GetModule(const std::string& name);
 		void AddModule(const std::string& name, boost::python::object& module);
 
@@ -57,6 +59,7 @@ namespace Scripting
 		boost::python::object GraphicsModule;
 		boost::python::object ScreensModule;
 		boost::python::object StatusEffectsModule;
+		boost::python::object MappingModule;
 		boost::unordered_map<std::string, boost::python::object> AdditionalModules;
 	};
 }

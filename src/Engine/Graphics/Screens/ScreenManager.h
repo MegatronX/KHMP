@@ -6,6 +6,7 @@
 #include <Graphics/Screens/ScreenStack.h>
 #include <boost/unordered_map.hpp>
 #include <system/Input/InputModule.h>
+#include <map>
 class Engine;
 
 namespace Graphics
@@ -15,13 +16,17 @@ namespace Graphics
 		class ScreenManager : public ::Input::InputInterface, public AnimatedDraw
 		{
 		public:
-			void AddScreen(screen_ptr screen);
+			ScreenManager();
+			void AddScreen(screen_ptr screen, const int index = 0);
 			void AddScreenToStack(screen_ptr screen, const std::string& stackName);
-			void AddScreenStack(const std::string& name, const ScreenStack& stack, bool registerIndividualScreens = true);
-			ScreenStack& GetScreenStack(const std::string& name);
+			void AddScreenStack(const std::string& name, const ScreenStack& stack, const int DrawIndex = 0, bool registerIndividualScreens = true);
+			ScreenStack* GetScreenStack(const std::string& name);
+
+			bool RemoveStack(const std::string& name);
 
 			bool RegisterStackCreationFunction(const std::string& name);
 			ScreenStack CreateStack(const std::string stackname, const std::string creationFunction, bool registerStack = true, bool registerIndividualScreens = true);
+
 
 			//Input Interface
 			virtual bool HandleKeyPressed(const sf::Uint32 time, const ::Input::InputModule* inputModule, ::Input::InputActionResult& action) override;
@@ -33,6 +38,11 @@ namespace Graphics
 
 			virtual void Draw(sf::RenderWindow &window) override;
 			virtual void Draw(sf::RenderWindow &window, sf::Shader &shader) override;
+
+			void ClearStacks();
+		protected:
+			void SyncUpScreens();
+			
 		private:
 			Engine* engine;
 			boost::unordered_map<std::string, Screen*> AllScreensByName;
@@ -40,7 +50,14 @@ namespace Graphics
 
 			boost::unordered_map<std::string, ScreenStack> StackByName;
 			boost::unordered_map<int, ScreenStack*> StackByID;
-			std::vector<ScreenStack*> StacksInDrawOrder;
+			std::map<int, std::vector<ScreenStack*> > StacksInDrawOrder;
+			boost::unordered_map<std::string, ScreenStack> AddedStacks;
+			std::vector<std::string> RemovedStacks;
+			//std::map<int, std::vector<ScreenStack> > AddedStacks;
+			//std::map<int, std::vector<ScreenStack> > RemovedStacks;
+			bool Iterating;
+			bool ScreensAdded;
+			//std::vector<ScreenStack*> StacksInDrawOrder;
 		};
 	}
 }

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,8 +28,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/NonCopyable.hpp>
+#include <SFML/Network/Export.hpp>
 #include <SFML/Network/TcpSocket.hpp>
+#include <SFML/System/NonCopyable.hpp>
+#include <SFML/System/Time.hpp>
 #include <string>
 #include <vector>
 
@@ -42,7 +44,7 @@ class IpAddress;
 /// \brief A FTP client
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Ftp : NonCopyable
+class SFML_NETWORK_API Ftp : NonCopyable
 {
 public :
 
@@ -61,7 +63,7 @@ public :
     /// \brief Define a FTP response
     ///
     ////////////////////////////////////////////////////////////
-    class SFML_API Response
+    class SFML_NETWORK_API Response
     {
     public :
 
@@ -141,7 +143,7 @@ public :
         /// \param message Response message
         ///
         ////////////////////////////////////////////////////////////
-        Response(Status code = InvalidResponse, const std::string& message = "");
+        explicit Response(Status code = InvalidResponse, const std::string& message = "");
 
         ////////////////////////////////////////////////////////////
         /// \brief Check if the status code means a success
@@ -152,7 +154,7 @@ public :
         /// \return True if the status is a success, false if it is a failure
         ///
         ////////////////////////////////////////////////////////////
-        bool IsOk() const;
+        bool isOk() const;
 
         ////////////////////////////////////////////////////////////
         /// \brief Get the status code of the response
@@ -160,7 +162,7 @@ public :
         /// \return Status code
         ///
         ////////////////////////////////////////////////////////////
-        Status GetStatus() const;
+        Status getStatus() const;
 
         ////////////////////////////////////////////////////////////
         /// \brief Get the full message contained in the response
@@ -168,22 +170,22 @@ public :
         /// \return The response message
         ///
         ////////////////////////////////////////////////////////////
-        const std::string& GetMessage() const;
+        const std::string& getMessage() const;
 
     private :
 
         ////////////////////////////////////////////////////////////
         // Member data
         ////////////////////////////////////////////////////////////
-        Status      myStatus;  ///< Status code returned from the server
-        std::string myMessage; ///< Last message received from the server
+        Status      m_status;  ///< Status code returned from the server
+        std::string m_message; ///< Last message received from the server
     };
 
     ////////////////////////////////////////////////////////////
     /// \brief Specialization of FTP response returning a directory
     ///
     ////////////////////////////////////////////////////////////
-    class SFML_API DirectoryResponse : public Response
+    class SFML_NETWORK_API DirectoryResponse : public Response
     {
     public :
 
@@ -201,14 +203,14 @@ public :
         /// \return Directory name
         ///
         ////////////////////////////////////////////////////////////
-        const std::string& GetDirectory() const;
+        const std::string& getDirectory() const;
 
     private :
 
         ////////////////////////////////////////////////////////////
         // Member data
         ////////////////////////////////////////////////////////////
-        std::string myDirectory; ///< Directory extracted from the response message
+        std::string m_directory; ///< Directory extracted from the response message
     };
 
 
@@ -216,7 +218,7 @@ public :
     /// \brief Specialization of FTP response returning a
     ///        filename lisiting
     ////////////////////////////////////////////////////////////
-    class SFML_API ListingResponse : public Response
+    class SFML_NETWORK_API ListingResponse : public Response
     {
     public :
 
@@ -235,14 +237,14 @@ public :
         /// \return Array containing the requested filenames
         ///
         ////////////////////////////////////////////////////////////
-        const std::vector<std::string>& GetFilenames() const;
+        const std::vector<std::string>& getFilenames() const;
 
     private :
 
         ////////////////////////////////////////////////////////////
         // Member data
         ////////////////////////////////////////////////////////////
-        std::vector<std::string> myFilenames; ///< Filenames extracted from the data
+        std::vector<std::string> m_filenames; ///< Filenames extracted from the data
     };
 
 
@@ -264,29 +266,29 @@ public :
     /// This function tries to connect to the server so it may take
     /// a while to complete, especially if the server is not
     /// reachable. To avoid blocking your application for too long,
-    /// you can use a timeout. The default value, 0, means that the
+    /// you can use a timeout. The default value, Time::Zero, means that the
     /// system timeout will be used (which is usually pretty long).
     ///
     /// \param server  Name or address of the FTP server to connect to
     /// \param port    Port used for the connection
-    /// \param timeout Maximum time to wait, in milliseconds
+    /// \param timeout Maximum time to wait
     ///
     /// \return Server response to the request
     ///
-    /// \see Disconnect
+    /// \see disconnect
     ///
     ////////////////////////////////////////////////////////////
-    Response Connect(const IpAddress& server, unsigned short port = 21, Uint32 timeout = 0);
+    Response connect(const IpAddress& server, unsigned short port = 21, Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Close the connection with the server
     ///
     /// \return Server response to the request
     ///
-    /// \see Connect
+    /// \see connect
     ///
     ////////////////////////////////////////////////////////////
-    Response Disconnect();
+    Response disconnect();
 
     ////////////////////////////////////////////////////////////
     /// \brief Log in using an anonymous account
@@ -297,7 +299,7 @@ public :
     /// \return Server response to the request
     ///
     ////////////////////////////////////////////////////////////
-    Response Login();
+    Response login();
 
     ////////////////////////////////////////////////////////////
     /// \brief Log in using a username and a password
@@ -311,7 +313,7 @@ public :
     /// \return Server response to the request
     ///
     ////////////////////////////////////////////////////////////
-    Response Login(const std::string& name, const std::string& password);
+    Response login(const std::string& name, const std::string& password);
 
     ////////////////////////////////////////////////////////////
     /// \brief Send a null command to keep the connection alive
@@ -322,7 +324,7 @@ public :
     /// \return Server response to the request
     ///
     ////////////////////////////////////////////////////////////
-    Response KeepAlive();
+    Response keepAlive();
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the current working directory
@@ -332,10 +334,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see GetDirectoryListing, ChangeDirectory, ParentDirectory
+    /// \see getDirectoryListing, changeDirectory, parentDirectory
     ///
     ////////////////////////////////////////////////////////////
-    DirectoryResponse GetWorkingDirectory();
+    DirectoryResponse getWorkingDirectory();
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the contents of the given directory
@@ -349,10 +351,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see GetWorkingDirectory, ChangeDirectory, ParentDirectory
+    /// \see getWorkingDirectory, changeDirectory, parentDirectory
     ///
     ////////////////////////////////////////////////////////////
-    ListingResponse GetDirectoryListing(const std::string& directory = "");
+    ListingResponse getDirectoryListing(const std::string& directory = "");
 
     ////////////////////////////////////////////////////////////
     /// \brief Change the current working directory
@@ -363,20 +365,20 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see GetWorkingDirectory, GetDirectoryListing, ParentDirectory
+    /// \see getWorkingDirectory, getDirectoryListing, parentDirectory
     ///
     ////////////////////////////////////////////////////////////
-    Response ChangeDirectory(const std::string& directory);
+    Response changeDirectory(const std::string& directory);
 
     ////////////////////////////////////////////////////////////
     /// \brief Go to the parent directory of the current one
     ///
     /// \return Server response to the request
     ///
-    /// \see GetWorkingDirectory, GetDirectoryListing, ChangeDirectory
+    /// \see getWorkingDirectory, getDirectoryListing, changeDirectory
     ///
     ////////////////////////////////////////////////////////////
-    Response ParentDirectory();
+    Response parentDirectory();
 
     ////////////////////////////////////////////////////////////
     /// \brief Create a new directory
@@ -388,10 +390,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see DeleteDirectory
+    /// \see deleteDirectory
     ///
     ////////////////////////////////////////////////////////////
-    Response CreateDirectory(const std::string& name);
+    Response createDirectory(const std::string& name);
 
     ////////////////////////////////////////////////////////////
     /// \brief Remove an existing directory
@@ -405,10 +407,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see CreateDirectory
+    /// \see createDirectory
     ///
     ////////////////////////////////////////////////////////////
-    Response DeleteDirectory(const std::string& name);
+    Response deleteDirectory(const std::string& name);
 
     ////////////////////////////////////////////////////////////
     /// \brief Rename an existing file
@@ -421,10 +423,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see DeleteFile
+    /// \see deleteFile
     ///
     ////////////////////////////////////////////////////////////
-    Response RenameFile(const std::string& file, const std::string& newName);
+    Response renameFile(const std::string& file, const std::string& newName);
 
     ////////////////////////////////////////////////////////////
     /// \brief Remove an existing file
@@ -438,10 +440,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see RenameFile
+    /// \see renameFile
     ///
     ////////////////////////////////////////////////////////////
-    Response DeleteFile(const std::string& name);
+    Response deleteFile(const std::string& name);
 
     ////////////////////////////////////////////////////////////
     /// \brief Download a file from the server
@@ -457,10 +459,10 @@ public :
     ///
     /// \return Server response to the request
     ///
-    /// \see Upload
+    /// \see upload
     ///
     ////////////////////////////////////////////////////////////
-    Response Download(const std::string& remoteFile, const std::string& localPath, TransferMode mode = Binary);
+    Response download(const std::string& remoteFile, const std::string& localPath, TransferMode mode = Binary);
 
     ////////////////////////////////////////////////////////////
     /// \brief Upload a file to the server
@@ -476,8 +478,10 @@ public :
     ///
     /// \return Server response to the request
     ///
+    /// \see download
+    ///
     ////////////////////////////////////////////////////////////
-    Response Upload(const std::string& localFile, const std::string& remotePath, TransferMode mode = Binary);
+    Response upload(const std::string& localFile, const std::string& remotePath, TransferMode mode = Binary);
 
 private :
 
@@ -490,7 +494,7 @@ private :
     /// \return Server response to the request
     ///
     ////////////////////////////////////////////////////////////
-    Response SendCommand(const std::string& command, const std::string& parameter = "");
+    Response sendCommand(const std::string& command, const std::string& parameter = "");
 
     ////////////////////////////////////////////////////////////
     /// \brief Receive a response from the server
@@ -501,7 +505,7 @@ private :
     /// \return Server response to the request
     ///
     ////////////////////////////////////////////////////////////
-    Response GetResponse();
+    Response getResponse();
 
     ////////////////////////////////////////////////////////////
     /// \brief Utility class for exchanging datas with the server
@@ -515,7 +519,7 @@ private :
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    TcpSocket myCommandSocket; ///< Socket holding the control connection with the server
+    TcpSocket m_commandSocket; ///< Socket holding the control connection with the server
 };
 
 } // namespace sf
@@ -541,11 +545,11 @@ private :
 ///
 /// Every command returns a FTP response, which contains the
 /// status code as well as a message from the server. Some
-/// commands such as GetWorkingDirectory and GetDirectoryListing
+/// commands such as getWorkingDirectory and getDirectoryListing
 /// return additional data, and use a class derived from
 /// sf::Ftp::Response to provide this data.
 ///
-/// All commands, especially Upload and Download, may take some
+/// All commands, especially upload and download, may take some
 /// time to complete. This is important to know if you don't want
 /// to block your application while the server is completing
 /// the task.
@@ -556,32 +560,32 @@ private :
 /// sf::Ftp ftp;
 ///
 /// // Connect to the server
-/// sf::Ftp::Response response = ftp.Connect("ftp://ftp.myserver.com");
-/// if (response.IsOk())
+/// sf::Ftp::Response response = ftp.connect("ftp://ftp.myserver.com");
+/// if (response.isOk())
 ///     std::cout << "Connected" << std::endl;
 ///
 /// // Log in
-/// response = ftp.Login("laurent", "dF6Zm89D");
-/// if (response.IsOk())
+/// response = ftp.login("laurent", "dF6Zm89D");
+/// if (response.isOk())
 ///     std::cout << "Logged in" << std::endl;
 ///
 /// // Print the working directory
-/// sf::Ftp::DirectoryResponse directory = ftp.GetWorkingDirectory();
-/// if (directory.IsOk())
-///     std::cout << "Working directory: " << directory.GetDirectory() << std::endl;
+/// sf::Ftp::DirectoryResponse directory = ftp.getWorkingDirectory();
+/// if (directory.isOk())
+///     std::cout << "Working directory: " << directory.getDirectory() << std::endl;
 ///
 /// // Create a new directory
-/// response = ftp.CreateDirectory("files");
-/// if (response.IsOk())
+/// response = ftp.createDirectory("files");
+/// if (response.isOk())
 ///     std::cout << "Created new directory" << std::endl;
 ///
 /// // Upload a file to this new directory
-/// response = ftp.Upload("local-path/file.txt", "files", sf::Ftp::Ascii);
-/// if (response.IsOk())
+/// response = ftp.upload("local-path/file.txt", "files", sf::Ftp::Ascii);
+/// if (response.isOk())
 ///     std::cout << "File uploaded" << std::endl;
 ///
 /// // Disconnect from the server (optional)
-/// ftp.Disconnect();
+/// ftp.disconnect();
 /// \endcode
 ///
 ////////////////////////////////////////////////////////////

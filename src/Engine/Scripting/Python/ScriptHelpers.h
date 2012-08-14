@@ -25,6 +25,54 @@ using namespace boost::python;
 		return typename manage_new_object::apply<T *>::type()(p);
 	}
 
+	/*template<class Copyable>
+	object
+		generic__copy__(object copyable)
+	{
+		Copyable *newCopyable(new Copyable(extract<const Copyable
+			&>(copyable)));
+		//object result(boost::python::detail::new_reference(managingPyObject(newCopyable)));
+
+		//object result(extract<const Copyable &>(copyable)());
+
+		const Copyable & tmp = extract<const Copyable &>(copyable);
+		object result(tmp);
+
+		extract<dict>(result.attr("__dict__"))().update(
+			copyable.attr("__dict__"));
+
+		return result;
+	}
+
+	template<class Copyable>
+	object
+		generic__deepcopy__(object copyable, dict memo)
+	{
+		object copyMod = import("copy");
+		object deepcopy = copyMod.attr("deepcopy");
+
+		Copyable *newCopyable(new Copyable(extract<const Copyable
+			&>(copyable)));
+		//object result(boost::python::detail::new_reference(managingPyObject(newCopyable)));
+
+		//object result(extract<const Copyable &>(copyable)());
+
+		const Copyable & tmp = extract<const Copyable &>(copyable);
+		object result(tmp);
+
+		// HACK: copyableId shall be the same as the result of id(copyable)
+		//in Python -
+		// please tell me that there is a better way! (and which ;-p)
+		int copyableId = (int)(copyable.ptr());
+		memo[copyableId] = result;
+
+		extract<dict>(result.attr("__dict__"))().update(
+			deepcopy(extract<dict>(copyable.attr("__dict__"))(),
+			memo));
+
+		return result;
+	}*/
+
 	template<class Copyable>
 	object
 		generic__copy__(object copyable)
@@ -64,6 +112,7 @@ using namespace boost::python;
 
 		return result;
 	}
+	
 
 	template <class Container> 
 	class vector_ptr_indexing_suite 

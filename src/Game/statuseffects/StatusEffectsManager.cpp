@@ -8,7 +8,7 @@ namespace Game
 	namespace StatusEffects
 	{
 		StatusEffectsLibrary* StatusEffectsManager::SELibrary;
-		StatusEffectsManager::StatusEffectsManager(Entity* owner) : Component(owner, "StatusEffectsManager" + owner->GetName(), "StatusEffectsManager")
+		StatusEffectsManager::StatusEffectsManager(Entity* owner) : Component(owner, "StatusEffectsManager" + owner->GetName(), "StatusEffectsManager"), BaseResistance(0.f)
 		{
 
 		}
@@ -30,11 +30,12 @@ namespace Game
 				{
 					if (se->IsRefreshable())
 					{
-						it->second->SetRemainingTicks(se->GetRemainingTicks());
+						it->second->SetRemainingTicks(turns);
 					}
 				}
 				else
 				{
+					se->SetRemainingTicks(turns);
 					NameToSE[se->GetName()] = se;
 					PriorityToSE[se->GetPriority()].push_back(se.get());
 					for (auto cc = se->CallConditions.begin(); cc != se->CallConditions.end(); ++cc)
@@ -46,7 +47,7 @@ namespace Game
 					if (character != nullptr)
 					{
 						se->SetHolder(character);
-						auto applyEff = se->GetComponentAs<Components::ApplyEffectComponent*>("ApplyEffectComponent");
+						auto applyEff = se->GetComponentAs<Components::ApplyEffectComponent*>(ApplyEffectIndexer);
 						if (applyEff != nullptr)
 						{
 							applyEff->Apply(character);
@@ -73,7 +74,7 @@ namespace Game
 				auto character = dynamic_cast<Character::BaseCharacter*>(this->GetOwner());
 				if (character != nullptr)
 				{
-					auto applyEff = it->second->GetComponentAs<Components::ApplyEffectComponent*>("ApplyEffectComponent");
+					auto applyEff = it->second->GetComponentAs<Components::ApplyEffectComponent*>(ApplyEffectIndexer);
 					if (applyEff != nullptr)
 					{
 						applyEff->UnApply(character);
@@ -163,7 +164,7 @@ namespace Game
 		{
 			auto it = SEResistances.find(name);
 			if (it != SEResistances.end())
-				return it->second;
+				return it->second + BaseResistance;
 			return 0.f;
 		}
 		float StatusEffectsManager::GetStatusResistance(const StatusEffect* effect) const
@@ -201,6 +202,21 @@ namespace Game
 			if (effect.get() != nullptr)
 				IncrementStatusResistance(effect->GetName(), inc);
 		}
+
+		float StatusEffectsManager::GetBaseResistance() const
+		{
+			return BaseResistance;
+		}
+		void StatusEffectsManager::SetBaseResistance(const float res)
+		{
+			BaseResistance = res;
+		}
+
+		void StatusEffectsManager::IncrementBaseResistance(const float res)
+		{
+			BaseResistance += res;
+		}
+
 		StatusEffectsManager::RawClonePtr StatusEffectsManager::RawClone() const
 		{
 			return new StatusEffectsManager(*this);

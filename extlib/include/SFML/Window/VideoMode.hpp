@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Window/Export.hpp>
 #include <vector>
 
 
@@ -38,7 +38,7 @@ namespace sf
 /// \brief VideoMode defines a video mode (width, height, bpp)
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API VideoMode
+class SFML_WINDOW_API VideoMode
 {
 public :
 
@@ -53,12 +53,12 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Construct the video mode with its attributes
     ///
-    /// \param width        Width in pixels
-    /// \param height       Height in pixels
-    /// \param bitsPerPixel Pixel depths in bits per pixel
+    /// \param modeWidth        Width in pixels
+    /// \param modeHeight       Height in pixels
+    /// \param modeBitsPerPixel Pixel depths in bits per pixel
     ///
     ////////////////////////////////////////////////////////////
-    VideoMode(unsigned int width, unsigned int height, unsigned int bitsPerPixel = 32);
+    VideoMode(unsigned int modeWidth, unsigned int modeHeight, unsigned int modeBitsPerPixel = 32);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the current desktop video mode
@@ -66,7 +66,7 @@ public :
     /// \return Current desktop video mode
     ///
     ////////////////////////////////////////////////////////////
-    static VideoMode GetDesktopMode();
+    static VideoMode getDesktopMode();
 
     ////////////////////////////////////////////////////////////
     /// \brief Retrieve all the video modes supported in fullscreen mode
@@ -82,7 +82,7 @@ public :
     /// \return Array containing all the supported fullscreen modes
     ///
     ////////////////////////////////////////////////////////////
-    static const std::vector<VideoMode>& GetFullscreenModes();
+    static const std::vector<VideoMode>& getFullscreenModes();
 
     ////////////////////////////////////////////////////////////
     /// \brief Tell whether or not the video mode is valid
@@ -94,14 +94,14 @@ public :
     /// \return True if the video mode is valid for fullscreen mode
     ///
     ////////////////////////////////////////////////////////////
-    bool IsValid() const;
+    bool isValid() const;
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    unsigned int Width;        ///< Video mode width, in pixels
-    unsigned int Height;       ///< Video mode height, in pixels
-    unsigned int BitsPerPixel; ///< Video mode pixel depth, in bits per pixels
+    unsigned int width;        ///< Video mode width, in pixels
+    unsigned int height;       ///< Video mode height, in pixels
+    unsigned int bitsPerPixel; ///< Video mode pixel depth, in bits per pixels
 };
 
 ////////////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ public :
 /// \return True if modes are equal
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator ==(const VideoMode& left, const VideoMode& right);
+SFML_WINDOW_API bool operator ==(const VideoMode& left, const VideoMode& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates VideoMode
@@ -126,7 +126,7 @@ SFML_API bool operator ==(const VideoMode& left, const VideoMode& right);
 /// \return True if modes are different
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator !=(const VideoMode& left, const VideoMode& right);
+SFML_WINDOW_API bool operator !=(const VideoMode& left, const VideoMode& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates VideoMode
@@ -138,7 +138,7 @@ SFML_API bool operator !=(const VideoMode& left, const VideoMode& right);
 /// \return True if \a left is lesser than \a right
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator <(const VideoMode& left, const VideoMode& right);
+SFML_WINDOW_API bool operator <(const VideoMode& left, const VideoMode& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates VideoMode
@@ -150,7 +150,7 @@ SFML_API bool operator <(const VideoMode& left, const VideoMode& right);
 /// \return True if \a left is greater than \a right
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator >(const VideoMode& left, const VideoMode& right);
+SFML_WINDOW_API bool operator >(const VideoMode& left, const VideoMode& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates VideoMode
@@ -162,7 +162,7 @@ SFML_API bool operator >(const VideoMode& left, const VideoMode& right);
 /// \return True if \a left is lesser or equal than \a right
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator <=(const VideoMode& left, const VideoMode& right);
+SFML_WINDOW_API bool operator <=(const VideoMode& left, const VideoMode& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates VideoMode
@@ -174,7 +174,7 @@ SFML_API bool operator <=(const VideoMode& left, const VideoMode& right);
 /// \return True if \a left is greater or equal than \a right
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator >=(const VideoMode& left, const VideoMode& right);
+SFML_WINDOW_API bool operator >=(const VideoMode& left, const VideoMode& right);
 
 } // namespace sf
 
@@ -198,31 +198,31 @@ SFML_API bool operator >=(const VideoMode& left, const VideoMode& right);
 ///
 /// sf::VideoMode provides a static function for retrieving
 /// the list of all the video modes supported by the system:
-/// GetFullscreenModes().
+/// getFullscreenModes().
 ///
 /// A custom video mode can also be checked directly for
 /// fullscreen compatibility with its IsValid() function.
 ///
 /// Additionnally, sf::VideoMode provides a static function
-/// to get the mode currently used by the desktop: GetDesktopMode().
+/// to get the mode currently used by the desktop: getDesktopMode().
 /// This allows to build windows with the same size or pixel
 /// depth as the current resolution.
 ///
 /// Usage example:
 /// \code
 /// // Display the list of all the video modes available for fullscreen
-/// std::vector<sf::VideoMode> modes = sf::VideoMode::GetFullscreenModes();
+/// std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
 /// for (std::size_t i = 0; i < modes.size(); ++i)
 /// {
 ///     sf::VideoMode mode = modes[i];
 ///     std::cout << "Mode #" << i << ": "
-///               << mode.Width << "x" << mode.Height << " - "
-///               << mode.BitsPerPixel << " bpp" << std::endl;
+///               << mode.width << "x" << mode.height << " - "
+///               << mode.bitsPerPixel << " bpp" << std::endl;
 /// }
 ///
 /// // Create a window with the same pixel depth as the desktop
-/// sf::VideoMode desktop = sf::VideoMode::GetDesktopMode();
-/// window.Create(sf::VideoMode(1024, 768, desktop.BitsPerPixel), "SFML window");
+/// sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+/// window.create(sf::VideoMode(1024, 768, desktop.bitsPerPixel), "SFML window");
 /// \endcode
 ///
 ////////////////////////////////////////////////////////////

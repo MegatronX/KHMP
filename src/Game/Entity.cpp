@@ -13,16 +13,16 @@ namespace Game
 		auto hasher = boost::hash<std::string>();
 		NameHash = hasher(Name);
 	}
-	Entity::Entity(const Entity& entity)
+	Entity::Entity(const Entity& entity) : Name(entity.Name), Type(entity.Type), NameHash(entity.NameHash), FlagSet(entity.FlagSet)
 	{
-		this->Name = entity.Name;
 		this->UID = EntityIDCounter++;
-		this->Type = entity.Type;
-		this->NameHash = entity.NameHash;
 		ComponentCollection.rehash(entity.ComponentCollection.size());
 		for (auto it = entity.ComponentCollection.begin(); it != entity.ComponentCollection.end(); ++it)
 		{
-			ComponentCollection[it->first] = it->second->Clone();
+			auto cl = it->second->Clone();
+			auto temp = it->second;
+			cl->SetOwner(this);
+			ComponentCollection[it->first] = cl;//it->second->Clone();
 		}
 	}
 	int Entity::GetID() const
@@ -71,9 +71,39 @@ namespace Game
 		ComponentCollection[indexName] = component;
 		return true;
 	}
+	bool Entity::RemoveComponent(const std::string& indexName)
+	{
+		bool removed = false;
+		auto it = ComponentCollection.find(indexName);
+		if (it != ComponentCollection.end())
+		{
+			ComponentCollection.erase(it);
+			removed = true;
+		}
+		return removed;
+	}
 	Entity::RawClonePtr Entity::RawClone() const
 	{
 		return new Entity(*this);
+	}
+	void Entity::AddFlag(const std::string& flag)
+	{
+		FlagSet.insert(flag);
+	}
+	bool Entity::HasFlag(const std::string& flag)
+	{
+		return FlagSet.find(flag) != FlagSet.end();
+	}
+	bool Entity::RemoveFlag(const std::string& flag)
+	{
+		bool Removed = false;
+		auto it = FlagSet.find(flag);
+		if (it != FlagSet.end())
+		{
+			FlagSet.erase(it);
+			Removed = true;
+		}
+		return Removed;
 	}
 	bool Entity::operator==(const Entity& entity) const
 	{
@@ -91,6 +121,7 @@ namespace Game
 			this->NameHash = ref.NameHash;
 			this->Type = ref.Type;
 			this->UID = EntityIDCounter++;
+			this->FlagSet = ref.FlagSet;
 			ComponentCollection.clear();
 			ComponentCollection.rehash(ref.ComponentCollection.size());
 			for (auto it = ref.ComponentCollection.begin(); it != ref.ComponentCollection.end(); ++it)

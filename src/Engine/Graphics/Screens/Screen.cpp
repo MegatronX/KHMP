@@ -8,6 +8,10 @@ namespace Graphics
 		{
 
 		}
+		Screen::~Screen()
+		{
+
+		}
 		int Screen::GetID() const
 		{
 			return ScreenID;

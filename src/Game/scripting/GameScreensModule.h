@@ -52,6 +52,7 @@ namespace Game
 			}
 			void Draw(sf::RenderWindow& window) override
 			{
+				//BasicRMLScreen::Draw(window);
 				call_method<void>(self, "Draw", boost::ref(window));
 			}
 			void DrawDefault(sf::RenderWindow& window, sf::Shader& shader)
@@ -103,9 +104,10 @@ namespace Game
 				.def("GetPageContext", &BasicRMLScreen::GetPageContext, return_value_policy<reference_existing_object>())
 				.def("Draw", (void (BasicRMLScreen::*)(sf::RenderWindow&))&BasicRMLScreen::Draw, (void (BasicRMLScreenWrap::*)(sf::RenderWindow&))&BasicRMLScreenWrap::DrawDefault)
 				.def("Draw", (void (BasicRMLScreen::*)(sf::RenderWindow&, sf::Shader&))&BasicRMLScreen::Draw, (void (BasicRMLScreenWrap::*)(sf::RenderWindow&, sf::Shader&))&BasicRMLScreenWrap::DrawDefault)
-				.def("HandleKeyPressed", &BasicRMLScreen::HandleKeyPressed, &BasicRMLScreenWrap::HandleKeyPressedDefault)
-				.def("HandleKeyReleased", &BasicRMLScreen::HandleKeyReleased, &BasicRMLScreenWrap::HandleKeyReleasedDefault)
+				.def("HandleKeyPressed", &BasicRMLScreenWrap::HandleKeyPressedDefault)
+				.def("HandleKeyReleased", &BasicRMLScreenWrap::HandleKeyReleasedDefault)
 				.def("Update", (void (BasicRMLScreen::*)(const sf::Uint32, float))&BasicRMLScreen::Update, &BasicRMLScreenWrap::UpdateDefault, boost::python::arg("TimeScale") = 1.f)
+				.def("ClearTransforms", &BasicRMLScreen::ClearTransforms)
 				;
 			class_<TitleScreen, bases<BasicRMLScreen>, boost::noncopyable >("TitleScreen", no_init)
 				//.def("", &TitleScreen::)

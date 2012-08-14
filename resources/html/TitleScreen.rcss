@@ -3,7 +3,10 @@ body
 	font-family: Chaney;
 	background: white;
 }
-
+.Hide
+{
+	display: none;
+}
 body.window
 {
 	width: 800px;
@@ -17,6 +20,36 @@ div.Background
 	display: inline-block;
 	background-decorator: image;
 	background-image-src: titlescreentest/WhiteBack.png;
+}
+div.KHLogo
+{
+	position: absolute;
+	top: 45px;
+	left: 400px;
+}
+img.MainSelectedOption
+{
+	z-index: 4;
+	color: rgba(255, 255, 255, 0);
+}
+img.MainSelectedOptionVis
+{
+	z-index: 4;
+	color: rgba(255, 255, 255, 255);
+}
+img.LogoBack
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: rgba(255, 255, 255, 90);
+}
+img.LogoFront
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: rgba(255, 255, 255, 90);
 }
 img.Heart
 {
@@ -93,9 +126,9 @@ img.Ceira
 .AandC
 {
     position: absolute;
-    left: 806px;
+    left: 0px;
 	top: 0px;
-	color: rgba(255, 255, 255, 128);
+	color: rgba(255, 255, 255, 99);
 }
 
 .Disclaimer
@@ -258,7 +291,10 @@ div.OptionText
     shadow-offset: 1px 1px;
     shadow-color: black;
 }
+.Cursor
+{
 
+}
 .NewGameMenu
 {
     position: absolute;
@@ -267,7 +303,7 @@ div.OptionText
     left: 75px;
     top: 80px;
     z-index: 10;
-    display: none;
+	color: rgba(255, 255, 255, 10);
 }
 
 .NewGameHeader
@@ -275,22 +311,18 @@ div.OptionText
     position: absolute;
     left: 146px;
     top: 10px;
-	background-decorator: image;
-	background-image: titlescreentest/MenuTitle.png;
-    background-repeat: no-repeat;
     width: 350px;
     height: 54px;
+	color: rgba(255, 255, 255, 10);
 }
 
 .NewGameBody
 {
     position: absolute;
-	background-decorator: image;
-	background-image: titlescreentest/MenuBack.png;
-    background-repeat: no-repeat;
     width: 650px;
     height: 310px;
     top: 75px;
+	color: rgba(255, 255, 255, 10);
 }
 
 .OptionList

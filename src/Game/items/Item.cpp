@@ -12,12 +12,18 @@ namespace Game
 		{
 
 		}
-		Item::Item(const Item& ref) : Entity(ref.GetName(), ref.GetType())
+		Item::Item(const Item& ref) : Entity(ref)
 		{
 			//if (ref.ItemHealingComponent != nullptr)
 			//	ItemHealingComponent = static_cast<Components::HealingComponent*>(ref.ItemHealingComponent->Clone());
 			
 		}
+
+		Item::Item(const std::string& itemName, const std::string& description, const unsigned int itemValue) : Entity(itemName, EntityTypes::ItemEntity), Description(description), BaseMunnyValue(itemValue)
+		{
+
+		}
+
 		Item::RawClonePtr Item::RawClone() const
 		{
 			return new Item(*this);
@@ -33,6 +39,14 @@ namespace Game
 				delete it->second;
 			}*/
 			//delete ItemHealingComponent;
+		}
+		int Item::GetValue() const
+		{
+			return BaseMunnyValue;
+		}
+		const std::string& Item::GetDescription() const
+		{
+			return Description;
 		}
 		/*Item& Item::operator=(const Item& ref)
 		{

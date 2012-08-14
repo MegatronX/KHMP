@@ -139,6 +139,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComponentControls\ActionComponents\ElementalWeightComponent.xaml.cs">
+      <DependentUpon>ElementalWeightComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ComponentControls\ItemComponents\FreeSynthesisComponent.xaml.cs">
       <DependentUpon>FreeSynthesisComponent.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="ComponentControls\ItemComponents\ThrowComponent.xaml.cs">
       <DependentUpon>ThrowComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentControls\ItemComponents\WeaponComponent.xaml.cs">
+      <DependentUpon>WeaponComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SFMLRenderControl.cs">
       <SubType>UserControl</SubType>
@@ -164,6 +170,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ComponentControls\ActionComponents\ElementalWeightComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ComponentControls\ItemComponents\FreeSynthesisComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ComponentControls\ItemComponents\ThrowComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComponentControls\ItemComponents\WeaponComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,14 +302,12 @@
   <ItemGroup>
     <Resource Include="Enemies.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>
-      </SubType>
+      <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Items.xml">
-      <SubType>
-      </SubType>
+      <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +330,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ButtonImages\crystal-project-actions-PNG\PNG\player_pause-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Actions.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

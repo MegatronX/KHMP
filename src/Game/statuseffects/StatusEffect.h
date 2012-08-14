@@ -39,7 +39,10 @@ namespace Game
 		class StatusEffect : public Entity
 		{
 		public:
-			StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int RecommendedTickCount = 7);
+			StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int RecommendedTickCount = 7, const std::vector<CallCondition>& conditions = std::vector<CallCondition>());
+			StatusEffect(Character::BaseCharacter * holder, const std::string& name, const std::string& desc, bool IsPos = false, const int priority = 0, const int RecommendedTickCount = 7, const std::vector<CallCondition>& conditions = std::vector<CallCondition>());
+			//StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int RecommendedTickCount = 7, const boost::unordered_set<CallCondition>& conditions = boost::unordered_set<CallCondition>());
+			//StatusEffect(Character::BaseCharacter * holder, const std::string& name, bool IsPos = false, const int priority = 0, const int RecommendedTickCount = 7);
 			StatusEffect(const StatusEffect& eff);
 			int GetRemainingTicks() const;
 			int GetPriority() const;
@@ -54,10 +57,19 @@ namespace Game
 			boost::signals2::connection AddEffectDeactivatedSignal(const EffectActivatedSignal::slot_type& event);
 			void DispatchActivatedSignal(const std::string& activationCondition);
 			void DispatchDeactivatedSignal(const std::string& deactivatedCondition);
+
+			void AddCallCondition(const CallCondition condition);
+			bool HasCondition(const CallCondition condition) const;
+			bool RemoveCondition(const CallCondition condition);
+
+			const std::string& GetDescription() const;
+
 			StatusEffect& operator=(const StatusEffect& eff);
 			bool operator==(const StatusEffect& eff);
 			bool operator!=(const StatusEffect& eff);
 		protected:
+			void SetDescription(const std::string& desc);
+
 			void SetRemainingTicks(const int ticks);
 			void SetIsPositive(const bool pos);
 			
@@ -65,6 +77,7 @@ namespace Game
 			void SetRefreshable(const bool val);
 
 		private:
+			std::string Description;
 			EffectActivatedSignal EffectSignal;
 			EffectActivatedSignal EffectDeactivatedSignal;
 			bool NetPositive;

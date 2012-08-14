@@ -9,6 +9,9 @@ namespace Game
 	{
 		class_<GameInstance, boost::noncopyable>("GameInstance", no_init)
 			.def("GetItemLibrary", &GameInstance::GetItemLibrary, return_value_policy<reference_existing_object>())
+			.def("GetActionLibrary", &GameInstance::GetActionLibrary, return_value_policy<reference_existing_object>())
+			.def("MakeNewGame", &GameInstance::MakeNewGame)
+			.def("GetPlayerParty", &GameInstance::GetPlayerParty, return_value_policy<reference_existing_object>())
 			//.def("", &GameInstance::)
 			//.def("", &GameInstance)
 			;

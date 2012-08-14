@@ -3,9 +3,7 @@
 #define _CHARACTERSTATCOMPONENT_H_
 #include <character/Stats.h>
 #include <components/Component.h>
-#include <boost/signal.hpp>
-#include <boost/signals2.hpp>
-#include <boost/function.hpp>
+#include <array>
 
 namespace Game
 {
@@ -14,40 +12,103 @@ namespace Game
 	{
 		class BaseCharacter;
 		class StatsManager;
+		class LevelingComponent;
 	}
 	namespace Components
 	{
 		
-		class StatComponent; 
+		//class StatComponent; 
 
-		typedef boost::signals2::signal<void (const std::string& compName, StatComponent*, Character::Stat stat, int oldVal, int newVal)> StatChangedSignal;
+		//typedef boost::signals2::signal<void (const std::string& compName, StatComponent*, Character::Stat stat, int oldVal, int newVal)> StatChangedSignal;
 		
-		class StatComponent : public Components::Component, public boost::signals::trackable
+		template <class T = int>
+		class StatComponent : public Components::Component
 		{
 		public:
-			StatComponent(Entity* owner);
-			StatComponent(Entity* owner, int initialValue);
-			StatComponent(Entity* owner, int initialValues[Character::StatCount]);
-			StatComponent(Entity* owner, const std::string& name);
-			StatComponent(Entity* owner, int initialValue, const std::string& name);
-			StatComponent(Entity* owner, const int InitialStats[Character::StatCount], const std::string& name) ;
+			StatComponent() : Component(nullptr, "EmptyStatComponent", "StatsComponent")
+			{
 
-			//NOTE that the copy constructor does NOT copy the signals
-			StatComponent(const StatComponent& base);
-			int GetStat(const Character::Stat stat) const;
-			bool SetStat(const Character::Stat stat, const int value);
-			boost::signals2::connection AddStatChangedEvent(const StatChangedSignal::slot_type& event);
-			void DispatchStatChangedEvents(Character::Stat stat, int prevVal, int newVal);
-			virtual ~StatComponent();
-			StatComponent& operator=(const StatComponent& reference);
-			virtual ClonePtr Clone() const override;
+			}
+			StatComponent(Entity* owner) :  Component(owner, owner != nullptr ? "EmptyStatComponent" + owner->GetName() : "EmptyStatComponent", "StatsComponent")
+			{
+
+			}
+			StatComponent(Entity* owner, const T initialValue) :  Component(owner, owner != nullptr ? "EmptyStatComponent" + owner->GetName() : "EmptyStatComponent", "StatsComponent")
+			{
+				for (int i = 0; i < Character::StatCount; ++i)
+				{
+					Stats[i] = initialValue;
+				}
+			}
+			StatComponent(Entity* owner, const T InitialStats[Character::StatCount]) : Component(owner, "NoNameStatsComponent", "StatsComponent")
+			{
+				for (auto i = 0; i < Stats.size(); ++i)
+				{
+					Stats[i] = InitialStats[i];
+				}
+			}
+			StatComponent(Entity* owner, const std::string& name) : Component(owner, name, "StatsComponent")
+			{
+				for (int i = 0; i < Character::StatCount; ++i)
+				{
+					Stats[i] = T();
+				}
+			}
+			StatComponent(Entity* owner, const T initialValue, const std::string& name) : Component(owner, name, "StatsComponent")
+			{
+				for (int i = 0; i < Character::StatCount; ++i)
+				{
+					Stats[i] = initialValue;
+				}
+			}
+			StatComponent(Entity* owner, const T InitialStats[Character::StatCount], const std::string& name) : Component(owner, name, "StatsComponent"), Stats(InitialStats)
+			{
+
+			}
+
+			/*StatComponent(const StatComponent<T>& base)
+			{
+
+			}*/
+
+			T GetStat(const Character::Stat stat) const
+			{
+				return Stats[stat];
+			}
+
+			void IncrementStat(const Character::Stat stat, const T inc)
+			{
+				Stats[stat] += inc;
+			}
+
+			virtual ~StatComponent()
+			{
+
+			}
+			//StatComponent& operator=(const StatComponent<T>& reference);
+			virtual ClonePtr Clone() const override
+			{
+				return ClonePtr(new StatComponent(*this));
+			}
+
 		protected:
-			
-			StatChangedSignal StatChangedEvent;
-			int& operator[](const Character::Stat stat);
-			int& operator[](const int stat);
+			bool SetStat(const Character::Stat stat, const T val)
+			{
+				Stats[stat] = val;
+			}
+			T& operator[](const Character::Stat stat)
+			{
+				return Stats[stat];
+			}
+			T& operator[](const int stat)
+			{
+				return Stats[stat];
+			}
+
+			friend class Character::LevelingComponent;
 		private:
-			int Stats[Character::StatCount] ;
+			std::array<T, Character::StatCount> Stats;
+
 			friend class Character::BaseCharacter;
 			friend class Character::StatsManager;
 		};

@@ -14,7 +14,7 @@
 #include <graphics/Screens/ScreenManager.h>
 #include <Rocket/Core.h>
 #include <Graphics/Rocket/BaseFileInterface.h>
-#include <Graphics/Rocket/LibRocketRenderInterace.h>
+#include <Graphics/Rocket/LibRocketRenderInterface.h>
 #include <Graphics/Rocket/RocketSystemInterface.h>
 #include <Graphics/AnimatedDraw.h>
 class Engine : public Graphics::AnimatedDraw, private boost::noncopyable

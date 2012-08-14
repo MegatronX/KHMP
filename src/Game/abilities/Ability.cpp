@@ -18,7 +18,7 @@ namespace Game
 			auto character = GetHolder();
 			if (character != nullptr)
 			{
-				auto overrides = APCostOverrides.find(character->GetName());
+/*				auto overrides = APCostOverrides.find(character->GetName());
 				if (overrides != APCostOverrides.end())
 				{
 					auto abilityOverride = (*overrides).second.find(this->GetName());
@@ -26,7 +26,7 @@ namespace Game
 					{
 						return abilityOverride->second;
 					}
-				}
+				}*/
 			}
 			return APCost;
 		}

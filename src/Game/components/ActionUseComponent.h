@@ -10,15 +10,15 @@ namespace Game
 	}
 	namespace Components
 	{
-		class ActionUseComponent : public Component, public Actions::ActionInterface
+		class ActionUseComponent : public Component//, public Actions::ActionInterface
 		{
 		public:
 			ActionUseComponent(Entity* owner, const std::string& name, const int priority = 0, 
 				bool hasPreUse = false, bool hasBattlePreUse = false,
 				bool hasUse = false, bool hasBattleUse = false, 
 				bool hasPostUse = false, bool hasBattlePostUse = false) 
-				: Priority(priority), Component(owner, name, "ActionUseComponent"), 
-				ActionInterface(hasPreUse, hasBattlePreUse, hasUse, hasBattlePreUse, hasPostUse, hasBattlePostUse)
+				: Priority(priority), Component(owner, name, "ActionUseComponent")//, 
+				//ActionInterface(hasPreUse, hasBattlePreUse, hasUse, hasBattlePreUse, hasPostUse, hasBattlePostUse)
 			{
 
 			}

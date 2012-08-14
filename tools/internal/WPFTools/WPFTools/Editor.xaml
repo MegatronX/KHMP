@@ -19,6 +19,12 @@
                          IsInitialLoadEnabled="True"
                          debug:PresentationTraceSources.TraceLevel="High"
                          />
+        <XmlDataProvider x:Key="ActionDB"
+                         XPath="/Actions/*"
+                         IsAsynchronous="False"
+                         IsInitialLoadEnabled="True"
+                         debug:PresentationTraceSources.TraceLevel="High"
+                         />
         
     </Window.Resources>
     <Grid>
@@ -26,12 +32,18 @@
             <TabItem Header="Game Files" Name="GameFiles">
                 <Grid Height="636" Name="GameFilesTabGrid" Width="974">
                     <Label Height="28" HorizontalAlignment="Left" Margin="17,53,0,0" Name="label9" VerticalAlignment="Top" Width="120">Enemies XML File</Label>
-                    <TextBox Height="23" Margin="143,55,483,0" Name="EnemyDBFile" VerticalAlignment="Top" />
-                    <Button Height="23" Margin="416,84,483,0" Name="BrowseForEnemyXML" VerticalAlignment="Top" Click="BrowseForEnemyXML_Click">Browse</Button>
+                    <TextBox Height="23" Margin="0,55,465,0" Name="EnemyDBFile" VerticalAlignment="Top" HorizontalAlignment="Right" Width="348" />
+                    <Button Height="23" Margin="434,84,465,0" Name="BrowseForEnemyXML" VerticalAlignment="Top" Click="BrowseForEnemyXML_Click">Browse</Button>
                     <Label Height="28" HorizontalAlignment="Left" Margin="17,111,0,0" Name="label10" VerticalAlignment="Top" Width="120">Items XML File</Label>
-                    <TextBox Height="23" Margin="143,113,483,0" Name="ItemsDBFile" VerticalAlignment="Top" />
-                    <Button Height="23" Margin="416,142,483,0" Name="BrowseForItemsXML" VerticalAlignment="Top" Click="BrowseForItemsXML_Click">Browse</Button>
+                    <TextBox Height="23" Margin="161,113,465,0" Name="ItemsDBFile" VerticalAlignment="Top" />
+                    <Button Height="23" Margin="434,142,465,0" Name="BrowseForItemsXML" VerticalAlignment="Top" Click="BrowseForItemsXML_Click">Browse</Button>
                     <Button Height="23" HorizontalAlignment="Left" Margin="17,6,0,0" Name="LoadDefaults" VerticalAlignment="Top" Width="93" Click="LoadDefaults_Click">Load Defaults</Button>
+                    <Label Content="Actions XML File" Height="28" HorizontalAlignment="Left" Margin="17,169,0,0" Name="label32" VerticalAlignment="Top" Width="120" />
+                    <TextBox Height="23" Margin="161,171,465,0" Name="ActionDBFile" VerticalAlignment="Top" />
+                    <Button Content="Browse" Height="23" Margin="434,200,465,0" Name="BrowseForActionsXML" VerticalAlignment="Top" Click="BrowseForActionsXML_Click" />
+                    <Label Content="Status Effects XML File" Height="28" HorizontalAlignment="Left" Margin="17,227,0,0" Name="label37" VerticalAlignment="Top" Width="138" />
+                    <TextBox Height="23" Margin="161,229,465,0" Name="textBox3" VerticalAlignment="Top" />
+                    <Button Content="Browse" Height="23" Margin="434,258,465,0" Name="button6" VerticalAlignment="Top" />
                 </Grid>
             </TabItem>
             <TabItem Header="Player" Name="PlayerEditor">
@@ -378,27 +390,75 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Actions" Name="ActionEditor">
-                <Grid Height="636" Name="ActionsGrid" Width="974">
-                    <ListBox HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ItemDB}}" Margin="8,195,0,47" Name="ActionListBox" VerticalContentAlignment="Top" Width="227.5" />
+                <Grid Height="636" Name="ActionsGrid" Width="1044">
+                    <Grid.DataContext>
+                        <Binding ElementName="ActionListBox" Path="SelectedItem"/>
+                    </Grid.DataContext>
+                    <Grid.Resources>
+                        <DataTemplate x:Key="ActionTemplate">
+                            <TextBlock Text="{Binding XPath=@name}" Foreground="Black" />
+                        </DataTemplate>
+                        <DataTemplate x:Key="SelectedActionTemplate">
+                            <TextBlock Text="{Binding XPath=@name}" Foreground="Red" />
+                        </DataTemplate>
+                        <Style TargetType="{x:Type ListBoxItem}" x:Key="ActionListContainerStyle">
+                            <Setter Property="ContentTemplate" Value="{StaticResource ActionTemplate}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource SelectedActionTemplate}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                    </Grid.Resources>
+                    <ListBox ItemContainerStyle="{StaticResource ActionListContainerStyle}" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource ActionDB}}" Margin="8,195,0,47" Name="ActionListBox" VerticalContentAlignment="Top" Width="227.5" DataContext="{Binding}" SelectionChanged="ActionListBox_SelectionChanged" />
                     <Label Background="Green" FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="8,160,0,0" Name="label23" VerticalAlignment="Top" Width="227.5">Action List</Label>
                     <Label FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="142,160,0,0" Name="label24" VerticalAlignment="Top" Width="46">Count</Label>
                     <Button Height="23" HorizontalAlignment="Left" Margin="5.5,0,0,14" Name="AddNewAction" VerticalAlignment="Bottom" Width="60">Add New</Button>
-                    <Button Height="23" HorizontalAlignment="Left" Margin="127.5,0,0,14" Name="SaveAllActions" ToolTip="Saves ALL changes to the item database" VerticalAlignment="Bottom" Width="106">Save All Changes</Button>
+                    <Button Height="23" HorizontalAlignment="Left" Margin="127.5,0,0,14" Name="SaveAllActions" ToolTip="Saves ALL changes to the item database" VerticalAlignment="Bottom" Width="106" Click="SaveAllActions_Click">Save All Changes</Button>
                     <ComboBox Height="23" Margin="71.5,0,0,15" Name="ActionListSortOrder" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="50">
                         <ComboBoxItem>Alphabetical</ComboBoxItem>
                         <ComboBoxItem>Value</ComboBoxItem>
                         <ComboBoxItem>Families</ComboBoxItem>
                         <ComboBoxItem>Types</ComboBoxItem>
                     </ComboBox>
-                    <Label FontSize="20" Height="38.75" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label25" VerticalAlignment="Top" Width="289">-</Label>
+                    <Label FontSize="20" Height="38.75" HorizontalAlignment="Left" Margin="10,10,0,0" Name="ActiveActionNameLabel" VerticalAlignment="Top" Width="289">-</Label>
                     <TextBox DataContext="{Binding}" Height="100" HorizontalAlignment="Left" Margin="10,55,0,0" Name="textBox2" Text="{Binding XPath=Description/@value}" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="228" />
-                    <Label Content="{Binding ElementName=EnemeyListBox, Path=Items.Count}" FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="184.25,161,0,0" Name="ActionCount" VerticalAlignment="Top" Width="53.75" />
+                    <Label Content="{Binding ElementName=ActionListBox, Path=Items.Count}" FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="184.25,161,0,0" Name="ActionCount" VerticalAlignment="Top" Width="53.75" />
                     <GroupBox Header="Active Action Component" Margin="242,207,6,14" Name="groupBox2">
-                        <Grid Name="ActionComponentGrid" />
+                        <Grid Name="ActionComponentGrid" Height="395" Width="788" />
                     </GroupBox>
                     <GroupBox Header="Action Properties" Height="195" Margin="244,6,6,0" Name="groupBox3" VerticalAlignment="Top">
                         <Grid>
-                            <ListBox Margin="0,65,6,7" Name="ActionComponentList" HorizontalAlignment="Right" Width="120" />
+                            <ListBox ItemsSource="{Binding XPath=Components/*}" Margin="0,32,6,40" Name="ActionComponentList" HorizontalAlignment="Right" Width="243" SelectionChanged="ActionComponentList_SelectionChanged">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ListBox>
+                            <Label Content="Power" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label25" VerticalAlignment="Top" />
+                            <Label Content="MP Cost" Height="28" HorizontalAlignment="Left" Margin="6,32,0,0" Name="label38" VerticalAlignment="Top" />
+                            <Label Content="SP Cost" Height="28" HorizontalAlignment="Left" Margin="6,58,0,0" Name="label39" VerticalAlignment="Top" />
+                            <Label Content="Accuracy" Height="28" HorizontalAlignment="Left" Margin="6,83,0,0" Name="label40" VerticalAlignment="Top" />
+                            <Label Content="Flags" Height="28" HorizontalAlignment="Left" Margin="154,60,0,0" Name="label41" VerticalAlignment="Top" />
+                            <TextBox Text="{Binding XPath=@power}" Height="23" HorizontalAlignment="Left" Margin="68,8,0,0" Name="ActionPower" VerticalAlignment="Top" Width="63" />
+                            <TextBox Height="23" Text="{Binding XPath=@sp}" HorizontalAlignment="Left" Margin="68,60,0,0" Name="ActionSPCost" VerticalAlignment="Top" Width="63" />
+                            <TextBox Height="23" Text="{Binding XPath=@mp}" HorizontalAlignment="Left" Margin="68,34,0,0" Name="ActionMPCost" VerticalAlignment="Top" Width="63" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="68,85,0,0" Name="ActionAccuracy" Text="{Binding XPath=@accuracy}" VerticalAlignment="Top" Width="63" />
+                            <ListBox ItemsSource="{Binding XPath=Flags/*}" Height="74" HorizontalAlignment="Left" Margin="204,66,0,0" Name="ActionFlagList" VerticalAlignment="Top" Width="139">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ListBox>
+                            <Label Content="Action Components" Height="28" HorizontalAlignment="Left" Margin="533,3,0,0" Name="label42" VerticalAlignment="Top" />
+                            <Button Content="Add..." Height="23" HorizontalAlignment="Left" Margin="533,138,0,0" Name="AddActionComponentButton" VerticalAlignment="Top" Width="75" />
+                            <Button Content="Add..." Height="23" HorizontalAlignment="Left" Margin="204,146,0,0" Name="AddActionFlag" VerticalAlignment="Top" Width="75" />
+                            <Label Content="Family" Height="28" HorizontalAlignment="Left" Margin="154,6,0,0" Name="label43" VerticalAlignment="Top" />
+                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="204,37,0,0" Name="ActionFamilyList" VerticalAlignment="Top" Width="139" />
+                            <TextBox Text="{Binding XPath=@family}" Height="23" HorizontalAlignment="Left" Margin="204,8,0,0" Name="ActionFamily" VerticalAlignment="Top" Width="139" />
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -423,12 +483,13 @@
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
+                        
                     </Grid.Resources>
-                    <ListBox ItemContainerStyle="{StaticResource ItemListContainerStyle}" ItemsSource="{Binding Source={StaticResource ItemDB}}" HorizontalAlignment="Left" Margin="6,191,0,45" Name="ItemListBox" Width="227.5" SelectionChanged="ItemListBox_SelectionChanged" VerticalContentAlignment="Top" />
+                    <ListBox ItemContainerStyle="{StaticResource ItemListContainerStyle}" ItemsSource="{Binding Source={StaticResource ItemDB}}" HorizontalAlignment="Left" Margin="6,191,0,57" Name="ItemListBox" Width="227.5" SelectionChanged="ItemListBox_SelectionChanged" VerticalContentAlignment="Top" Height="381" DataContext="{Binding}" />
                     <Label Height="38.75" HorizontalAlignment="Left" Margin="6,6,0,0" Name="ActiveItemNameLabel" VerticalAlignment="Top" Width="289" FontSize="20">-</Label>
                     <Label Background="Chocolate" FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="6,156,0,0" Name="label11" VerticalAlignment="Top" Width="227.5">Item List</Label>
                     <Label FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="138,156,0,0" Name="label12" VerticalAlignment="Top" Width="46">Count</Label>
-                    <Label Content="{Binding ElementName=EnemeyListBox, Path=Items.Count}" FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="178,156,0,0" Name="ItemCountLabel" VerticalAlignment="Top" Width="53.75" />
+                    <Label Content="{Binding ElementName=ItemListBox, Path=Items.Count}" FontWeight="Bold" Foreground="White" Height="28" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="178,156,0,0" Name="ItemCountLabel" VerticalAlignment="Top" Width="53.75" />
                     <TextBox Text="{Binding XPath=Description/@value}" Height="100" HorizontalAlignment="Left" Margin="6,51,0,0" Name="ItemDescriptionBox" VerticalAlignment="Top" Width="228" DataContext="{Binding}" TextWrapping="WrapWithOverflow" />
                     <Image Height="128" Width="128" HorizontalAlignment="Right" Margin="0,19,16,0" Name="ItemIcon" Stretch="Fill" VerticalAlignment="Top" />
                     <Label Content="Icon" Height="28" HorizontalAlignment="Right" Margin="0,0,111.443,0" Name="label13" VerticalAlignment="Top" Width="32.557" />
@@ -467,9 +528,9 @@
                     <GroupBox Header="Active Component" Margin="240,279,13,0" Name="ActiveItemComponentGrouping">
                         <Grid Name="ItemComponentAttachmentGrid" />
                     </GroupBox>
-                    <Button Height="23" Margin="6,0,902,17.04" Name="AddNewItemButton" VerticalAlignment="Bottom">Add New</Button>
-                    <Button Height="23" HorizontalAlignment="Right" Margin="0,0,734,16" Name="SaveAllItemChanges" VerticalAlignment="Bottom" Width="106" Click="SaveAllItemChanges_Click" ToolTip="Saves ALL changes to the item database">Save All Changes</Button>
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="72,0,0,16" Name="SortItemsSelect" VerticalAlignment="Bottom" Width="50" SelectionChanged="SortItemsSelect_SelectionChanged">
+                    <Button Height="23" Margin="6,0,902,28" Name="AddNewItemButton" VerticalAlignment="Bottom" Click="AddNewItemButton_Click">Add New</Button>
+                    <Button Height="23" HorizontalAlignment="Right" Margin="0,0,934,0" Name="SaveAllItemChanges" VerticalAlignment="Bottom" Width="106" Click="SaveAllItemChanges_Click" ToolTip="Saves ALL changes to the item database">Save All Changes</Button>
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="161,0,0,28" Name="SortItemsSelect" VerticalAlignment="Bottom" Width="50" SelectionChanged="SortItemsSelect_SelectionChanged">
                         <ComboBoxItem Content="Alphabetical" />
                         <ComboBoxItem Content="Value" />
                         <ComboBoxItem Content="Families" />

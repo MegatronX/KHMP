@@ -12,6 +12,7 @@ namespace Game
 			class GameScreen : public ::Graphics::Screens::Screen
 			{
 			public:
+				virtual ~GameScreen() {};
 				GameScreen(const std::string& name, ::Engine* engine, int id) : ::Graphics::Screens::Screen(name, engine, id)
 				{
 

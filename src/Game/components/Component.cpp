@@ -25,6 +25,10 @@ namespace Game
 		{
 
 		}
+		Component::Component(const Component& comp) : Name(comp.Name), NameHash(comp.NameHash), ComponentType(comp.ComponentType), Valid(comp.Valid), Owner(comp.Owner), UID(++ComponentIDCounter)
+		{
+
+		}
 		/*Component::Component(const Component& ref)
 		{
 			this->ComponentType = ref.ComponentType;
@@ -77,6 +81,19 @@ namespace Game
 		{
 			return !(*this == cmp);
 		}
+		Component& Component::operator=(const Component& cmp)
+		{
+			if ((*this) == cmp)
+				return *this;
+			ComponentType = cmp.ComponentType;
+			Name = cmp.Name;
+			NameHash = cmp.NameHash;
+			UID = ++ComponentIDCounter;
+			Valid = cmp.Valid;
+			Owner = cmp.Owner;
+
+			return *this;
+		}
 		void Component::SetValid(bool val)
 		{
 			Valid = val;
@@ -88,6 +105,10 @@ namespace Game
 		void Component::SetOwner(Entity* owner)
 		{
 			Owner = owner;
+		}
+		void Component::SetOwnerAndName(Entity* owner, const std::string& name)
+		{
+
 		}
 	}
 }

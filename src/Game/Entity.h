@@ -6,6 +6,7 @@
 #include <boost/functional.hpp>
 #include <components/Component.h>
 #include <boost/unordered_map.hpp>
+#include <boost/unordered_set.hpp>
 #include <boost/thread/mutex.hpp>
 namespace Game
 {
@@ -44,13 +45,17 @@ namespace Game
 		}
 		bool HasComponent(const std::string& name); //const;
 		bool RegisterComponent(const std::string& indexName, boost::shared_ptr<Components::Component> component, bool ReplaceExisting = true);
-		void RemoveComponent(const std::string& indexName);
+		bool RemoveComponent(const std::string& indexName);
 		virtual RawClonePtr RawClone() const override;
 
 		//Leave empty until use case arises
 		bool DeleteComponent(const Components::Component* component);
 		//Leave empty until use case arises
 		bool DeleteComponent(const boost::shared_ptr<Components::Component>& component);
+
+		void AddFlag(const std::string& flag);
+		bool HasFlag(const std::string& flag);
+		bool RemoveFlag(const std::string& flag);
 
 		bool operator==(const Entity& entity) const;
 		bool operator!=(const Entity& entity) const;
@@ -59,6 +64,8 @@ namespace Game
 		void AddType(int type);
 		void RemoveType(int type);
 		boost::unordered_map<std::string, boost::shared_ptr<Components::Component> > ComponentCollection;
+		boost::unordered_set<std::string> FlagSet;
+
 		static boost::hash<std::string> StringHasher;
 
 	private:

@@ -69,6 +69,9 @@ namespace Cache
 			case BackColor:
 				path = activeCollection->BackColorsDirectory + indexer + extension;
 				break;
+			case Background:
+				path = activeCollection->Backgrounds + indexer + extension;
+				break;
 			case BattleBack:
 				path = activeCollection->BattleBacks + indexer + extension;
 				break;
@@ -136,7 +139,7 @@ namespace Cache
 					NewRes.first = time + ResourceLifeTime;
 				else
 					NewRes.first = time + lifeTime;
-				if(newTexture->LoadFromFile(path))
+				if(newTexture->loadFromFile(path))
 				{
 					NewRes.second = newTexture;
 				}
@@ -201,6 +204,7 @@ namespace Cache
 		MainPaths.MagicSheetSpriteDirectory = MainPaths.SpriteDirectory + configuration.GetApplicationSetting("MagicSheetSubDir");
 		MainPaths.MagicSheetSpriteDirectory = MainPaths.SpriteDirectory + configuration.GetApplicationSetting("SkillSheetSubDir");
 		MainPaths.BattleBacks = MainPaths.SpriteDirectory + configuration.GetApplicationSetting("BattleBacksSubDir");
+		MainPaths.Backgrounds = configuration.GetApplicationSetting("ResourcesBaseDirectory") + configuration.GetApplicationSetting("GraphicsSubDir") + configuration.GetApplicationSetting("BackgroundsSubDir");
 		MainPaths.MinigameSpriteDirectory = SpriteDirectory + configuration.GetApplicationSetting("MinigameSubDir");
 		MainPaths.DDRSpriteDirectory = MainPaths.MinigameSpriteDirectory + configuration.GetApplicationSetting("DDRSubDir");
 		MainPaths.ParticleDirectory = MainPaths.SpriteDirectory + configuration.GetApplicationSetting("ParticleSubDir");

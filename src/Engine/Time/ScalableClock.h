@@ -17,7 +17,7 @@ private:
 	void UpdateFunction();
 	float TimeBuffer;
 	sf::Uint32 LastUpdate;
-	sf::Uint32 Resolution;
+	sf::Time Resolution;
 	sf::Clock GameClock;
 	bool Scaled;
 	float TimeScaler;

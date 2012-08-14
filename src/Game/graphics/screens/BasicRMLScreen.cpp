@@ -23,18 +23,19 @@ namespace Game
 			}
 			BasicRMLScreen::~BasicRMLScreen()
 			{
-				pageContext->RemoveReference();
 				if (Doc != nullptr)
 					Doc->GetContext()->UnloadDocument((Doc));
+				pageContext->RemoveReference();
+				
 			}
 			void BasicRMLScreen::Draw(sf::RenderWindow &window, sf::Shader &shader)
 			{
-
 				pageContext->Render();
 			}
 			void BasicRMLScreen::Draw(sf::RenderWindow &window)
 			{
 				pageContext->Render();
+				
 			}
 			void BasicRMLScreen::Update(const sf::Uint32 time, const float TimeScale)
 			{
@@ -76,6 +77,10 @@ namespace Game
 			void BasicRMLScreen::AddNewTransform(const std::string& name, boost::shared_ptr<::Graphics::GameRocket::ElementTransformer>& transformer, sf::Uint32 delay)
 			{
 				ActiveTransforms[name] = TransformPair(transformer, engine->GetTime() + delay);
+			}
+			void BasicRMLScreen::ClearTransforms()
+			{
+				ActiveTransforms.clear();
 			}
 		}
 	}

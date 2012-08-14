@@ -75,7 +75,7 @@ Enemy -> Enemy specifies an enemy grouping. That is, all enemies in the grouping
       </Flags>
     </EnemyInstance>
     <EnemyInstance level="83">
-      <Description value="An enormous dragon who's skin seems to be on fire. It is very rare and posses collosal strength" />
+      <Description value="An enormous dragon who's skin seems to be on fire. It is very rare and posseses collosal strength" />
       <Stats HP="135000" MP="5000" SP="12500" Strength="312" Vitality="195" Magic="300" Spirit="262" Skill="222" Speed="209" Evasion="120" MgEvasion="120" Accuracy="120" Luck="85" />
       <StatusResistances>
         <Resistance name="Sleep" value="1.0" />
@@ -198,6 +198,22 @@ Enemy -> Enemy specifies an enemy grouping. That is, all enemies in the grouping
       <Description value="WHY IS THIS 0" />
       <Classes />
       <Stats HP="100000000000" MP="0" SP="0" Strength="0" Vitality="0" Magic="0" Spirit="0" Skill="0" Speed="0" Evasion="0" MgEvasion="0" Accuracy="0" Luck="0" />
+      <StatusResistances />
+      <ElementalEffectiveness />
+      <LootTable />
+      <DropTable />
+      <AIScript />
+      <Flags />
+    </EnemyInstance>
+  </Enemy>
+  <Enemy name="BLARGH" displayname="BLRG" type="">
+    <EnemyInstance level="10">
+      <Description value="0" />
+      <Classes>
+        <Class value="Beast" />
+        <Class value="Beast" />
+      </Classes>
+      <Stats HP="10000" MP="100" SP="100" Strength="100" Vitality="100" Magic="100" Spirit="100" Skill="100" Speed="100" Evasion="100" MgEvasion="100" Accuracy="100" Luck="100" />
       <StatusResistances />
       <ElementalEffectiveness />
       <LootTable />

@@ -20,8 +20,8 @@ namespace Game
 			{
 			public:
 				BasicRMLScreen(const std::string& name, const std::string& rmlDoc, Engine* engine, int id);
-				BasicRMLScreen::BasicRMLScreen(const std::string& name, const std::string& rmlDoc, Engine& engine, int id);
-				~BasicRMLScreen();
+				BasicRMLScreen(const std::string& name, const std::string& rmlDoc, Engine& engine, int id);
+				virtual ~BasicRMLScreen();
 				virtual void Draw(sf::RenderWindow &window, sf::Shader &shader) override;
 				virtual void Draw(sf::RenderWindow &window) override;
 				virtual void Update(const sf::Uint32 time, const float TimeScale = 1.0) override;
@@ -33,6 +33,7 @@ namespace Game
 				void AddNewTransform(const std::string& name, std::vector<::Graphics::GameRocket::ElementTransformationInterface*>& transforms, sf::Uint32 delay = 0);
 				void AddNewTransform(const std::string& name, ::Graphics::GameRocket::ElementTransformer* transformer, sf::Uint32 delay = 0);
 				void AddNewTransform(const std::string& name, boost::shared_ptr<::Graphics::GameRocket::ElementTransformer>& transformer, sf::Uint32 delay = 0);
+				void ClearTransforms();
 			private:
 				Rocket::Core::Context* pageContext;
 				Rocket::Core::ElementDocument* Doc;

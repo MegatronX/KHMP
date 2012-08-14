@@ -2,7 +2,7 @@
 
 namespace Cache
 {
-	FontCache::FontCache(int maxEntries, sf::Uint32 DefaultLife, sf::Uint32 UpdateTime) : TimerCache<sf::Font>(maxEntries, DefaultLife, UpdateTime, res_ptr(new sf::Font(sf::Font::GetDefaultFont())))
+	FontCache::FontCache(int maxEntries, sf::Uint32 DefaultLife, sf::Uint32 UpdateTime) : TimerCache<sf::Font>(maxEntries, DefaultLife, UpdateTime, res_ptr(new sf::Font(sf::Font::getDefaultFont())))
 	{
 		this->CurrentEntries = 0;
 		this->LastUpdate = 0;
@@ -25,7 +25,7 @@ namespace Cache
 				res_ptr newFont = res_ptr(new sf::Font());
 				Resource newResource;
 				newResource.first = time + ResourceLifeTime;
-				if(newFont->LoadFromFile(path))
+				if(newFont->loadFromFile(path))
 				{
 					newResource.second = newFont;
 				}

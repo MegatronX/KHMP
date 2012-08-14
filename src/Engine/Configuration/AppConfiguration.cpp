@@ -50,12 +50,32 @@ void AppConfiguration::Initialize(const std::string &configFile)
 		}
 	}
 }
+void AppConfiguration::WriteConfiguration(std::ostream& outstream)
+{
 
-const std::string AppConfiguration::GetApplicationSetting(const std::string &lookup)
+}
+void AppConfiguration::WriteConfiguration(std::string& file, bool MakeFileIfNotAvailable)
+{
+
+}
+void AppConfiguration::SetApplicationSetting(const std::string& key, const std::string& value)
+{
+	ApplicationSettings[key] = value;
+}
+const std::string& AppConfiguration::GetApplicationSetting(const std::string &lookup)
 {
 	return ApplicationSettings[lookup];
 }
-const std::string AppConfiguration::GetApplicationSetting(const char* lookup)
+const std::string& AppConfiguration::GetApplicationSetting(const char* lookup)
+{
+	return GetApplicationSetting(std::string(lookup));
+}
+
+const std::string AppConfiguration::GetApplicationSettingByVal(const std::string &lookup)
+{
+	return ApplicationSettings[lookup];
+}
+const std::string AppConfiguration::GetApplicationSettingByVal(const char* lookup)
 {
 	return GetApplicationSetting(std::string(lookup));
 }

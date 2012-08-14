@@ -19,6 +19,11 @@ namespace Game
 		{
 
 		}
+		BaseCharacter::BaseCharacter(const std::string& characterName, std::vector<int>& baseStats) : Entity(characterName, CharacterEntity), ElementEffectsComponent(this), 
+			SEManager(this), AbilManager(this), SManager(this, baseStats)
+		{
+
+		}
 		Components::Component* BaseCharacter::GetComponent(const std::string& index)// const
 		{
 			const static int EleHash = StringHasher("ElementEffectivenessComponent");
@@ -58,9 +63,14 @@ namespace Game
 			return new BaseCharacter(*this);
 		}
 
-		Party* BaseCharacter::GetParty() const
+		BaseParty* BaseCharacter::GetParty() const
 		{
 			return AttachedParty;
+		}
+
+		void BaseCharacter::SetParty(BaseParty* party)
+		{
+			AttachedParty = party;
 		}
 
 		StatusEffects::StatusEffectsManager& BaseCharacter::GetStatusEffectsManager()

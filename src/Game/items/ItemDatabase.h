@@ -24,6 +24,7 @@ namespace Game
 
 			void AddItem(boost::shared_ptr<Item> item);
 			
+			unsigned int GetItemCount() const;
 			//void AddItem(boost::shared_ptr<Entity> item);
 		private:
 			void EmptyDatabase();

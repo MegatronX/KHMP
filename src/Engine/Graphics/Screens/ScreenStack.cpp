@@ -20,8 +20,12 @@ namespace Graphics
 		}
 
 		ScreenStack::ScreenStack(const std::string& screenName, const int uid, const std::vector<screen_ptr>& screenOwned, bool sendInputs, bool drawStack, bool valid, bool deleteStack) 
-			: ScreenName(screenName), UID(uid), Valid(valid), DrawStack(drawStack), SendInputs(sendInputs), DeleteStack(deleteStack), OwnedScreens(screenOwned)
+			: ScreenName(screenName), UID(uid), Valid(valid), DrawStack(drawStack), SendInputs(sendInputs), DeleteStack(deleteStack)//, OwnedScreens(screenOwned)
 		{
+			for (auto screen = screenOwned.begin(); screen != screenOwned.end(); ++screen)
+			{
+				OwnedScreens[(*screen)->GetDrawPriority()].push_back(*screen);
+			}
 		}
 
 		const std::string& ScreenStack::GetScreenName()
@@ -69,43 +73,61 @@ namespace Graphics
 		{
 			DeleteStack = deletable;
 		}
-		void ScreenStack::AddScreen(screen_ptr& screen)
+		void ScreenStack::AddScreen(screen_ptr screen, int drawPriority)
 		{
-			OwnedScreens.push_back(screen);
+			if (screen.get() != nullptr)
+			{
+				OwnedScreens[drawPriority].push_back(screen);
+			}
+			
 		}
 		bool ScreenStack::RemoveScreen(const std::string& screenName)
 		{
-			for(auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				if ((*it)->GetScreenName() == screenName)
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
 				{
-					OwnedScreens.erase(it);
-					return true;
+					if ((*screen)->GetScreenName() == screenName)
+					{
+						priority->second.erase(screen);
+						return true;
+					}
 				}
+				
 			}
 			return false;
 		}
-		const std::vector<screen_ptr>& ScreenStack::GetOwnedScreens() const
+		const std::map<int, std::vector<screen_ptr> >& ScreenStack::GetOwnedScreens() const
 		{
 			return OwnedScreens;
 		}
 		bool ScreenStack::HandleKeyPressed(const sf::Uint32 time, const Input::InputModule* inputModule, ::Input::InputActionResult& action)
 		{
 			bool inputConsumed = false;
-			for(auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				if ((*it)->IsAcceptingInputs())
-					inputConsumed = inputConsumed || (*it)->HandleKeyPressed(time, inputModule, action);
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
+				{
+					if ((*screen)->IsAcceptingInputs())
+					{
+						inputConsumed |= (*screen)->HandleKeyPressed(time, inputModule, action);
+					}
+				}
 			}
 			return inputConsumed;
 		}
 		bool ScreenStack::HandleKeyReleased(const sf::Uint32 time, const Input::InputModule* inputModule, ::Input::InputActionResult& action)
 		{
 			bool inputConsumed = false;
-			for(auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				if ((*it)->IsAcceptingInputs())
-					inputConsumed = inputConsumed || (*it)->HandleKeyReleased(time, inputModule, action);
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
+				{
+					if ((*screen)->IsAcceptingInputs())
+					{
+						inputConsumed |= (*screen)->HandleKeyReleased(time, inputModule, action);
+					}
+				}
 			}
 			return inputConsumed;
 		}
@@ -133,31 +155,43 @@ namespace Graphics
 		//Animate Draw
 		void ScreenStack::Update(const sf::Uint32 time, const float TimeScale)
 		{
-			for (auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				(*it)->Update(time, TimeScale);
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
+				{
+					(*screen)->Update(time, TimeScale);
+				}
 			}
 		}
 		void ScreenStack::Update(const float time, const float TimeScale)
 		{
-			for (auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				(*it)->Update(time, TimeScale);
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
+				{
+					(*screen)->Update(time, TimeScale);
+				}
 			}
 		}
 
 		void ScreenStack::Draw(sf::RenderWindow &window)
 		{
-			for (auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				(*it)->Draw(window);
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
+				{
+					(*screen)->Draw(window);
+				}
 			}
 		}
 		void ScreenStack::Draw(sf::RenderWindow &window, sf::Shader &shader)
 		{
-			for (auto it = OwnedScreens.begin(); it != OwnedScreens.end(); ++it)
+			for(auto priority = OwnedScreens.begin(); priority != OwnedScreens.end(); ++priority)
 			{
-				(*it)->Draw(window, shader);
+				for (auto screen = priority->second.begin(); screen != priority->second.end(); ++screen)
+				{
+					(*screen)->Draw(window, shader);
+				}
 			}
 		}
 		bool ScreenStack::operator==(const ScreenStack& stackComp) const

@@ -1,7 +1,7 @@
 #include "ScalableClock.h"
 
 ScalableClock::ScalableClock(const float scale, sf::Uint32 resolution) 
-	: TimeScaler(scale), TimeBuffer(0), Scaled(!(scale >= 0.99 && scale <= 1.01)), UpdaterThread(boost::bind(&ScalableClock::UpdateFunction, this))
+	: TimeScaler(scale), TimeBuffer(0), Scaled(!(scale >= 0.99 && scale <= 1.01)), UpdaterThread(boost::bind(&ScalableClock::UpdateFunction, this)), Resolution(sf::milliseconds(resolution))
 {
 
 }
@@ -14,32 +14,32 @@ sf::Uint32 ScalableClock::GetElapsedGameTime()
 {
 	if (Scaled)
 	{
-		LockUpdater.Lock();
-		sf::Uint32 time = GameClock.GetElapsedTime();
+		LockUpdater.lock();
+		sf::Uint32 time = GameClock.getElapsedTime().asMilliseconds();
 		sf::Uint32 Elapsed =  time - LastUpdate;
 		TimeBuffer += static_cast<sf::Uint32>(static_cast<float>(Elapsed) * (TimeScaler - 1.0f));
 		LastUpdate = time;
-		LockUpdater.Unlock();
+		LockUpdater.unlock();
 		
 	}
 	//else
 	{
 		if (TimeBuffer != 0)
-			return GameClock.GetElapsedTime() + static_cast<sf::Uint32>(TimeBuffer);
-		return GameClock.GetElapsedTime();
+			return GameClock.getElapsedTime().asMilliseconds() + static_cast<sf::Uint32>(TimeBuffer);
+		return GameClock.getElapsedTime().asMilliseconds();
 	}
 }
 sf::Uint32 ScalableClock::GetElapsedRealTime() const
 {
-	return GameClock.GetElapsedTime();
+	return GameClock.getElapsedTime().asMilliseconds();
 }
 void ScalableClock::Reset()
 {
-	LockUpdater.Lock();
+	LockUpdater.lock();
 	TimeBuffer = 0;
 	Scaled = false;
 	TimeScaler = 1.0f;
-	LockUpdater.Unlock();
+	LockUpdater.unlock();
 }
 bool ScalableClock::IsScaled()
 {
@@ -48,10 +48,10 @@ bool ScalableClock::IsScaled()
 void ScalableClock::UpdateFunction()
 {
 	//I forget what goes here
-	sf::Sleep(Resolution);
+	sf::sleep(Resolution);
 }
 ScalableClock::~ScalableClock()
 {
-	UpdaterThread.Terminate();
+	UpdaterThread.terminate();
 	//UpdaterThread.Terminate();
 }

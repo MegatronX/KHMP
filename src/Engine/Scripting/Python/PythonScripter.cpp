@@ -3,6 +3,7 @@
 #include "GraphicsModule.h"
 #include "RocketModule.h"
 #include "ScreenModule.h"
+#include "MappingModule.h"
 #include <scripting/GameScripting.h>
 #include <Scripting/EntityModule.h>
 #include <Scripting/ItemModule.h>
@@ -13,6 +14,10 @@
 #include <Scripting/BattleModule.h>
 #include <scripting/GameScreensModule.h>
 #include <scripting/StatusEffectsModule.h>
+#include <scripting/ElementModule.h>
+#ifndef _DEBUG
+#include <Graphics/Rocket/Assert.h>
+#endif
 using namespace boost::python;
 using namespace Game;
 using namespace Game::Scripting;
@@ -33,7 +38,12 @@ namespace Scripting
 		PyImport_AppendInittab("ScreenModule", initScreenModule);
 		PyImport_AppendInittab("GameScreensModule", initGameScreensModule);
 		PyImport_AppendInittab("StatusEffectsModule", initStatusEffectsModule);
+		PyImport_AppendInittab("ElementModule", initElementModule);
+		PyImport_AppendInittab("MappingModule", initMappingModule);
 		Py_Initialize();
+
+		
+
 		MainModule = object((handle<>(borrowed(PyImport_AddModule("__main__")))));
 		MainNamespace = MainModule.attr("__dict__");
 
@@ -55,6 +65,10 @@ namespace Scripting
 		auto ComponentModule = object((handle<>(PyImport_ImportModule("ComponentModule"))));
 		MainNamespace["ComponentModule"] = ComponentModule;
 		AdditionalModules["ComponentModule"] = ComponentModule;
+
+		MappingModule = object((handle<>(PyImport_ImportModule("MappingModule"))));
+		MainNamespace["MappingModule"] = MappingModule;
+		AdditionalModules["MappingModule"] = MappingModule;
 
 		auto CharacterModule = object((handle<>(PyImport_ImportModule("CharacterModule"))));
 		MainNamespace["CharacterModule"] = CharacterModule;
@@ -91,6 +105,10 @@ namespace Scripting
 		auto SEModule = object((handle<>(PyImport_ImportModule("StatusEffectsModule"))));
 		MainNamespace["StatusEffectsModule"] = SEModule;
 		AdditionalModules["StatusEffectsModule"] = SEModule;
+
+		auto EleModule = object((handle<>(PyImport_ImportModule("ElementModule"))));
+		MainNamespace["ElementModule"] = EleModule;
+		AdditionalModules["ElementModule"] = EleModule;
 	}
 	void PythonScripter::RunString(const std::string &scriptString)
 	{
@@ -173,6 +191,10 @@ namespace Scripting
 	{
 		return StatusEffectsModule;
 	}
+	boost::python::object& PythonScripter::GetMappingModule()
+	{
+		return MappingModule;
+	}
 	//boost::python::object emptyObject();
 	boost::python::object& PythonScripter::GetModule(const std::string& name)
 	{
@@ -190,6 +212,12 @@ namespace Scripting
 	void PythonScripter::SetPath(const std::string &val)
 	{
 		ScriptPath = val;
+		if (ScriptPath.size() > 0)
+		{
+			boost::python::str dir(ScriptPath.c_str());
+			boost::python::object sys = boost::python::import("sys");
+			sys.attr("path").attr("insert")(0, dir);
+		}
 	}
 
 	PythonScripter::~PythonScripter()

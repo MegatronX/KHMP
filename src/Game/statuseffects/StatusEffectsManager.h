@@ -17,6 +17,7 @@ namespace Game
 	
 	namespace StatusEffects
 	{
+		const std::string ApplyEffectIndexer = "ApplyEffectComponent";
 		class StatusEffectsManager : public Components::Component
 		{
 		public:
@@ -30,8 +31,6 @@ namespace Game
 			void RemoveStatusEffects(const int count, bool AtRandom = true);
 			void RemoveNegativeStatusEffects(const int count, bool AtRandom = true);
 			void RemovePositiveStatusEffects(const int count, bool AtRandom = true);
-			
-	
 
 			se_ptr GetStatusEffect(const std::string& name) const;
 			std::vector<StatusEffect*>& GetStatusEffectsWithCallCondition(const CallCondition cc, bool sort);
@@ -51,6 +50,10 @@ namespace Game
 			void IncrementStatusResistance(const StatusEffect* effect, const float inc);
 			void IncrementStatusResistance(se_ptr effect, const float inc);
 
+			float GetBaseResistance() const;
+			void SetBaseResistance(const float res);
+			void IncrementBaseResistance(const float res);
+
 			virtual RawClonePtr RawClone() const override;
 		private:
 			boost::unordered_map<std::string, se_ptr> NameToSE;
@@ -59,6 +62,7 @@ namespace Game
 			boost::unordered_set<std::string> LockedInStatusEffects;
 			boost::unordered_map<std::string, float> SEResistances;
 			static StatusEffectsLibrary* SELibrary;
+			float BaseResistance;
 			friend class GameInstance;
 		};
 	}

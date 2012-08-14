@@ -1,0 +1,23 @@
+﻿Build started 08/08/2012 8:04:45 PM.
+     1>Project "C:\Kingdom Hearts MP\resources\glew-1.9.0\glew-1.9.0\build\vc10\visualinfo.vcxproj" on node 4 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "static/release/visualinfo.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /Zi /nologo /W3 /WX- /O2 /Ob1 /Oy- /D WIN32 /D WIN32_MEAN_AND_LEAN /D VC_EXTRALEAN /D GLEW_STATIC /D _CRT_SECURE_NO_WARNINGS /D _VC80_UPGRADE=0x0600 /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\static/release\\" /Fd".\static/release\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\src\visualinfo.c
+         visualinfo.c
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D NDEBUG /D _VC80_UPGRADE=0x0600 /l"0x0409" /nologo /fo"static/release/visualinfo.res" ..\visualinfo.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\../../bin\visualinfo.exe" /INCREMENTAL:NO /NOLOGO ../../lib/glew32s.lib glu32.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"static/release/visualinfo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Kingdom Hearts MP\resources\glew-1.9.0\glew-1.9.0\bin\visualinfo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../../bin/visualinfo.lib" /MACHINE:X86 static/release/visualinfo.res
+         .\static/release\visualinfo.obj
+         visualinfo.vcxproj -> C:\Kingdom Hearts MP\resources\glew-1.9.0\glew-1.9.0\build\vc10\../../bin/visualinfo.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:".\../../bin\visualinfo.exe;#1" /manifest static/release/visualinfo.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "static/release/visualinfo.unsuccessfulbuild".
+         Touching "static/release/visualinfo.lastbuildstate".
+     1>Done Building Project "C:\Kingdom Hearts MP\resources\glew-1.9.0\glew-1.9.0\build\vc10\visualinfo.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.45

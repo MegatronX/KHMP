@@ -83,6 +83,8 @@ namespace Content
 
 		bool VerifyResourceExistance(const std::string& filepath);
 
+		void LoadSpriteDescriptors(const std::string& file);
+
 		virtual ~ContentManager();
 		//boost::shared_ptr<sf::Music> RequestMusic(const std::string &fileName);
 		//boost::shared_ptr<sf::Music> RequestMusicDirectly(const std::string &fileName);
@@ -103,7 +105,7 @@ namespace Content
 		sf::Thread UpdaterThread;
 		sf::Mutex UpdateLock;
 		sf::Uint32 RunningTime;
-		sf::Uint32 UpdateRate;
+		sf::Time UpdateRate;
 		void ThreadUpdater();
 		void Initialize(Configuration::AppConfiguration &configuration);
 		//Cache::SoundCache PrimarySoundCache;

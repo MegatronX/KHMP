@@ -7,6 +7,7 @@ static const double ElementDefenseFloor = -1;
 static const double ElementDamageCeiling = 4;
 namespace Game
 {
+	class Entity;
 	namespace Elements
 	{
 

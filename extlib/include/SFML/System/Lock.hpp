@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,6 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/System/Export.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
 
@@ -39,7 +40,7 @@ class Mutex;
 /// \brief Automatic wrapper for locking and unlocking mutexes
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Lock : NonCopyable
+class SFML_SYSTEM_API Lock : NonCopyable
 {
 public :
 
@@ -51,7 +52,7 @@ public :
     /// \param mutex Mutex to lock
     ///
     ////////////////////////////////////////////////////////////
-    Lock(Mutex& mutex);
+    explicit Lock(Mutex& mutex);
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor
@@ -66,7 +67,7 @@ private :
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    Mutex& myMutex; ///< Mutex to lock / unlock
+    Mutex& m_mutex; ///< Mutex to lock / unlock
 };
 
 } // namespace sf

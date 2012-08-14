@@ -6,14 +6,17 @@
 #include <graphics/DrawInterface.h>
 namespace Graphics
 {
-	class AnimatedDraw : public DrawInterface
+	class AnimatedDraw : public virtual DrawInterface
 	{
 	public:
 		AnimatedDraw(bool paused = false, int drawPriority = 0) : DrawInterface(drawPriority), Paused(paused)
 		{
 		}
 
-		virtual void Update(const sf::Uint32 time, const float TimeScale = 1.0) {}
+		virtual void Update(const sf::Uint32 time, const float TimeScale = 1.0) 
+		{
+
+		}
 		virtual void Update(const float time, const float TimeScale = 1.0)
 		{
 			Update(static_cast<sf::Uint32>(time * 0.001), TimeScale);
@@ -26,6 +29,11 @@ namespace Graphics
 		{
 			return Paused;
 		}
+		virtual RawClonePtr RawClone() const override
+		{
+			return new AnimatedDraw(*this);
+		}
+
 	protected:
 		bool Paused;
 	private:

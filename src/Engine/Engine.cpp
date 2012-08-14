@@ -22,7 +22,7 @@ Engine::Engine(const std::string& configFile, sf::RenderWindow* window, const sf
 	Input.AddKeyPressedEvent(boost::bind(&Graphics::Screens::ScreenManager::HandleKeyPressed, &ScreenManager, _1, _2, _3));
 	Input.AddKeyReleasedEvent(boost::bind(&Graphics::Screens::ScreenManager::HandleKeyReleased, &ScreenManager, _1, _2, _3)); 
 	baseRocketInterface.SetRootDirectory(this->ContentManager.GetHTMLDirectory().c_str());
-	baseRocketRenderer.SetWindow(window);
+	baseRocketRenderer.target = window;
 	Rocket::Core::SetRenderInterface(&baseRocketRenderer);
 	Rocket::Core::SetFileInterface(&baseRocketInterface);
 	Rocket::Core::SetSystemInterface(&baseRocketSystem);
@@ -54,9 +54,9 @@ bool Engine::IsReady() const
 void Engine::HandleWindowEvents(sf::RenderWindow &GameWindow, bool& ContinueRunning)
 {
 	sf::Event event;
-	while(GameWindow.PollEvent(event))
+	while(GameWindow.pollEvent(event))
 	{
-		switch (event.Type)
+		switch (event.type)
 		{
 		case sf::Event::LostFocus:
 			{
@@ -75,22 +75,23 @@ void Engine::HandleWindowEvents(sf::RenderWindow &GameWindow, bool& ContinueRunn
 			break;
 		case sf::Event::KeyPressed:
 			{
-				Input.DispatchKeyPressedEvents(this->GetTime(), event.Key);
+				Input.DispatchKeyPressedEvents(this->GetTime(), event.key);
 			}
 			break;
 		case sf::Event::KeyReleased:
 			{
-				Input.DispatchKeyReleasedEvents(this->GetTime(), event.Key);
+				//std::cout << "Key Released in Engine\n";
+				Input.DispatchKeyReleasedEvents(this->GetTime(), event.key);
 			}
 			break;
 		case sf::Event::JoystickButtonPressed:
 			{
-				Input.DispatchJoystickKeyPressedEvents(this->GetTime(), event.JoystickButton);
+				Input.DispatchJoystickKeyPressedEvents(this->GetTime(), event.joystickButton);
 			}
 			break;
 		case sf::Event::JoystickButtonReleased:
 			{
-				Input.DispatchJoystickKeyReleasedEvents(this->GetTime(), event.JoystickButton);
+				Input.DispatchJoystickKeyReleasedEvents(this->GetTime(), event.joystickButton);
 			}
 			break;
 		case sf::Event::JoystickMoved:

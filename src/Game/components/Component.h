@@ -7,6 +7,10 @@
 
 namespace Game
 {
+	namespace Battle
+	{
+		class Mechanics;
+	}
 	class Entity;
 	namespace Components
 	{
@@ -18,6 +22,7 @@ namespace Game
 			Component(Entity* Owner, bool valid, const int id = ++ComponentIDCounter);
 			Component(Entity* Owner, const std::string& name, int type, bool valid = true, const int id = ++ComponentIDCounter);
 			Component(Entity* Owner, const std::string& name, const std::string& type, bool valid = true, const int id = ++ComponentIDCounter);
+			Component(const Component& comp);
 		//	Component(const Component& ref);
 			bool IsValid() const;
 			void SetValid(bool val);
@@ -35,8 +40,12 @@ namespace Game
 
 			bool operator==(const Component& cmp) const;
 			bool operator!=(const Component& cmp) const;
+			Component& operator=(const Component& cmp);
 		protected:
 			void SetOwner(Entity* owner);
+			void SetOwnerAndName(Entity* owner, const std::string& name);
+			friend class Entity;
+			friend class Battle::Mechanics;
 		private:
 			static boost::hash<std::string> StringHash;
 			static int ComponentIDCounter;// = 0;

@@ -2,6 +2,7 @@
 #ifndef _ABILITYMANAGER_H_
 #define _ABILITYMANAGER_H_
 #include <abilities/Ability.h>
+#include <abilities/AbilityLibrary.h>
 #include <components/Component.h>
 namespace Game
 {
@@ -41,6 +42,8 @@ namespace Game
 			
 			void DistributeXP(const int XP);
 			
+			
+
 			static void SetAbilityLibrary(AbilityLibrary* lib);
 		private:
 			boost::unordered_map<std::string, AbilityHolder> PermanentAbilities;

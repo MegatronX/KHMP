@@ -3,6 +3,7 @@
 #include <boost/python.hpp>
 namespace Game
 {
+	class Entity;
 	namespace Character
 	{
 		class BaseCharacter;
@@ -18,9 +19,11 @@ namespace Game
 		class UseComponentWrap : public Components::UseComponent
 		{
 		public:
-			UseComponentWrap(PyObject* self_);
-			UseComponentWrap(PyObject* self_, const std::string& name, bool hasUse, bool hasBattleUse);
+			UseComponentWrap(PyObject* self_, Entity* owner);
+			UseComponentWrap(PyObject* self_, Entity* owner, const std::string& name, bool hasUse = false, bool hasBattleUse = false);
+			UseComponentWrap(PyObject* self_, Entity* owner, bool HasUse = false, bool HasBattleUse = false);
 			UseComponentWrap(PyObject* self_, const Components::UseComponent& cmp);
+			//UseComponentWrap(const Components::UseComponentWrap& cmp);
 			bool Use(Actions::Action* action) override;
 			bool UseDefault(Actions::Action* action);
 			bool BattleUse(Actions::Action* action, Battle::BattleField* field) override;

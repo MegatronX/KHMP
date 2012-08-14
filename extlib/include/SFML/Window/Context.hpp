@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Window/Export.hpp>
 #include <SFML/Window/GlResource.hpp>
 #include <SFML/Window/ContextSettings.hpp>
 #include <SFML/System/NonCopyable.hpp>
@@ -45,7 +45,7 @@ namespace priv
 /// \brief Class holding a valid drawing context
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Context : GlResource, NonCopyable
+class SFML_WINDOW_API Context : GlResource, NonCopyable
 {
 public :
 
@@ -73,7 +73,7 @@ public :
     /// \return True on success, false on failure
     ///
     ////////////////////////////////////////////////////////////
-    bool SetActive(bool active);
+    bool setActive(bool active);
 
 public :
 
@@ -95,7 +95,7 @@ private :
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    priv::GlContext* myContext; ///< Internal OpenGL context
+    priv::GlContext* m_context; ///< Internal OpenGL context
 };
 
 } // namespace sf
@@ -125,7 +125,7 @@ private :
 ///
 /// Usage example:
 /// \code
-/// void ThreadFunction(void*)
+/// void threadFunction(void*)
 /// {
 ///    sf::Context context;
 ///    // from now on, you have a valid context

@@ -27,7 +27,11 @@ namespace Game
 			{
 
 			}
-			
+			UseComponent(Entity* owner, bool hasUse = false, bool hasBattleUse = false)
+				: Component(owner, owner != nullptr ? owner->GetName() + "UseComponent" : nullptr, "UseComponent"), ImplementsUse(hasUse), ImplementsBattleUse(hasBattleUse)
+			{
+
+			}
 			virtual bool Use(Actions::Action* action)
 			{
 				return false;

@@ -7,7 +7,7 @@
     <!--Used to specify the folder to drop into to find resources -->
     <add key="ResourcesBaseDirectory" value="..\..\..\Resources\"/>
     <!--Graphics Paths-->
-    <add key="MapSubDir" value="Maps\"/>
+    <add key="MapSubDir" value="TileMaps\"/>
     <add key="GraphicsSubDir" value="Graphics\"/>
     <add key="TitleScreenSubDir" value="Intro\"/>
     <add key="GUISubDir" value="GUI\"/>
@@ -45,7 +45,8 @@
     <add key="ShaderSubDir" value="Shaders\"/>
     <add key="BackColorsSubDir" value="BackColours\"/>
     <add key="HTMLDirectory" value="..\..\..\Resources\html\"/>
-    <!--Right now, you NEED to specify full path for the HTML Directory-->
+
+    <add key="SaveDirectory" value="..\..\..\Resources\Saves\"/>
     <add key="MinigameSubDir" value="Minigames\"/>
     <add key="DDRSubDir" value="DDR\"/>
     <add key="ParticleSubDir" value="Particles"/>
@@ -80,6 +81,7 @@
     <Player1>
       <keyboard>
         <add key="W" action="Up"/>
+        <add key="O" action="Up"/>
         <add key="S" action="Down"/>
         <add key="A" action="Left"/>
         <add key="D" action="Right"/>
@@ -89,7 +91,7 @@
         <add key="K" action="Aux2"/>
         <add key="Q" action="LeftAux"/>
         <add key="E" action="RightAux"/>
-        <add key="Enter" action="Start"/>
+        <add key="Return" action="Start"/>
         <add key="Space" action="Select" />
       </keyboard>
       <joystick>

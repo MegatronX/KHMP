@@ -55,7 +55,10 @@ namespace Game
 				}*/
 			}
 		}
-
+		unsigned int ItemDatabase::GetItemCount() const
+		{
+			return NameToItemMap.size();
+		}
 		void ItemDatabase::EmptyDatabase()
 		{
 			IDToItemMap.clear();

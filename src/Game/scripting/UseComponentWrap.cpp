@@ -9,12 +9,17 @@ namespace Game
 {
 	namespace Scripting
 	{
-		UseComponentWrap::UseComponentWrap(PyObject* self_) : self(self_)
+		UseComponentWrap::UseComponentWrap(PyObject* self_, Entity* owner) : self(self_), UseComponent(owner)
 		{
 
 		}
-		UseComponentWrap::UseComponentWrap(PyObject* self_, const std::string& name, bool hasUse, bool hasBattleUse) : self(self_), 
-			UseComponent(nullptr, name, hasUse, hasBattleUse)
+		UseComponentWrap::UseComponentWrap(PyObject* self_, Entity* owner, const std::string& name, bool hasUse, bool hasBattleUse) : self(self_), 
+			UseComponent(owner, name, hasUse, hasBattleUse)
+		{
+
+		}
+		UseComponentWrap::UseComponentWrap(PyObject* self_, Entity* owner, bool HasUse, bool HasBattleUse) 
+			: UseComponent(owner, HasUse, HasBattleUse), self(self_)
 		{
 
 		}
@@ -22,6 +27,10 @@ namespace Game
 		{
 
 		}
+		/*UseComponentWrap::UseComponentWrap(const Components::UseComponentWrap& cmp)
+		{
+
+		}*/
 		bool UseComponentWrap::Use(Actions::Action* action)
 		{
 			return call_method<bool>(self, "Use", ptr(action));//, boost::ref(Targets));

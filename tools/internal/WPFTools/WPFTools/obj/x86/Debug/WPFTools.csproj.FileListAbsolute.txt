@@ -297,3 +297,7 @@ C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\WPFTools.g.r
 C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\WPFTools.Properties.Resources.resources
 C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\ResGen.read.1.tlog
 C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\ResGen.write.1.tlog
+C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\ComponentControls\ItemComponents\WeaponComponent.baml
+C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\ComponentControls\ItemComponents\WeaponComponent.g.cs
+C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\ComponentControls\ActionComponents\ElementalWeightComponent.baml
+C:\Kingdom Hearts MP\tools\internal\WPFTools\WPFTools\obj\x86\Debug\ComponentControls\ActionComponents\ElementalWeightComponent.g.cs

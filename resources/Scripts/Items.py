@@ -8,7 +8,7 @@ from BattleModule import *
 import xml.etree.cElementTree as xml
 
 import copy
-class HealingComponent(UseComponent):
+'''class HealingComponent(UseComponent):
     def __init__(self, FieldHealMap, BattleHealMap = None):
         self.FieldHealMap = FieldHealMap
         self.BattleHealMap = BattleHealMap
@@ -24,13 +24,23 @@ class HealingComponent(UseComponent):
         print "BattleTest"
     def Clone(self):
         print "herp"
-        return copy.deepcopy(self)
+        return copy.deepcopy(self)'''
 
 def ItemFactory(ItemNode):
-    ItemName = ItemNode.attrib["name"]
-    CurrentItem = Entity(ItemName, EntityTypes.ItemEntity)
+    ItemName = "Bad Item"
+    if "name" in ItemNode.attrib:
+        ItemName = ItemNode.attrib["name"]
+    Val = 0
+    if "value" in ItemNode.attrib:
+        Val = int(ItemNode.attrib["value"])
+    Description = "Bad item"
+    DesNode = ItemNode.find("Description")
+    if DesNode != None and "value" in DesNode.attrib:
+        Description = DesNode.attrib["value"]
+
+    CurrentItem = Item(ItemName, Description, Val)
     #print ItemName
-    componentNode = ItemNode.find("Components")
+    '''componentNode = ItemNode.find("Components")
     if (componentNode != None):
         components = componentNode.getchildren()
         for component in components:
@@ -46,7 +56,7 @@ def ItemFactory(ItemNode):
                                 type = targetstat.attrib["type"]
                                 HealMap[targetstat.tag] = (amount, type)
                         HealComp = HealingComponent(HealMap, HealMap)
-                        CurrentItem.RegisterComponent(healingcomponent.tag, HealComp)
+                        CurrentItem.RegisterComponent(healingcomponent.tag, HealComp)'''
 
                 #HealComp = HealingComponent(None)
                 #CurrentItem.RegisterComponent("Healing Component", HealComp)
@@ -59,6 +69,7 @@ if (itemList != None):
     for item in itemList:
         targitem = ItemFactory(item)
         ItemModule.ItemLibrary.AddItem(targitem)
+    print " Added " + str(ItemModule.ItemLibrary.GetItemCount()) + " items"
         #ItemModule.ItemLibrary.AddItem(targitem)
 
 

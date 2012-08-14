@@ -3,6 +3,7 @@
 #define _SCREENMODULE_H_
 #include <Scripting/Python/ScriptHelpers.h>
 #include <Graphics/Screens/Screen.h>
+#include <Graphics/Screens/ScreenStack.h>
 using namespace ::Graphics::Screens;
 class Engine;
 namespace Scripting
@@ -67,8 +68,29 @@ namespace Scripting
 	{
 		class_<ScreenManager, boost::noncopyable>("ScreenManager", no_init)
 			.def("AddScreen", &ScreenManager::AddScreen)
+			.def("AddScreenStack", &ScreenManager::AddScreenStack, (boost::python::arg("DrawIndex") = 0, boost::python::arg("registerIndividualScreens") = true))
+			.def("AddScreenToStack", &ScreenManager::AddScreenToStack)
+			.def("GetScreenStack", &ScreenManager::GetScreenStack, return_value_policy<reference_existing_object>())
+			.def("RemoveStack", &ScreenManager::RemoveStack)
+			//.def("", &ScreenManager:)
+			//.def("", &ScreenManager:)
 			;
-		class_<Screen, boost::shared_ptr<ScreenWrap> >("Screen", init<const std::string&, ::Engine*, int>())
+		class_<ScreenStack, bases<::Input::InputModule, AnimatedDraw> >("ScreenStack", init<>())
+			.def(init<const std::string&, const int>())
+			.def(init<const std::string&, const int, bool, bool, boost::python::optional<bool, bool>>())
+			.def("AddScreen", &ScreenStack::AddScreen)
+			.def("GetDeletable", &ScreenStack::GetDeletable)
+			//.def("GetOwnedScreen", &ScreenStack::GetOwnedScreens)
+			.def("GetScreenName", &ScreenStack::GetScreenName, return_value_policy<reference_existing_object>())
+			.def("RemoveScreen", &ScreenStack::RemoveScreen)
+			.def("GetUID", &ScreenStack::GetUID)
+			.def("SetDeletable", &ScreenStack::SetDeletable)
+			.def("__eq__", &ScreenStack::operator==)
+			.def("__neq__", &ScreenStack::operator!=)
+			//.def("", &ScreenStack:)
+			//.def("", &ScreenStack:)
+			;
+		class_<Screen, boost::shared_ptr<ScreenWrap>, bases<::Input::InputModule, AnimatedDraw> >("Screen", init<const std::string&, ::Engine*, int>())
 			.def("AddOwner", &Screens::Screen::AddOwner)
 			.def("Draw", (void (Screens::Screen::*)(sf::RenderWindow&))&Screen::Draw, (void (Screens::Screen::*)(sf::RenderWindow&))&ScreenWrap::DrawDefault)
 			.def("Draw", (void (Screens::Screen::*)(sf::RenderWindow&, sf::Shader&))&Screen::Draw, (void (Screens::Screen::*)(sf::RenderWindow&, sf::Shader&))&ScreenWrap::DrawDefault)
@@ -78,6 +100,7 @@ namespace Scripting
 			.def("HandleKeyReleased", &Screens::Screen::HandleKeyReleased, &ScreenWrap::HandleKeyReleasedDefault)
 			.def("HasOwner", &Screens::Screen::HasOwner)
 			.def("IsAcceptingInputs", &Screens::Screen::IsAcceptingInputs)
+			.def("SetAcceptingInputs", &Screens::Screen::SetAcceptingInputs)
 			.def("SetScreenName", &Screens::Screen::SetScreenName)
 			.def("Update", (void (Screens::Screen::*)(const sf::Uint32, float))&Screens::Screen::Update, &ScreenWrap::UpdateDefault, boost::python::arg("TimeScale") = 1.f)
 			;

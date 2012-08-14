@@ -45,7 +45,7 @@
     <add key="ShaderSubDir" value="Shaders\"/>
     <add key="BackColorsSubDir" value="BackColours\"/>
     <add key="HTMLDirectory" value="..\..\..\Resources\html\"/>
-    <!--Right now, you NEED to specify full path for the HTML Directory-->
+    <add key="SaveDirectory" value="..\..\..\Resources\saves\"/>
     <add key="MinigameSubDir" value="Minigames\"/>
     <add key="DDRSubDir" value="DDR\"/>
     <add key="ParticleSubDir" value="Particles"/>

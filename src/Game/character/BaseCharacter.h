@@ -6,6 +6,7 @@
 #include <boost/unordered_map.hpp>
 #include <character/Stats.h>
 #include <character/StatsManager.h>
+#include <character/Party.h>
 #include <components/StatsComponent.h>
 #include <components/ElementEffectivenessComponent.h>
 #include <components/StatusEffectivenessComponent.h>
@@ -23,24 +24,26 @@ namespace Game
 	};
 	namespace Character
 	{
-		class Party;
+
 		class BaseCharacter : public Entity, boost::signals2::trackable
 		{
 		public:
 			BaseCharacter();
 			BaseCharacter(const std::string& characterName);
 			BaseCharacter(const std::string& characterName, int baseStats[Character::StatCount]);
-			virtual Components::Component* GetComponent(const std::string& index);// const;
+			BaseCharacter(const std::string& characterName, std::vector<int>& baseStats);
+			virtual Components::Component* GetComponent(const std::string& index) override;// const;
 			virtual RawClonePtr RawClone () const;
 			
-			Party* GetParty() const;
+			PartyInterface<BaseCharacter>* GetParty() const;
+			void SetParty(PartyInterface<BaseCharacter>* party);
 
 			StatusEffects::StatusEffectsManager& GetStatusEffectsManager();
 			Abilities::AbilityManager& GetAbilityManager();
 
 			StatsManager& GetStatsManager();
 		private:
-			Party* AttachedParty;
+			PartyInterface<BaseCharacter>* AttachedParty;
 
 			StatusEffects::StatusEffectsManager SEManager;
 			Abilities::AbilityManager AbilManager;
@@ -50,6 +53,11 @@ namespace Game
 			Components::StatusEffectivenessComponent StatusEffectsComponent;
 			Components::ElementEffectivenessComponent ElementEffectsComponent;
 		};
+
+
+		typedef PartyInterface<BaseCharacter> BaseParty;
+		typedef boost::shared_ptr<BaseParty> bparty_ptr;
+
 	}
 }
 

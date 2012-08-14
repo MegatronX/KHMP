@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Graphics/Export.hpp>
 
 
 namespace sf
@@ -37,7 +37,7 @@ namespace sf
 /// \brief Utility class for manpulating RGBA colors
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Color
+class SFML_GRAPHICS_API Color
 {
 public :
 
@@ -95,7 +95,7 @@ public :
 /// \return True if colors are equal, false if they are different
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator ==(const Color& left, const Color& right);
+SFML_GRAPHICS_API bool operator ==(const Color& left, const Color& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Color
@@ -109,7 +109,7 @@ SFML_API bool operator ==(const Color& left, const Color& right);
 /// \return True if colors are different, false if they are equal
 ///
 ////////////////////////////////////////////////////////////
-SFML_API bool operator !=(const Color& left, const Color& right);
+SFML_GRAPHICS_API bool operator !=(const Color& left, const Color& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Color
@@ -124,7 +124,7 @@ SFML_API bool operator !=(const Color& left, const Color& right);
 /// \return Result of \a left + \a right
 ///
 ////////////////////////////////////////////////////////////
-SFML_API Color operator +(const Color& left, const Color& right);
+SFML_GRAPHICS_API Color operator +(const Color& left, const Color& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Color
@@ -141,7 +141,7 @@ SFML_API Color operator +(const Color& left, const Color& right);
 /// \return Result of \a left * \a right
 ///
 ////////////////////////////////////////////////////////////
-SFML_API Color operator *(const Color& left, const Color& right);
+SFML_GRAPHICS_API Color operator *(const Color& left, const Color& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Color
@@ -157,7 +157,7 @@ SFML_API Color operator *(const Color& left, const Color& right);
 /// \return Reference to \a left
 ///
 ////////////////////////////////////////////////////////////
-SFML_API Color& operator +=(Color& left, const Color& right);
+SFML_GRAPHICS_API Color& operator +=(Color& left, const Color& right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Color
@@ -175,7 +175,7 @@ SFML_API Color& operator +=(Color& left, const Color& right);
 /// \return Reference to \a left
 ///
 ////////////////////////////////////////////////////////////
-SFML_API Color& operator *=(Color& left, const Color& right);
+SFML_GRAPHICS_API Color& operator *=(Color& left, const Color& right);
 
 } // namespace sf
 
@@ -199,8 +199,8 @@ SFML_API Color& operator *=(Color& left, const Color& right);
 ///
 /// \code
 /// sf::Color color(255, 0, 0); // red
-/// color.red = 0;              // make it black
-/// color.blue = 128;           // make it dark blue
+/// color.r = 0;                // make it black
+/// color.b = 128;              // make it dark blue
 /// \endcode
 ///
 /// The fourth component of colors, named "alpha", represents

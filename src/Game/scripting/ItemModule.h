@@ -17,9 +17,52 @@ namespace Game
 			//item.RegisterComponent(compName, comp.get());
 		//	comp.release();
 		}*/
+
+		class ItemWrap : public Items::Item
+		{
+		public:
+			ItemWrap(PyObject* self) : self(self)
+			{
+
+			}
+
+			ItemWrap(PyObject* self, const Items::Item& ref) : self(self), Items::Item(ref)
+			{
+
+			}
+
+			ItemWrap(PyObject* self, const std::string& name) : self(self), Item(name)
+			{
+
+			}
+
+			ItemWrap(PyObject* self, const std::string& itemName, const std::string& description, const unsigned int itemValue) : self(self), Item(itemName, description, itemValue)
+			{
+
+			}
+			ClonePtr Clone() const override
+			{
+				return call_method<ClonePtr>(self, "Clone");
+			}
+			ClonePtr CloneDefault() const
+			{
+				return this->Items::Item::Clone();
+			}
+			PyObject* self;
+		private:
+		};
+
 		BOOST_PYTHON_MODULE(ItemModule)
 		{
-			
+			using namespace Items;
+			class_<Item, boost::shared_ptr<ItemWrap>, bases<Entity> >("Item", init<>())
+				.def(init<const Items::Item&>())
+				.def(init<const std::string&>())
+				.def(init<const std::string&, const std::string&, const unsigned int>())
+				.def("GetValue", &Item::GetValue)
+				.def("GetDescription", &Item::GetDescription, return_value_policy<reference_existing_object>())
+				.def("Clone", &Item::Clone, &ItemWrap::CloneDefault)
+				;
 			/*class_<Items::Item, bases<Entity> >("Item")
 				.def(init<Items::Item&>())
 				.def(init<const std::string&>())
@@ -34,6 +77,10 @@ namespace Game
 
 			class_<Items::ItemDatabase>("ItemDatabase", no_init)
 				.def("AddItem", &Items::ItemDatabase::AddItem)
+				.def("GetItemCount", &Items::ItemDatabase::GetItemCount)
+				//.def("EmptyDatabase", &Items::ItemDatabase::EmptyDatabase)
+				//.def("GetItemByName", &Item::ItemDatabase::GetItemByName, return_value_policy<reference_existing_object>)
+				//.def("GetItemByID", &Item::ItemDatabase::GetItemByID, return_value_policy<reference_existing_object>)
 				//.def("GetItem", &Items::ItemDatabase::GetItem)
 				;
 		}

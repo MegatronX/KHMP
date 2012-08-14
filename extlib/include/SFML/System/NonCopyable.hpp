@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/System/Export.hpp>
 
 
 namespace sf
@@ -38,7 +38,7 @@ namespace sf
 ///        class non-copyable
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API NonCopyable
+class SFML_SYSTEM_API NonCopyable
 {
 protected :
 
@@ -99,7 +99,7 @@ private :
 /// the copy constructor and assignment operator are declared private
 /// in sf::NonCopyable so they will end up being inaccessible in both
 /// cases. Thus you can use a shorter syntax for inheriting from it
-/// see below).
+/// (see below).
 ///
 /// Usage example:
 /// \code

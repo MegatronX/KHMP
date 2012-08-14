@@ -39,7 +39,7 @@ StopWatch::StopWatch(bool initiallyRunning)
 sf::Uint32 StopWatch::GetElapsedTime() const
 {
 	if (mRunning)
-		return mTimeBuffer + mClock.GetElapsedTime();
+		return mTimeBuffer + mClock.getElapsedTime().asMilliseconds();//GetElapsedTime();
 	else
 		return mTimeBuffer;
 }
@@ -61,7 +61,7 @@ void StopWatch::Start()
 	if (!mRunning)
 	{
 		mRunning = true;
-		mClock.Reset();
+		mClock.restart();
 	}		
 }
 
@@ -70,7 +70,7 @@ void StopWatch::Stop()
 	if (mRunning)
 	{
 		mRunning = false;
-		mTimeBuffer += mClock.GetElapsedTime();
+		mTimeBuffer += mClock.getElapsedTime().asMilliseconds();
 	}
 }
 
@@ -78,7 +78,7 @@ void StopWatch::Reset(bool continueRunning)
 {
 	mTimeBuffer = 0u;
 	mRunning = continueRunning;
-	mClock.Reset();
+	mClock.restart();//reset();
 }
 
 //} // namespace thor

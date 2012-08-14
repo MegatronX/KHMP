@@ -514,7 +514,7 @@ namespace Input
 
 		}
 		return set != nullptr &&
-			(sf::Keyboard::IsKeyPressed((*set)[action]) || sf::Joystick::IsButtonPressed((*set).GetJoystickID(), (*set).GetJoystickMapping(action)));
+			(sf::Keyboard::isKeyPressed((*set)[action]) || sf::Joystick::isButtonPressed((*set).GetJoystickID(), (*set).GetJoystickMapping(action)));
 	}
 
 
@@ -525,11 +525,11 @@ namespace Input
 	}
 	void InputModule::DispatchKeyPressedEvents(const sf::Uint32 time, sf::Event::KeyEvent& keyEvent, bool DispatchInvalidActions)
 	{
-		auto action = Player1InputMap[keyEvent.Code];
+		auto action = Player1InputMap[keyEvent.code];
 		if (DispatchInvalidActions || action != InputAction::InvalidAction)
 			KeyPressedSignal(time, this, InputActionResult(false, P1Input, action));
 #if MaxPlayerCount > 1
-		action = Player2InputMap[keyEvent.Code];
+		action = Player2InputMap[keyEvent.code];
 		if (DispatchInvalidActions || action != InputAction::InvalidAction)
 			KeyPressedSignal(time, this, InputActionResult(false, P2Input, action));
 #endif
@@ -541,11 +541,11 @@ namespace Input
 	}
 	void InputModule::DispatchJoystickKeyPressedEvents(const sf::Uint32 time, sf::Event::JoystickButtonEvent& joyEvent, bool DispatchInvalidActions)
 	{
-		switch(joyEvent.JoystickId)
+		switch(joyEvent.joystickId)
 		{
 		case 0:
 			{
-				auto action = Player1InputMap[joyEvent.Button];
+				auto action = Player1InputMap[joyEvent.button];
 				if (action == InputAction::InvalidAction && !DispatchInvalidActions)
 					return;
 				KeyPressedSignal(time, this, InputActionResult(false, P1Input, action));
@@ -554,7 +554,7 @@ namespace Input
 #if MaxPlayerCount > 1
 		case 1:
 			{
-				auto action = Player1InputMap[joyEvent.Button];
+				auto action = Player1InputMap[joyEvent.button];
 				if (action == InputAction::InvalidAction && !DispatchInvalidActions)
 					return;
 				KeyPressedSignal(time, this, InputActionResult(false, P2Input, action));
@@ -575,11 +575,11 @@ namespace Input
 	}
 	void InputModule::DispatchKeyReleasedEvents(const sf::Uint32 time, sf::Event::KeyEvent& keyEvent, bool DispatchInvalidActions)
 	{
-		auto action = Player1InputMap[keyEvent.Code];
+		auto action = Player1InputMap[keyEvent.code];
 		if (DispatchInvalidActions || action != InputAction::InvalidAction)
 			KeyReleasedSignal(time, this, InputActionResult(false, P1Input, action));
 #if MaxPlayerCount > 1
-		action = Player2InputMap[keyEvent.Code];
+		action = Player2InputMap[keyEvent.code];
 		if (DispatchInvalidActions || action != InputAction::InvalidAction)
 			KeyReleasedSignal(time, this, InputActionResult(false, P2Input, action));
 #endif
@@ -592,11 +592,11 @@ namespace Input
 	}
 	void InputModule::DispatchJoystickKeyReleasedEvents(const sf::Uint32 time, sf::Event::JoystickButtonEvent& joyEvent, bool DispatchInvalidActions)
 	{
-		switch(joyEvent.JoystickId)
+		switch(joyEvent.joystickId)
 		{
 		case 0:
 			{
-				auto action = Player1InputMap[joyEvent.Button];
+				auto action = Player1InputMap[joyEvent.button];
 				if (action == InputAction::InvalidAction && !DispatchInvalidActions)
 					return;
 				KeyReleasedSignal(time, this, InputActionResult(false, P1Input, action));
@@ -606,7 +606,7 @@ namespace Input
 #if MaxPlayerCount > 1
 		case 1:
 			{
-				auto action = Player1InputMap[joyEvent.Button];
+				auto action = Player1InputMap[joyEvent.button];
 				if (action == InputAction::InvalidAction && !DispatchInvalidActions)
 					return;
 				KeyReleasedSignal(time, this, InputActionResult(false, P2Input, action));
@@ -661,12 +661,12 @@ namespace Input
 			
 		}
 		return set != nullptr &&
-			(sf::Keyboard::IsKeyPressed((*set)[action]) || sf::Joystick::IsButtonPressed((*set).GetJoystickID(), (*set).GetJoystickMapping(action)));
+			(sf::Keyboard::isKeyPressed((*set)[action]) || sf::Joystick::isButtonPressed((*set).GetJoystickID(), (*set).GetJoystickMapping(action)));
 //return keyboard->IsKeyPressed(Player1InputMap[action]) || joystick->IsButtonPressed(Player1InputMap.GetJoystickID(), joystick->)
 	}
 	bool InputModule::operator[] (const sf::Keyboard::Key key)
 	{
-		return sf::Keyboard::IsKeyPressed(key);
+		return sf::Keyboard::isKeyPressed(key);
 	}
 	bool InputModule::operator[] (unsigned int joystickKey)
 	{

@@ -2,7 +2,9 @@
 #ifndef _STATUSEFFECTSMODULE_H_
 #define _STATUSEFFECTSMODULE_H_
 #include <boost/python.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <statuseffects/StatusEffect.h>
+#include <statuseffects/StatusEffectsManager.h>
 #include <scripting/Python/ScriptHelpers.h>
 #include <components/ApplyEffectComponent.h>
 using namespace boost::python;
@@ -73,14 +75,65 @@ namespace Game
 
 		BOOST_PYTHON_MODULE(StatusEffectsModule)
 		{
-			class_<StatusEffects::StatusEffect, bases<Entity> >("StatusEffect", init<Character::BaseCharacter*, const std::string&, boost::python::optional<bool, const int, const int> >())
+			boost::python::scope().attr("DEFAULT_TURNS") = DEFAULT_TURNS;
+			boost::python::scope().attr("ApplyEffectIndex") = StatusEffects::ApplyEffectIndexer;
+			enum_<CallCondition>("CallCondition")
+				.value("Apply", CallCondition::Apply)
+				.value("ApplyingDamage", CallCondition::ApplyingDamage)
+				.value("DamageDealt", CallCondition::DamageDealt)
+				.value("DamageTaken", CallCondition::DamageTaken)
+				.value("DeterminingCrit", CallCondition::DeterminingCrit)
+				.value("DeterminingHit", CallCondition::DeterminingHit)
+				.value("FinalizingTargets", CallCondition::FinalizingTargets)
+				.value("IncomingAttack", CallCondition::IncomingAttack)
+				.value("MPInspection", CallCondition::MPInspection)
+				.value("OutgoingAttack", CallCondition::OutgoingAttack)
+				.value("PartyMemberIncomingAttack", CallCondition::PartyMemberIncomingAttack)
+				.value("PreUse", CallCondition::PreUse)
+				.value("SPInspection", CallCondition::SPInspection)
+				.value("Tick", CallCondition::Tick)
+				//.value("", CallCondition:)
+				//.value("", CallCondition:)
+				;
+
+			class_<std::vector<CallCondition> >("CallConditionSet")
+				.def(vector_indexing_suite<std::vector<CallCondition> >())
+				;
+
+			class_<StatusEffects::StatusEffect, bases<Entity> >("StatusEffect", init<Character::BaseCharacter*, const std::string&, boost::python::optional<bool, const int, const int, const std::vector<CallCondition>& > >())
+				.def(init<Character::BaseCharacter*, const std::string&, const std::string&, boost::python::optional<bool, const int, const int, const std::vector<CallCondition>& > >())
 				.def(init<const StatusEffects::StatusEffect&>())
 				.def("SetHolder", &StatusEffects::StatusEffect::SetHolder)
-				.def("Clone", &StatusEffects::StatusEffect::Clone, &StatusEffectWrap::CloneDefault)
+				.def("GetHolder", &StatusEffects::StatusEffect::GetHolder, return_value_policy<reference_existing_object>())
+				.def("Clone", &StatusEffectWrap::CloneDefault)
 				.def("__eq__", &StatusEffects::StatusEffect::operator==)
 				.def("__neq__", &StatusEffects::StatusEffect::operator!=)
-				.def("__copy__", &generic__copy__<StatusEffectWrap>)
-				.def("__deepcopy__", &generic__deepcopy__<StatusEffectWrap>)
+				.def("__copy__", &generic__copy__<StatusEffects::StatusEffect>)
+				.def("__deepcopy__", &generic__deepcopy__<StatusEffects::StatusEffect>)
+				;
+
+			class_<StatusEffects::StatusEffectsManager, noncopyable>("StatusEffectManager", no_init)
+				.def("AddStatusEffect", (void (StatusEffects::StatusEffectsManager::*)(StatusEffects::StatusEffect*, const int))&StatusEffects::StatusEffectsManager::AddStatusEffect)
+				.def("AddStatusEffect", (void (StatusEffects::StatusEffectsManager::*)(StatusEffects::se_ptr, int))&StatusEffects::StatusEffectsManager::AddStatusEffect)
+				.def("AddStatusEffect", (void (StatusEffects::StatusEffectsManager::*)(const std::string&, int))&StatusEffects::StatusEffectsManager::AddStatusEffect)
+				.def("GetBaseResistance", &StatusEffects::StatusEffectsManager::GetBaseResistance)
+				.def("GetNegativeStatusEffects", &StatusEffects::StatusEffectsManager::GetNegativeStatusEffects, boost::python::arg("SortyByPriority") = false)
+				.def("GetPositiveStatusEffects", &StatusEffects::StatusEffectsManager::GetPositiveStatusEffects, boost::python::arg("SortyByPriority") = false)
+				.def("GetStatusEffectsWithCallCondition", &StatusEffects::StatusEffectsManager::GetStatusEffectsWithCallCondition, return_value_policy<reference_existing_object>())
+				.def("GetStatusResistance", (float (StatusEffects::StatusEffectsManager::*)(const StatusEffects::StatusEffect*) const)&StatusEffects::StatusEffectsManager::GetStatusResistance)
+				.def("GetStatusResistance", (float (StatusEffects::StatusEffectsManager::*)(StatusEffects::se_ptr) const)&StatusEffects::StatusEffectsManager::GetStatusResistance)
+				.def("GetStatusResistance", (float (StatusEffects::StatusEffectsManager::*)(const std::string&) const)&StatusEffects::StatusEffectsManager::GetStatusResistance)
+				.def("IncrementStatusResistance", (void (StatusEffects::StatusEffectsManager::*)(const StatusEffects::StatusEffect*, const float))&StatusEffects::StatusEffectsManager::IncrementStatusResistance)
+				.def("IncrementStatusResistance", (void (StatusEffects::StatusEffectsManager::*)(StatusEffects::se_ptr, const float))&StatusEffects::StatusEffectsManager::IncrementStatusResistance)
+				.def("IncrementStatusResistance", (void (StatusEffects::StatusEffectsManager::*)(const std::string&, const float))&StatusEffects::StatusEffectsManager::IncrementStatusResistance)
+				.def("IncrementBaseResistance", &StatusEffects::StatusEffectsManager::IncrementBaseResistance)
+				.def("RemoveNegativeStatusEffects", &StatusEffects::StatusEffectsManager::RemoveNegativeStatusEffects, boost::python::arg("AtRandom") = false)
+				.def("RemovePositiveStatusEffects", &StatusEffects::StatusEffectsManager::RemovePositiveStatusEffects, boost::python::arg("AtRandom") = false)
+				.def("RemoveStatusEffect", &StatusEffects::StatusEffectsManager::RemoveStatusEffect)
+				.def("RemoveStatusEffects", &StatusEffects::StatusEffectsManager::RemoveStatusEffects, boost::python::arg("AtRandom") = false)
+				.def("SetBaseResistance", &StatusEffects::StatusEffectsManager::SetBaseResistance)
+				//.def("", &StatusEffects::StatusEffectsManager::)
+				//.def("", &StatusEffects::StatusEffectsManager:)
 				;
 
 			class_<StatusEffects::StatusEffectsLibrary, noncopyable>("StatusEffectsLibrary", no_init)
@@ -90,11 +143,11 @@ namespace Game
 
 			class_<Components::ApplyEffectComponent, boost::shared_ptr<ApplyEffectWrap>, bases<Components::Component> >("ApplyEffectComponent", init<Entity*>())
 				.def(init<const Components::ApplyEffectComponent&>())
-				.def("Apply", &Components::ApplyEffectComponent::Apply, &ApplyEffectWrap::ApplyDefault)
-				.def("UnApply", &Components::ApplyEffectComponent::UnApply, &ApplyEffectWrap::UnApplyDefault)
-				.def("Clone", &ApplyEffectWrap::Clone)//, &ApplyEffectWrap::CloneDefault)
-				.def("__copy__", &generic__copy__<ApplyEffectWrap>)
-				.def("__deepcopy__", &generic__deepcopy__<ApplyEffectWrap>)
+				.def("Apply", &ApplyEffectWrap::ApplyDefault)
+				.def("UnApply", &ApplyEffectWrap::UnApplyDefault)
+				.def("Clone", &ApplyEffectWrap::CloneDefault)
+				.def("__copy__", &generic__copy__<Components::ApplyEffectComponent>)
+				.def("__deepcopy__", &generic__deepcopy__<Components::ApplyEffectComponent>)
 				;
 		}
 	}

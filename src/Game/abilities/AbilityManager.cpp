@@ -4,8 +4,11 @@ namespace Game
 {
 	namespace Abilities
 	{
-		boost::unordered_map<std::string, boost::unordered_map<std::string, int> > Ability::APCostOverrides; // = boost::unordered_map<std::string, boost::unordered_map<std::string, int> >();
-		boost::unordered_map<std::string, boost::unordered_map<std::string, int> > Ability::RequiredXPOverrides;
+//		boost::unordered_map<std::string, boost::unordered_map<std::string, int> > Ability::APCostOverrides; // = boost::unordered_map<std::string, boost::unordered_map<std::string, int> >();
+	//	boost::unordered_map<std::string, boost::unordered_map<std::string, int> > Ability::RequiredXPOverrides;
+
+		AbilityLibrary* AbilityManager::abilLib;
+
 		std::vector<Ability*> EmptyAbilSet;
 		AbilityManager::AbilityManager()
 		{
@@ -45,7 +48,7 @@ namespace Game
 				auto abil = abilLib->GetAbility(AbilityName);
 				if (abil != nullptr)
 				{
-					return AddAbility(abil->Clone(), instances);
+					return AddAbility(boost::dynamic_pointer_cast<Ability>(abil->Clone()), instances);
 				}
 	#ifdef DEBUG
 				else
@@ -64,9 +67,9 @@ namespace Game
 		}
 		bool AbilityManager::AddAbility(const Ability* ability, int instances)
 		{
-			if (ability != null)
+			if (ability != nullptr)
 			{
-				return AddAbility(ability->Clone(), instances);
+				return AddAbility(boost::dynamic_pointer_cast<Ability>(ability->Clone()), instances);
 			}
 			return false;
 		}
@@ -80,10 +83,12 @@ namespace Game
 			
 		bool AbilityManager::RemoveAbility(const std::string, int instances)
 		{
-			
+			bool removed = false;
+
+			return removed;
 		}
 		
-		void SetAbilityLibrary(AbilityLibrary* lib)
+		void AbilityManager::SetAbilityLibrary(AbilityLibrary* lib)
 		{
 			abilLib = lib;
 		}

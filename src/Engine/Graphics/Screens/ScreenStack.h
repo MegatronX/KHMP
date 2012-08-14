@@ -10,7 +10,8 @@ namespace Graphics
 {
 	namespace Screens
 	{
-		class ScreenStack : public Input::InputInterface, public AnimatedDraw
+		class ScreenManager;
+		class ScreenStack : public ::Input::InputInterface, public AnimatedDraw
 		{
 		public:
 			ScreenStack();
@@ -35,10 +36,10 @@ namespace Graphics
 			bool GetDeletable() const;
 			void SetDeletable(const bool deletable);
 			
-			void AddScreen(screen_ptr& screen);
+			void AddScreen(screen_ptr screen, int drawPriority);
 			bool RemoveScreen(const std::string& screenName);
 
-			const std::vector<screen_ptr>& GetOwnedScreens() const;
+			const std::map<int, std::vector<screen_ptr> >& GetOwnedScreens() const;
 
 			//Input Interface
 			virtual bool HandleKeyPressed(const sf::Uint32 time, const ::Input::InputModule* inputModule, ::Input::InputActionResult& action) override;
@@ -55,8 +56,8 @@ namespace Graphics
 		protected:
 			void SetScreenName(const std::string& screenName);
 		private:
+			friend class ScreenManager;
 			std::string ScreenName;
-			int DrawPriority;
 			int UID;
 
 			bool Valid;
@@ -65,7 +66,7 @@ namespace Graphics
 			bool SendInputs;
 			bool DeleteStack;
 
-			std::vector<screen_ptr> OwnedScreens;
+			std::map<int, std::vector<screen_ptr> > OwnedScreens;
 		};
 	}
 }

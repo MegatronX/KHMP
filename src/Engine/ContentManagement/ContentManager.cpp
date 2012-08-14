@@ -1,18 +1,19 @@
 #include "ContentManager.h"
 #include <contentmanagement/ResourceLoadImport.h>
 #include <boost/bind.hpp>
+#include <boost/algorithm/string.hpp>
 namespace Content
 {
 
 	ContentManager::ContentManager(sf::Uint32 StartTime, sf::Uint32 ResolutionTime, sf::Uint32 ImageLifeTime, sf::Uint32 FontLifeTime, sf::Uint32 AudioLifeTime) 
-		: RunningTime(StartTime), PrimaryFontCache(200, FontLifeTime, 5), UpdaterThread(boost::bind(&ContentManager::ThreadUpdater, this)) //: PrimaryImageCache(200, ImageLifeTime, 5)
+		: RunningTime(StartTime), PrimaryFontCache(200, FontLifeTime, 5), UpdateRate(sf::milliseconds(ResolutionTime)), UpdaterThread(boost::bind(&ContentManager::ThreadUpdater, this)) //: PrimaryImageCache(200, ImageLifeTime, 5)
 	{
-		UpdaterThread.Launch();
+		UpdaterThread.launch();
 		//boost::shared_ptr<sf::Image> unknown = boost::shared_ptr<sf::Image>(new sf::Image);
 		//unknown->LoadFromFile("Unknown.png");
 
 		boost::shared_ptr<sf::Texture> unknowntex = boost::shared_ptr<sf::Texture>(new sf::Texture);
-		unknowntex->LoadFromFile("Unknown.png");
+		unknowntex->loadFromFile("Unknown.png");
 		//boost::shared_ptr<sf::Music> music = boost::shared_ptr<sf::Music>(new sf::Music);
 		//music->OpenFromFile(std::string("FleetingDream.ogg"));
 		//boost::shared_ptr<sf::Sound> sound = boost::shared_ptr<sf::Sound>(new sf::Sound);
@@ -33,9 +34,9 @@ namespace Content
 	}*/
 	boost::shared_ptr<sf::Texture> ContentManager::RequestTexture(const std::string &name, Cache::GameStyle style, Cache::World world, Cache::ResourceClass rClass, sf::Uint32 time, std::string extension)
 	{
-		UpdateLock.Lock();
+		UpdateLock.lock();
 		return PrimaryTextureCache.RequestResource(name, style, world, rClass, time, -1, true, extension);
-		UpdateLock.Unlock();
+		UpdateLock.unlock();
 	}
 	/*boost::shared_ptr<sf::Image> ContentManager::RequestImageDirectly(std::string &filename)
 	{
@@ -52,16 +53,16 @@ namespace Content
 		if (boost::filesystem::exists(filename))
 		{
 			auto retImage = Cache::TextureCache::res_ptr(new sf::Texture);
-			if (retImage->LoadFromFile(filename))
+			if (retImage->loadFromFile(filename))
 				return retImage;
 		}
 		return PrimaryTextureCache.GetFallBack();
 	}
 	boost::shared_ptr<sf::Font> ContentManager::RequestFont(const std::string &fontFile, sf::Uint32 time, const std::string extension)
 	{
-		UpdateLock.Lock();
+		UpdateLock.lock();
 		return PrimaryFontCache.RequestResource(fontFile, time, extension);
-		UpdateLock.Unlock();
+		UpdateLock.unlock();
 	
 	}
 /*	Graphics::animsprite_ptr ContentManager::RequestSprite(const std::string &name, const Cache::GameStyle style, const Cache::World world, const Cache::ResourceClass rClass, const sf::Uint32 time, const bool Start, const std::string extension)
@@ -125,17 +126,47 @@ namespace Content
 	{
 		return boost::filesystem::exists(filepath);
 	}
+
+	void ContentManager::LoadSpriteDescriptors(const std::string& file)
+	{
+		using namespace std;
+		using namespace pugi;
+		xml_document doc;
+		xml_parse_result result = doc.load_file(file.c_str());
+		if (!result)
+			std::cerr << "Descriptions Failed To Load. Error: " << result.description();
+		else
+		{
+			xml_node root = doc.child("Resources");
+			xml_node sprroot = root.child("Sprites");
+			for (auto sprNode = sprroot.child("Sprite"); sprroot; sprroot = sprroot.next_sibling("Sprite"))
+			{
+				xml_node rows = sprNode.child("Rows");
+				for (auto row = rows.child("Row"); row; row = row.next_sibling("Row"))
+				{
+					int frameCount = row.attribute("framecount").as_int();
+					std::string index(row.attribute("index").value());
+					for (auto frame = row.child("Frame"); frame; frame = frame.next_sibling("Frame"))
+					{
+
+					}
+				}
+			}
+		}
+	}
+
+
 	ContentManager::~ContentManager()
 	{
-		UpdaterThread.Terminate();
+		UpdaterThread.terminate();
 	}
 	void ContentManager::ThreadUpdater()
 	{
-		RunningTime += UpdateRate;
-		UpdateLock.Lock();
+		RunningTime += UpdateRate.asMilliseconds();
+		UpdateLock.lock();
 		UpdateCaches(RunningTime);
-		UpdateLock.Unlock();
-		sf::Sleep(UpdateRate);
+		UpdateLock.unlock();
+		sf::sleep(UpdateRate);
 	}
 	void ContentManager::Initialize(Configuration::AppConfiguration &configuration)
 	{

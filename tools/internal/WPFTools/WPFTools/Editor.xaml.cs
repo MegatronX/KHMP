@@ -129,6 +129,7 @@ namespace WPFTools
         {
             string CurrentDir = System.IO.Directory.GetCurrentDirectory();
             string itemsDB = System.Configuration.ConfigurationManager.AppSettings["InitialItemDB"];
+            
             if (itemsDB != null && System.IO.File.Exists(itemsDB))
             {
                 ItemsDBFile.Text = itemsDB;
@@ -150,12 +151,31 @@ namespace WPFTools
 
                 }
             }
-
+            string actionDB = System.Configuration.ConfigurationManager.AppSettings["InitialActionDB"];
+            if (actionDB != null && System.IO.File.Exists(actionDB))
+            {
+                bool cont = true;
+                while (cont)
+                {
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(actionDB);
+                    XmlNodeList nodes = doc.SelectNodes("/Actions/*");
+                    cont = false;
+                }
+                
+                ActionDBFile.Text = actionDB;
+                if (this.Resources.Contains("ActionDB"))
+                {
+                    XmlDataProvider xmlDP = (XmlDataProvider)this.Resources["ActionDB"];
+                    xmlDP.Source = new Uri(actionDB, UriKind.RelativeOrAbsolute);
+                }
+            }
         }
         protected void SetUpExplicitEvents()
         {
             ((INotifyCollectionChanged)EnemyListBox.Items).CollectionChanged += EnemyListBox_CollectionChanged;
             ((INotifyCollectionChanged)ItemListBox.Items).CollectionChanged += ItemListBox_CollectionChanged;
+            ((INotifyCollectionChanged)ActionListBox.Items).CollectionChanged += ActionListBox_CollectionChanged;
         }
         protected void SetUpBindings()
         {
@@ -257,7 +277,7 @@ namespace WPFTools
             }
             else
             {
-                MessageBox.Show("You must select ane enemy before adding an instance");
+                MessageBox.Show("You must select one enemy before adding an instance");
             }
         }
         private void EnemyStatViewDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -362,43 +382,7 @@ namespace WPFTools
         
 
         #region Item Tab Region
-        static string ItemIconDir = System.Configuration.ConfigurationManager.AppSettings["ItemImageDirectory"];
-        private void ItemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ItemComponentAttachmentGrid.Children.Clear();
-            if (e.AddedItems.Count > 0)
-            {
-                string name = ((XmlElement)e.AddedItems[0]).GetAttribute("name");
-                string path = ItemIconDir + name + ".png";
-                ActiveItemNameLabel.Content = name;//.ToString();
-                var pathtest = System.IO.Directory.GetCurrentDirectory();
-                if (System.IO.File.Exists(path))
-                {
-                    BitmapImage AIcon = new BitmapImage();
-                    AIcon.BeginInit();
-                    AIcon.UriSource = new Uri(pathtest + "\\" + path, UriKind.Absolute);
-                    AIcon.EndInit();
-                    ItemIcon.Source = AIcon;
-                }
-                if (ItemListBox.SelectedItem != null && ItemListBox.SelectedItem is XmlElement)
-                {
-                    XmlElement xmlEle = (XmlElement)ItemListBox.SelectedItem;
-                    string xmlEleName = xmlEle.GetAttribute("name");
-                    if (xmlEleName != null && !xmlEleName.Equals(string.Empty))
-                    {
-                        foreach (var familyMember in OtherFamilyMembers.Items)
-                        {
-                            if (((XmlAttribute)familyMember).Value.Equals(xmlEleName))
-                            {
-                                OtherFamilyMembers.SelectedItem = (XmlAttribute)familyMember;
-                                break;
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
+        
         #endregion
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -453,6 +437,45 @@ namespace WPFTools
         #endregion
 
         #region Items
+
+        static string ItemIconDir = System.Configuration.ConfigurationManager.AppSettings["ItemImageDirectory"];
+        private void ItemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemComponentAttachmentGrid.Children.Clear();
+            if (e.AddedItems.Count > 0)
+            {
+                string name = ((XmlElement)e.AddedItems[0]).GetAttribute("name");
+                string path = ItemIconDir + name + ".png";
+                ActiveItemNameLabel.Content = name;//.ToString();
+                var pathtest = System.IO.Directory.GetCurrentDirectory();
+                if (System.IO.File.Exists(path))
+                {
+                    BitmapImage AIcon = new BitmapImage();
+                    AIcon.BeginInit();
+                    AIcon.UriSource = new Uri(pathtest + "\\" + path, UriKind.Absolute);
+                    AIcon.EndInit();
+                    ItemIcon.Source = AIcon;
+                }
+                if (ItemListBox.SelectedItem != null && ItemListBox.SelectedItem is XmlElement)
+                {
+                    XmlElement xmlEle = (XmlElement)ItemListBox.SelectedItem;
+                    string xmlEleName = xmlEle.GetAttribute("name");
+                    if (xmlEleName != null && !xmlEleName.Equals(string.Empty))
+                    {
+                        foreach (var familyMember in OtherFamilyMembers.Items)
+                        {
+                            if (((XmlAttribute)familyMember).Value.Equals(xmlEleName))
+                            {
+                                OtherFamilyMembers.SelectedItem = (XmlAttribute)familyMember;
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
         private void BrowseForItemsXML_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -794,6 +817,89 @@ namespace WPFTools
         }
 
         #endregion
+
+        #region Actions
+
+        private void ActionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //ItemComponentAttachmentGrid.Children.Clear();
+            if (e.AddedItems.Count > 0)
+            {
+                string name = ((XmlElement)e.AddedItems[0]).GetAttribute("name");
+                //string path = ItemIconDir + name + ".png";
+                ActiveActionNameLabel.Content = name;
+
+                if (ActionListBox.SelectedItem != null && ActionListBox.SelectedItem is XmlElement)
+                {
+                    XmlElement xmlEle = (XmlElement)ActionListBox.SelectedItem;
+                    bool cont = true;
+                    //while (cont)
+                    {
+                        XmlNodeList flags = xmlEle.SelectNodes("Flags/*");
+                        int count = flags.Count;
+                    }
+                    
+                }
+
+
+
+
+
+
+                if (ItemListBox.SelectedItem != null && ItemListBox.SelectedItem is XmlElement)
+                {
+                    XmlElement xmlEle = (XmlElement)ItemListBox.SelectedItem;
+                    string xmlEleName = xmlEle.GetAttribute("name");
+                    if (xmlEleName != null && !xmlEleName.Equals(string.Empty))
+                    {
+                        foreach (var familyMember in OtherFamilyMembers.Items)
+                        {
+                            if (((XmlAttribute)familyMember).Value.Equals(xmlEleName))
+                            {
+                                OtherFamilyMembers.SelectedItem = (XmlAttribute)familyMember;
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void BrowseForActionsXML_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.CheckFileExists = true;
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML Documents (.xml)|*.xml";
+            bool? res = dlg.ShowDialog();
+            if (res == true)
+            {
+                ActionDBFile.Text = dlg.FileName;
+                if (this.Resources.Contains("ActionDB"))
+                {
+                    XmlDataProvider xmlDP = (XmlDataProvider)this.Resources["ActionDB"];
+                    xmlDP.Source = new Uri(dlg.FileName, UriKind.Absolute);
+
+                }
+            }
+        }
+
+        private void ActionListBox_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ActionCount.Content = ActionListBox.Items.Count;
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                ActionListBox.ScrollIntoView(e.NewItems[0]);
+            }
+            /*else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                EnemyCountLabel.Content = EnemyListBox.Items.Count;
+            }*/
+        }
+
+        #endregion
+
         void Test()
         {
             XmlDataProvider xmlDP = (XmlDataProvider)this.Resources["ItemDB"];
@@ -1096,7 +1202,101 @@ namespace WPFTools
             InitiateShaderData();
         }
 
-        
+        private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Resources.Contains("ItemDB"))
+            {
+                XmlDataProvider dataProv = (XmlDataProvider)this.Resources["ItemDB"];
+                if (dataProv.Document != null)
+                {
+                    var itemRoot = dataProv.Document.ChildNodes.Item(0) as XmlElement;
+
+                    ItemWindows.AddNewItem itWin = new ItemWindows.AddNewItem(itemRoot, this);
+                    var helper = new WindowInteropHelper(itWin);
+                    helper.Owner = new WindowInteropHelper(this).Handle;
+                    bool? res = itWin.ShowDialog();
+                    if (res != null && (bool)res)
+                    {
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Did not add new enemy");
+                    }
+                }
+            }
+            else
+            {
+                Console.Out.WriteLine("There is no valid Item XML file to add item to");
+            }
+        }
+
+        private void SaveAllActions_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Resources.Contains("ActionDB"))
+            {
+                XmlDataProvider xmlDP = (XmlDataProvider)this.Resources["ActionDB"];
+                xmlDP.Document.Save(ActionDBFile.Text);
+
+            }
+        }
+
+        private void ActionComponentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ActionComponentGrid.Children.Clear();
+                XmlElement ele = e.AddedItems[0] as XmlElement;
+                switch (ele.Name.ToLower())
+                {
+                    case "elementalweightcomponent":
+                        {
+                            ActionComponentGrid.Children.Add(new ComponentControls.ActionComponents.ElementalWeightComponent((XmlElement)ActionComponentList.SelectedItem, ele));
+                        }
+                        break;
+                    case "synthesisrecipecomponent":
+                        {
+                            ItemComponentAttachmentGrid.Children.Add(new ComponentControls.ItemComponents.SynthesisRecipeComponent(ele, (XmlElement)ItemListBox.SelectedItem));
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+
+
+
+        /*
+         * private void AddNewEnemyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Resources.Contains("EnemyDB"))
+            {
+                XmlDataProvider dataProv = (XmlDataProvider)this.Resources["EnemyDB"];
+                if (dataProv.Document != null)
+                {
+                    NewEnemyWindow eneWindow = new NewEnemyWindow(dataProv.Document, this);
+                    var helper = new WindowInteropHelper(eneWindow);
+                    helper.Owner = new WindowInteropHelper(this).Handle;
+                    bool? res = eneWindow.ShowDialog();
+                    if (res != null && (bool)res)
+                    {
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Did not add new enemy");
+                    }
+                }
+                else
+                {
+                    Console.Out.WriteLine("There is no valid Enemy XML file to add enemy to!");
+                }
+                
+            }
+            
+        }
+         * */
 
 
     }

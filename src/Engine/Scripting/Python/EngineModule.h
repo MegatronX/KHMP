@@ -91,7 +91,10 @@ namespace Scripting
 			.value("Up", ::Input::InputAction::Up)
 			;
 		class_<::Input::InputModule, boost::noncopyable>("InputModule", no_init)
-
+			.def("HandleKeyPressed", &::Input::InputInterface::HandleKeyPressed)
+			.def("IsAcceptingInputs", &::Input::InputInterface::IsAcceptingInputs)
+			.def("SetAcceptingInputs", &::Input::InputInterface::SetAcceptingInputs)
+			.def("HandleKeyReleased", &::Input::InputInterface::HandleKeyReleased)
 			;
 		enum_<::Input::PlayerInput>("PlayerInput")
 			.value("Invalid", ::Input::PlayerInput::Invalid)
@@ -135,6 +138,14 @@ namespace Scripting
 // int channel = 0, bool loop = true, int StartMillseconds = -1, int EndMilliseconds = -1, float Volume = 1.0);
 			.def("PlaySoundSection", &SoundSystem::PlaySoundSection, (boost::python::arg("channel") = 0, boost::python::arg("loop") = true, boost::python::arg("StartMilliseconds") = -1, boost::python::arg("EndMilliseconds") = -1, boost::python::arg("Volume") = 1.0f))
 
+			;
+		//.def("Draw", (void (sf::RenderWindow::*)(const sf::Drawable&, const sf::RenderStates&))&sf::RenderWindow::draw
+		class_<Configuration::AppConfiguration>("AppConfiguration", no_init)
+			//.def("GetApplicationSetting", (const std::string& (Configuration::AppConfiguration::*)(const char*))&Configuration::AppConfiguration::GetApplicationSetting, return_value_policy<reference_existing_object>())
+			.def("GetApplicationSetting", (const std::string (Configuration::AppConfiguration::*)(const std::string&))&Configuration::AppConfiguration::GetApplicationSettingByVal)
+			//.def("", &Configuration::AppConfiguration:)
+			//.def("", &Configuration::AppConfiguration:)
+			//.def("", &Configuration::AppConfiguration:)
 			;
 		class_<::Engine, boost::noncopyable>("Engine", no_init)
 			.def("GetApplicationConfiguration", &::Engine::GetApplicationConfiguration, return_value_policy<reference_existing_object>())

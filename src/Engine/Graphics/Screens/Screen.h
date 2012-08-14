@@ -6,16 +6,18 @@
 #include <boost/shared_ptr.hpp>
 #include <string>
 #include <boost/unordered_map.hpp>
+#include <Graphics/DrawManager.h>
 class Engine;
 namespace Graphics
 {
 	namespace Screens
 	{
 		class ScreenStack;
-		class Screen : public ::Input::InputInterface, public AnimatedDraw
+		class Screen : public virtual ::Input::InputInterface, public virtual AnimatedDraw
 		{
 		public:
 			Screen(const std::string& name, ::Engine* engine, int id);
+			virtual ~Screen();
 			int GetID() const;
 			const std::string& GetScreenName() const;
 			void SetScreenName(const std::string& name);
@@ -41,7 +43,7 @@ namespace Graphics
 		protected:
 			Engine* engine;
 		private:
-			
+			//DrawManager DManager;
 			int ScreenID;
 			std::string ScreenName;
 			bool DrawScreen;
