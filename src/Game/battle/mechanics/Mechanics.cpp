@@ -26,7 +26,6 @@ namespace Game
 {
 	namespace Battle
 	{
-<<<<<<< HEAD
 		const std::string PreUseIndex = "PreUseComponent";
 		const std::string PostUseIndex = "PostUseComponent";
 		const std::string UseIndex = "UseIndexComponent";
@@ -38,9 +37,10 @@ namespace Game
 			
 		}
 		void Mechanics::Init()
-=======
+		{
+			
+		}
 		Mechanics::Mechanics(BattleField* owner) : Component(owner, owner != nullptr ? owner->GetName() + "Mechanics" : "NoOwnerMechanics", "Mechanics"), Field(owner)
->>>>>>> 7ad82f64ce6114954df969959f53c9ffcfcde337
 		{
 
 
@@ -346,7 +346,6 @@ namespace Game
 		}
 		int Mechanics::ApplyDamageFormula(Character::BaseCharacter& target, Actions::Action& action)
 		{
-<<<<<<< HEAD
 			float eff = DetermineElementalMultiplier(target, action);
 			float split = DetermineDamageSplit(action, ActionInProgress != nullptr ? ActionInProgress->Targets.GroupSize() : 1, true);
 
@@ -490,13 +489,6 @@ namespace Game
 			RandomsEnabled = Enabled;
 		}
 
-=======
-			int damage = 0;
-			
-			action.SetCalculatedDamage(damage);
-			
-			return damage;
-		}
 		
 		void EnforceActionCosts(Character::BaseCharacter& user, Actions::Action& action)
 		{
@@ -551,8 +543,6 @@ namespace Game
 			return inflictedDamage;
 		}
 
-		
->>>>>>> 7ad82f64ce6114954df969959f53c9ffcfcde337
 		BattleField* Mechanics::GetField() const
 		{
 			return Field;
